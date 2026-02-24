@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Book a mobile car detailing or house cleaning service with Wash&Go. Fast, easy online booking — same day available.">
+  <title>Book a Service — Wash&amp;Go</title>
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/globals.css">
+  <style>
+    .booking-layout {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: var(--space-10);
+      align-items: start;
+    }
+    .booking-sidebar {
+      background-color: var(--color-bg);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      border: 1px solid var(--color-border);
+      position: sticky;
+      top: calc(var(--nav-height) + var(--space-4));
+    }
+    .service-select-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3);
+    }
+    .service-option {
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-4);
+      cursor: pointer;
+      transition: all var(--transition-base);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      text-align: center;
+      background: var(--color-white);
+    }
+    .service-option:hover,
+    .service-option.is-selected {
+      border-color: var(--color-primary);
+      background-color: var(--color-primary-pale);
+    }
+    .service-option__icon { font-size: var(--text-3xl); }
+    .service-option__name { font-size: var(--text-sm); font-weight: var(--font-semibold); color: var(--color-dark); }
+    .service-option__price { font-size: var(--text-xs); color: var(--color-primary); font-weight: var(--font-bold); }
+
+    .booking-steps {
+      display: flex;
+      gap: var(--space-2);
+      margin-bottom: var(--space-8);
+    }
+    .booking-step-dot {
+      width: 2rem;
+      height: 2rem;
+      border-radius: var(--radius-full);
+      background-color: var(--color-border);
+      color: var(--color-mid);
+      font-size: var(--text-sm);
+      font-weight: var(--font-bold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .booking-step-dot.is-active {
+      background-color: var(--color-primary);
+      color: var(--color-white);
+    }
+    .booking-step-dot.is-done {
+      background-color: var(--color-success);
+      color: var(--color-white);
+    }
+
+    .time-slots {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-2);
+    }
+    .time-slot {
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-2) var(--space-3);
+      text-align: center;
+      font-size: var(--text-sm);
+      font-weight: var(--font-medium);
+      cursor: pointer;
+      transition: all var(--transition-base);
+      background: var(--color-white);
+    }
+    .time-slot:hover, .time-slot.is-selected {
+      border-color: var(--color-primary);
+      background-color: var(--color-primary-pale);
+      color: var(--color-primary-darker);
+    }
+    .time-slot.is-taken {
+      opacity: 0.4;
+      cursor: not-allowed;
+      text-decoration: line-through;
+    }
+
+    @media (max-width: 1023px) {
+      .booking-layout { grid-template-columns: 1fr; }
+      .booking-sidebar { position: static; }
+    }
+    @media (max-width: 479px) {
+      .service-select-grid { grid-template-columns: 1fr; }
+      .time-slots { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVIGATION -->
+  <header class="nav" role="banner">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo" aria-label="Wash&amp;Go Home">
+        <img src="assets/logo.svg" alt="Wash&amp;Go" width="180" height="44">
+      </a>
+      <nav aria-label="Main navigation">
+        <ul class="nav__links" role="list">
+          <li><a href="index.html" class="nav__link">Home</a></li>
+          <li><a href="services.html" class="nav__link">Services</a></li>
+          <li><a href="pricing.html" class="nav__link">Pricing</a></li>
+          <li><a href="gallery.html" class="nav__link">Gallery</a></li>
+          <li><a href="about.html" class="nav__link">About</a></li>
+          <li><a href="blog.html" class="nav__link">Blog</a></li>
+          <li><a href="contact.html" class="nav__link">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="nav__actions">
+        <a href="cart.html" class="btn btn--ghost btn--icon cart-badge" aria-label="Cart">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg>
+          <span class="cart-badge__count" style="display:none;">0</span>
+        </a>
+        <a href="account.html" class="btn btn--ghost btn--sm">Sign In</a>
+      </div>
+      <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+      </button>
+    </div>
+    <nav id="mobile-menu" class="nav__menu" aria-label="Mobile navigation">
+      <a href="index.html" class="nav__link">Home</a>
+      <a href="services.html" class="nav__link">Services</a>
+      <a href="pricing.html" class="nav__link">Pricing</a>
+      <a href="about.html" class="nav__link">About</a>
+      <a href="contact.html" class="nav__link">Contact</a>
+      <div class="nav__actions">
+        <a href="account.html" class="btn btn--outline">Sign In</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <div class="page-header">
+      <div class="page-header__pattern" aria-hidden="true"></div>
+      <div class="container page-header__content">
+        <h1 class="page-header__title">Book a Service</h1>
+        <p class="page-header__subtitle">Schedule your car detail or home clean in under 2 minutes.</p>
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="breadcrumb__sep" aria-hidden="true">/</span>
+          <span aria-current="page">Book</span>
+        </nav>
+      </div>
+    </div>
+
+    <section class="section" aria-labelledby="booking-title">
+      <div class="container">
+        <div class="booking-layout">
+          <!-- Main Form -->
+          <div>
+            <h2 id="booking-title" class="sr-only">Booking Form</h2>
+
+            <!-- Progress Steps -->
+            <div class="booking-steps" role="list" aria-label="Booking progress">
+              <div class="booking-step-dot is-active" role="listitem" aria-label="Step 1: Service (current)">1</div>
+              <div style="flex:1;height:2px;background:var(--color-border);margin-top:1rem;"></div>
+              <div class="booking-step-dot" role="listitem" aria-label="Step 2: Details">2</div>
+              <div style="flex:1;height:2px;background:var(--color-border);margin-top:1rem;"></div>
+              <div class="booking-step-dot" role="listitem" aria-label="Step 3: Contact">3</div>
+              <div style="flex:1;height:2px;background:var(--color-border);margin-top:1rem;"></div>
+              <div class="booking-step-dot" role="listitem" aria-label="Step 4: Confirm">4</div>
+            </div>
+
+            <form id="booking-form" novalidate aria-label="Service booking form">
+              <!-- Step 1: Service Type -->
+              <fieldset style="border:none;padding:0;margin-bottom:var(--space-8);">
+                <legend style="font-size:var(--text-xl);font-weight:var(--font-bold);margin-bottom:var(--space-5);">1. What are you booking?</legend>
+
+                <div class="service-select-grid" role="radiogroup" aria-label="Service type">
+                  <label class="service-option is-selected">
+                    <input type="radio" name="service_type" value="car" class="sr-only" checked>
+                    <span class="service-option__icon" aria-hidden="true">🚗</span>
+                    <span class="service-option__name">Car Detailing</span>
+                    <span class="service-option__price">from $49</span>
+                  </label>
+                  <label class="service-option">
+                    <input type="radio" name="service_type" value="home" class="sr-only">
+                    <span class="service-option__icon" aria-hidden="true">🏠</span>
+                    <span class="service-option__name">House Cleaning</span>
+                    <span class="service-option__price">from $89</span>
+                  </label>
+                </div>
+
+                <div class="form-group" style="margin-top:var(--space-5);">
+                  <label class="form-label" for="service-package">Service Package <span aria-hidden="true">*</span></label>
+                  <select id="service-package" name="service_package" class="form-select" data-validate="required" aria-required="true">
+                    <option value="">Select a package…</option>
+                    <optgroup label="Car Detailing">
+                      <option value="basic-wash">Basic Exterior Wash — $49</option>
+                      <option value="exterior-wash">Exterior Wash &amp; Shine — $79</option>
+                      <option value="interior-clean">Interior Deep Clean — $99</option>
+                      <option value="full-detail">Full Detail Package — $199</option>
+                      <option value="paint-correction">Paint Correction — $249</option>
+                      <option value="ceramic-coating">Ceramic Coating — $599</option>
+                    </optgroup>
+                    <optgroup label="House Cleaning">
+                      <option value="standard-clean">Standard Clean — $89</option>
+                      <option value="deep-clean">Deep Clean — $149</option>
+                      <option value="move-clean">Move In/Out — $219</option>
+                      <option value="post-construction">Post-Construction — $299</option>
+                    </optgroup>
+                  </select>
+                  <span class="form-error" hidden id="service-package-error"></span>
+                </div>
+              </fieldset>
+
+              <!-- Step 2: Date & Time -->
+              <fieldset style="border:none;padding:0;margin-bottom:var(--space-8);">
+                <legend style="font-size:var(--text-xl);font-weight:var(--font-bold);margin-bottom:var(--space-5);">2. When?</legend>
+
+                <div class="form-group">
+                  <label class="form-label" for="booking-date">Preferred Date <span aria-hidden="true">*</span></label>
+                  <input type="date" id="booking-date" name="date" class="form-input" data-validate="required" aria-required="true">
+                  <span class="form-error" hidden></span>
+                </div>
+
+                <div class="form-group" style="margin-top:var(--space-4);">
+                  <p class="form-label">Preferred Time <span aria-hidden="true">*</span></p>
+                  <div class="time-slots" role="radiogroup" aria-label="Time slots">
+                    <label class="time-slot"><input type="radio" name="time_slot" value="8:00 AM" class="sr-only">8:00 AM</label>
+                    <label class="time-slot"><input type="radio" name="time_slot" value="9:00 AM" class="sr-only">9:00 AM</label>
+                    <label class="time-slot"><input type="radio" name="time_slot" value="10:00 AM" class="sr-only">10:00 AM</label>
+                    <label class="time-slot is-taken" aria-disabled="true"><input type="radio" name="time_slot" value="11:00 AM" class="sr-only" disabled>11:00 AM</label>
+                    <label class="time-slot"><input type="radio" name="time_slot" value="12:00 PM" class="sr-only">12:00 PM</label>
+                    <label class="time-slot"><input type="radio" name="time_slot" value="1:00 PM" class="sr-only">1:00 PM</label>
+                    <label class="time-slot"><input type="radio" name="time_slot" value="2:00 PM" class="sr-only">2:00 PM</label>
+                    <label class="time-slot is-taken" aria-disabled="true"><input type="radio" name="time_slot" value="3:00 PM" class="sr-only" disabled>3:00 PM</label>
+                    <label class="time-slot"><input type="radio" name="time_slot" value="4:00 PM" class="sr-only">4:00 PM</label>
+                  </div>
+                </div>
+              </fieldset>
+
+              <!-- Step 3: Location & Vehicle/Home -->
+              <fieldset style="border:none;padding:0;margin-bottom:var(--space-8);">
+                <legend style="font-size:var(--text-xl);font-weight:var(--font-bold);margin-bottom:var(--space-5);">3. Location &amp; Details</legend>
+
+                <div class="form-group">
+                  <label class="form-label" for="address">Service Address <span aria-hidden="true">*</span></label>
+                  <input type="text" id="address" name="address" class="form-input" placeholder="123 Main St, City, State, ZIP" data-validate="required minLen:10" aria-required="true" autocomplete="street-address">
+                  <span class="form-error" hidden></span>
+                </div>
+
+                <div class="grid-2" style="margin-top:var(--space-4);">
+                  <div class="form-group">
+                    <label class="form-label" for="vehicle-year">Vehicle Year <span aria-hidden="true">*</span></label>
+                    <input type="number" id="vehicle-year" name="vehicle_year" class="form-input" placeholder="e.g. 2020" min="1980" max="2030" data-validate="required">
+                    <span class="form-error" hidden></span>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="vehicle-make">Vehicle Make &amp; Model</label>
+                    <input type="text" id="vehicle-make" name="vehicle_make" class="form-input" placeholder="e.g. Toyota Camry" autocomplete="off">
+                  </div>
+                </div>
+
+                <div class="form-group" style="margin-top:var(--space-4);">
+                  <label class="form-label" for="vehicle-size">Vehicle Size / Home Size</label>
+                  <select id="vehicle-size" name="size" class="form-select">
+                    <option value="">Select size…</option>
+                    <optgroup label="Vehicle">
+                      <option value="sedan">Sedan / Coupe</option>
+                      <option value="suv">SUV / Crossover</option>
+                      <option value="truck">Truck / Van</option>
+                      <option value="xl">XL / Commercial Vehicle</option>
+                    </optgroup>
+                    <optgroup label="Home">
+                      <option value="studio">Studio / 1 BR</option>
+                      <option value="2br">2 Bedroom</option>
+                      <option value="3br">3 Bedroom</option>
+                      <option value="4br">4+ Bedroom</option>
+                    </optgroup>
+                  </select>
+                </div>
+
+                <div class="form-group" style="margin-top:var(--space-4);">
+                  <label class="form-label" for="notes">Special Requests / Notes</label>
+                  <textarea id="notes" name="notes" class="form-textarea" placeholder="e.g. pet hair, specific stains, access code…" rows="3"></textarea>
+                </div>
+              </fieldset>
+
+              <!-- Step 4: Contact Info -->
+              <fieldset style="border:none;padding:0;margin-bottom:var(--space-8);">
+                <legend style="font-size:var(--text-xl);font-weight:var(--font-bold);margin-bottom:var(--space-5);">4. Your Contact Info</legend>
+
+                <div class="grid-2">
+                  <div class="form-group">
+                    <label class="form-label" for="first-name">First Name <span aria-hidden="true">*</span></label>
+                    <input type="text" id="first-name" name="first_name" class="form-input" placeholder="Jane" data-validate="required minLen:2" aria-required="true" autocomplete="given-name">
+                    <span class="form-error" hidden></span>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="last-name">Last Name <span aria-hidden="true">*</span></label>
+                    <input type="text" id="last-name" name="last_name" class="form-input" placeholder="Smith" data-validate="required minLen:2" aria-required="true" autocomplete="family-name">
+                    <span class="form-error" hidden></span>
+                  </div>
+                </div>
+
+                <div class="grid-2" style="margin-top:var(--space-4);">
+                  <div class="form-group">
+                    <label class="form-label" for="email">Email <span aria-hidden="true">*</span></label>
+                    <input type="email" id="email" name="email" class="form-input" placeholder="jane@example.com" data-validate="required email" aria-required="true" autocomplete="email">
+                    <span class="form-error" hidden></span>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="phone">Phone <span aria-hidden="true">*</span></label>
+                    <input type="tel" id="phone" name="phone" class="form-input" placeholder="(555) 123-4567" data-validate="required phone" aria-required="true" autocomplete="tel">
+                    <span class="form-error" hidden></span>
+                  </div>
+                </div>
+
+                <div class="form-group" style="margin-top:var(--space-4);">
+                  <label class="form-check">
+                    <input type="checkbox" name="recurring" class="form-check__input">
+                    <span class="form-check__label">I'm interested in recurring service (save up to 20%)</span>
+                  </label>
+                </div>
+
+                <div class="form-group" style="margin-top:var(--space-3);">
+                  <label class="form-check">
+                    <input type="checkbox" name="terms" class="form-check__input" data-validate="required" required>
+                    <span class="form-check__label">I agree to the <a href="terms.html" style="color:var(--color-primary);" target="_blank">Terms of Service</a> and <a href="privacy.html" style="color:var(--color-primary);" target="_blank">Privacy Policy</a> <span aria-hidden="true">*</span></span>
+                  </label>
+                  <span class="form-error" hidden></span>
+                </div>
+              </fieldset>
+
+              <button type="submit" class="btn btn--primary btn--lg btn--full">
+                Confirm Booking →
+              </button>
+              <p style="text-align:center;font-size:var(--text-sm);color:var(--color-mid);margin-top:var(--space-3);">
+                🔒 Your data is secure. No charge until service is complete.
+              </p>
+            </form>
+          </div>
+
+          <!-- Sidebar: Booking Summary -->
+          <aside class="booking-sidebar" aria-label="Booking summary">
+            <h3 style="font-size:var(--text-lg);font-weight:var(--font-bold);margin-bottom:var(--space-5);padding-bottom:var(--space-4);border-bottom:1px solid var(--color-border);">Booking Summary</h3>
+
+            <div style="display:flex;flex-direction:column;gap:var(--space-4);margin-bottom:var(--space-6);">
+              <div style="display:flex;justify-content:space-between;font-size:var(--text-sm);">
+                <span style="color:var(--color-mid);">Service</span>
+                <span style="font-weight:var(--font-semibold);" id="summary-service">—</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:var(--text-sm);">
+                <span style="color:var(--color-mid);">Date &amp; Time</span>
+                <span style="font-weight:var(--font-semibold);" id="summary-datetime">—</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:var(--text-sm);">
+                <span style="color:var(--color-mid);">Location</span>
+                <span style="font-weight:var(--font-semibold);text-align:right;max-width:14ch;" id="summary-location">—</span>
+              </div>
+            </div>
+
+            <div style="background:var(--color-primary-pale);border-radius:var(--radius-lg);padding:var(--space-4);margin-bottom:var(--space-5);">
+              <p style="font-size:var(--text-sm);color:var(--color-primary-darker);">✅ <strong>Satisfaction Guarantee</strong> — If you're not happy, we'll re-do the service free of charge.</p>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:var(--space-3);">
+              <div style="display:flex;align-items:center;gap:var(--space-3);font-size:var(--text-sm);">
+                <span style="font-size:var(--text-xl);" aria-hidden="true">📋</span>
+                <span>Instant booking confirmation by email</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:var(--space-3);font-size:var(--text-sm);">
+                <span style="font-size:var(--text-xl);" aria-hidden="true">💳</span>
+                <span>Pay after service — cash, card, or digital wallet</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:var(--space-3);font-size:var(--text-sm);">
+                <span style="font-size:var(--text-xl);" aria-hidden="true">🔔</span>
+                <span>SMS reminder 1 hour before arrival</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:var(--space-3);font-size:var(--text-sm);">
+                <span style="font-size:var(--text-xl);" aria-hidden="true">🚫</span>
+                <span>Free cancellation up to 2 hours before</span>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div style="text-align:center;">
+              <p style="font-size:var(--text-sm);color:var(--color-mid);">Need help? Call us:</p>
+              <a href="tel:+15551234567" style="font-size:var(--text-xl);font-weight:var(--font-bold);color:var(--color-primary);">(555) 123-4567</a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__bottom">
+      <p class="footer__copy">&copy; <span id="footer-year">2024</span> Wash&amp;Go LLC. All rights reserved.</p>
+      <nav class="footer__legal" aria-label="Legal">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="js/globals.js"></script>
+  <script>
+    document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+    // Service option toggle
+    document.querySelectorAll('.service-option').forEach(opt => {
+      opt.addEventListener('click', () => {
+        document.querySelectorAll('.service-option').forEach(o => o.classList.remove('is-selected'));
+        opt.classList.add('is-selected');
+      });
+    });
+
+    // Time slot toggle
+    document.querySelectorAll('.time-slot:not(.is-taken)').forEach(slot => {
+      slot.addEventListener('click', () => {
+        document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('is-selected'));
+        slot.classList.add('is-selected');
+      });
+    });
+
+    // Live summary update
+    const summaryService  = document.getElementById('summary-service');
+    const summaryDatetime = document.getElementById('summary-datetime');
+    const summaryLocation = document.getElementById('summary-location');
+
+    document.getElementById('service-package')?.addEventListener('change', e => {
+      summaryService.textContent = e.target.options[e.target.selectedIndex]?.text || '—';
+    });
+    document.getElementById('booking-date')?.addEventListener('change', e => {
+      summaryDatetime.textContent = e.target.value || '—';
+    });
+    document.getElementById('address')?.addEventListener('input', e => {
+      summaryLocation.textContent = e.target.value.substring(0, 30) || '—';
+    });
+  </script>
+</body>
+</html>

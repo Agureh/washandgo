@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Meet the Wash&Go team. Learn our story, mission, and values — mobile car detailing and cleaning done right.">
+  <title>About Us — Wash&amp;Go</title>
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/globals.css">
+  <style>
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(240px,100%), 1fr));
+      gap: var(--space-6);
+    }
+    .team-card {
+      text-align: center;
+      background: var(--color-white);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: transform var(--transition-base), box-shadow var(--transition-base);
+    }
+    .team-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-xl); }
+    .team-card__avatar {
+      width: 100%;
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, var(--color-primary-pale), var(--color-primary-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+    }
+    .team-card__body { padding: var(--space-5); }
+    .team-card__name { font-size: var(--text-lg); font-weight: var(--font-bold); margin-bottom: var(--space-1); }
+    .team-card__role { font-size: var(--text-sm); color: var(--color-primary); font-weight: var(--font-medium); margin-bottom: var(--space-3); }
+    .team-card__bio { font-size: var(--text-sm); color: var(--color-mid); line-height: var(--leading-relaxed); }
+    .value-card {
+      text-align: center;
+      padding: var(--space-8);
+      background: var(--color-white);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-md);
+    }
+    .value-card__icon { font-size: 3rem; margin-bottom: var(--space-4); }
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      max-width: 600px;
+      margin-inline: auto;
+    }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: var(--space-5);
+      padding-bottom: var(--space-8);
+      position: relative;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 39px;
+      top: 2.5rem;
+      bottom: 0;
+      width: 2px;
+      background-color: var(--color-primary-pale);
+    }
+    .timeline-item:last-child::before { display: none; }
+    .timeline-year {
+      font-size: var(--text-sm);
+      font-weight: var(--font-bold);
+      color: var(--color-primary);
+      text-align: center;
+      padding-top: var(--space-1);
+    }
+    .timeline-dot {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: var(--radius-full);
+      background-color: var(--color-primary);
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: var(--text-lg);
+    }
+    .timeline-content h3 { font-size: var(--text-base); font-weight: var(--font-bold); margin-bottom: var(--space-1); }
+    .timeline-content p { font-size: var(--text-sm); color: var(--color-mid); }
+  </style>
+</head>
+<body>
+  <header class="nav" role="banner">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo" aria-label="Wash&amp;Go Home"><img src="assets/logo.svg" alt="Wash&amp;Go" width="180" height="44"></a>
+      <nav aria-label="Main navigation"><ul class="nav__links" role="list">
+        <li><a href="index.html" class="nav__link">Home</a></li>
+        <li><a href="services.html" class="nav__link">Services</a></li>
+        <li><a href="pricing.html" class="nav__link">Pricing</a></li>
+        <li><a href="gallery.html" class="nav__link">Gallery</a></li>
+        <li><a href="about.html" class="nav__link">About</a></li>
+        <li><a href="blog.html" class="nav__link">Blog</a></li>
+        <li><a href="contact.html" class="nav__link">Contact</a></li>
+      </ul></nav>
+      <div class="nav__actions">
+        <a href="cart.html" class="btn btn--ghost btn--icon cart-badge" aria-label="Cart"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg><span class="cart-badge__count" style="display:none;">0</span></a>
+        <a href="account.html" class="btn btn--ghost btn--sm">Sign In</a>
+        <a href="booking.html" class="btn btn--primary btn--sm">Book Now</a>
+      </div>
+      <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu"><span class="nav__toggle-bar"></span><span class="nav__toggle-bar"></span><span class="nav__toggle-bar"></span></button>
+    </div>
+    <nav id="mobile-menu" class="nav__menu" aria-label="Mobile navigation">
+      <a href="index.html" class="nav__link">Home</a>
+      <a href="services.html" class="nav__link">Services</a>
+      <a href="pricing.html" class="nav__link">Pricing</a>
+      <a href="about.html" class="nav__link">About</a>
+      <a href="contact.html" class="nav__link">Contact</a>
+      <div class="nav__actions"><a href="account.html" class="btn btn--outline">Sign In</a><a href="booking.html" class="btn btn--primary">Book Now</a></div>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <div class="page-header">
+      <div class="page-header__pattern" aria-hidden="true"></div>
+      <div class="container page-header__content">
+        <h1 class="page-header__title">About Wash&amp;Go</h1>
+        <p class="page-header__subtitle">A local team with big standards — delivering premium mobile cleaning since 2016.</p>
+        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span class="breadcrumb__sep" aria-hidden="true">/</span><span aria-current="page">About</span></nav>
+      </div>
+    </div>
+
+    <!-- Our Story -->
+    <section class="section" aria-labelledby="story-title">
+      <div class="container">
+        <div class="feature-row">
+          <div style="border-radius:var(--radius-2xl);overflow:hidden;box-shadow:var(--shadow-xl);aspect-ratio:4/3;background:linear-gradient(135deg,#0c4a6e,#0ea5e9);display:flex;align-items:center;justify-content:center;font-size:8rem;" aria-hidden="true" data-reveal>🌊</div>
+          <div class="feature-row__content" data-reveal data-reveal-delay="1">
+            <span class="section__eyebrow">Our Story</span>
+            <h2 id="story-title" style="font-size:clamp(var(--text-3xl),4vw,var(--text-4xl));">Built on a Belief That Clean Should Be Convenient</h2>
+            <p style="color:var(--color-mid);line-height:var(--leading-relaxed);">Wash&amp;Go was founded in 2016 by Marcus Chen, a certified automotive detailer who grew frustrated watching customers wait hours at traditional car washes for mediocre results. Marcus believed there was a better way — mobile, professional, and guaranteed to impress.</p>
+            <p style="color:var(--color-mid);line-height:var(--leading-relaxed);margin-top:var(--space-4);">What began as a one-man operation with a single truck has grown into a team of 20+ certified professionals serving thousands of happy customers each year — now including premium house cleaning services alongside our signature car detailing.</p>
+            <p style="color:var(--color-mid);line-height:var(--leading-relaxed);margin-top:var(--space-4);">Our guiding philosophy has never changed: <strong style="color:var(--color-dark);">show up on time, do extraordinary work, and leave every customer raving.</strong></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <div class="stats-band">
+      <div class="container stats-band__grid">
+        <div data-reveal><p class="stats-band__number" data-counter="4300" data-counter-suffix="+">0</p><p class="stats-band__label">Services Completed</p></div>
+        <div data-reveal data-reveal-delay="1"><p class="stats-band__number" data-counter="500" data-counter-suffix="+">0</p><p class="stats-band__label">Five-Star Reviews</p></div>
+        <div data-reveal data-reveal-delay="2"><p class="stats-band__number" data-counter="20" data-counter-suffix="+">0</p><p class="stats-band__label">Certified Pros</p></div>
+        <div data-reveal data-reveal-delay="3"><p class="stats-band__number" data-counter="8" data-counter-suffix=" yrs">0</p><p class="stats-band__label">In Business</p></div>
+      </div>
+    </div>
+
+    <!-- Mission & Values -->
+    <section class="section section--bg" aria-labelledby="values-title">
+      <div class="container">
+        <header class="section__header" data-reveal>
+          <span class="section__eyebrow">What Drives Us</span>
+          <h2 class="section__title" id="values-title">Our Mission &amp; Values</h2>
+        </header>
+        <div class="grid-3">
+          <div class="value-card" data-reveal>
+            <div class="value-card__icon" aria-hidden="true">🎯</div>
+            <h3 style="font-size:var(--text-xl);margin-bottom:var(--space-3);">Mission</h3>
+            <p style="font-size:var(--text-sm);color:var(--color-mid);line-height:var(--leading-relaxed);">To make professional-grade cleaning accessible, convenient, and affordable for every household and vehicle owner in our community.</p>
+          </div>
+          <div class="value-card" data-reveal data-reveal-delay="1">
+            <div class="value-card__icon" aria-hidden="true">👁️</div>
+            <h3 style="font-size:var(--text-xl);margin-bottom:var(--space-3);">Vision</h3>
+            <p style="font-size:var(--text-sm);color:var(--color-mid);line-height:var(--leading-relaxed);">To become the most trusted mobile cleaning brand in every city we serve — synonymous with quality, reliability, and a spotless result.</p>
+          </div>
+          <div class="value-card" data-reveal data-reveal-delay="2">
+            <div class="value-card__icon" aria-hidden="true">💙</div>
+            <h3 style="font-size:var(--text-xl);margin-bottom:var(--space-3);">Values</h3>
+            <p style="font-size:var(--text-sm);color:var(--color-mid);line-height:var(--leading-relaxed);">Integrity in every job. Respect for every customer. Excellence in every detail. Community in everything we do.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="section" aria-labelledby="journey-title">
+      <div class="container">
+        <header class="section__header" data-reveal>
+          <span class="section__eyebrow">Our Journey</span>
+          <h2 class="section__title" id="journey-title">How We Got Here</h2>
+        </header>
+        <div class="timeline" data-reveal>
+          <div class="timeline-item">
+            <div><p class="timeline-year">2016</p><div class="timeline-dot" aria-hidden="true">🚐</div></div>
+            <div class="timeline-content"><h3>The Beginning</h3><p>Marcus launches Wash&amp;Go with one truck and a mobile detailing rig, serving 12 customers in the first month.</p></div>
+          </div>
+          <div class="timeline-item">
+            <div><p class="timeline-year">2018</p><div class="timeline-dot" aria-hidden="true">⭐</div></div>
+            <div class="timeline-content"><h3>First 500 Reviews</h3><p>Hit 500 five-star Google reviews. Added second truck and hired 4 more certified technicians.</p></div>
+          </div>
+          <div class="timeline-item">
+            <div><p class="timeline-year">2019</p><div class="timeline-dot" aria-hidden="true">🏠</div></div>
+            <div class="timeline-content"><h3>House Cleaning Launch</h3><p>Expanded into residential cleaning services based on overwhelming customer demand. A natural fit for the mobile model.</p></div>
+          </div>
+          <div class="timeline-item">
+            <div><p class="timeline-year">2021</p><div class="timeline-dot" aria-hidden="true">📱</div></div>
+            <div class="timeline-content"><h3>Online Booking Platform</h3><p>Launched our online booking system, making it possible for customers to schedule in under 2 minutes, 24/7.</p></div>
+          </div>
+          <div class="timeline-item">
+            <div><p class="timeline-year">2024</p><div class="timeline-dot" aria-hidden="true">🌟</div></div>
+            <div class="timeline-content"><h3>Today &amp; Beyond</h3><p>20+ team members, 4,300+ completed services, and expanding to new cities. The journey is just beginning.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team -->
+    <section class="section section--bg" aria-labelledby="team-title">
+      <div class="container">
+        <header class="section__header" data-reveal>
+          <span class="section__eyebrow">Meet the Team</span>
+          <h2 class="section__title" id="team-title">The People Behind the Shine</h2>
+          <p class="section__subtitle">Background-checked, insured, and trained to exceed your expectations.</p>
+        </header>
+        <div class="team-grid">
+          <article class="team-card" data-reveal>
+            <div class="team-card__avatar" aria-hidden="true">👨‍🔧</div>
+            <div class="team-card__body">
+              <h3 class="team-card__name">Marcus Chen</h3>
+              <p class="team-card__role">Founder &amp; Head Detailer</p>
+              <p class="team-card__bio">IDA-certified detailer with 12 years of experience. Marcus sets the quality standard for every service.</p>
+            </div>
+          </article>
+          <article class="team-card" data-reveal data-reveal-delay="1">
+            <div class="team-card__avatar" aria-hidden="true">👩‍💼</div>
+            <div class="team-card__body">
+              <h3 class="team-card__name">Aaliya Patel</h3>
+              <p class="team-card__role">Operations Manager</p>
+              <p class="team-card__bio">Keeps the team running like clockwork. Aaliya ensures every booking is perfectly coordinated.</p>
+            </div>
+          </article>
+          <article class="team-card" data-reveal data-reveal-delay="2">
+            <div class="team-card__avatar" aria-hidden="true">👨‍🏭</div>
+            <div class="team-card__body">
+              <h3 class="team-card__name">Derrick Williams</h3>
+              <p class="team-card__role">Senior Detailer &amp; Trainer</p>
+              <p class="team-card__bio">Former auto body specialist who trains every new Wash&amp;Go technician to our exacting standards.</p>
+            </div>
+          </article>
+          <article class="team-card" data-reveal data-reveal-delay="3">
+            <div class="team-card__avatar" aria-hidden="true">👩‍🔬</div>
+            <div class="team-card__body">
+              <h3 class="team-card__name">Sofia Reyes</h3>
+              <p class="team-card__role">Home Cleaning Lead</p>
+              <p class="team-card__bio">Leads our residential cleaning division with an eye for detail and a dedication to eco-friendly methods.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="cta-banner">
+      <div class="container cta-banner__content" data-reveal>
+        <h2 class="cta-banner__title">Ready to Experience the Wash&amp;Go Difference?</h2>
+        <p class="cta-banner__subtitle">Join thousands of happy customers and book your first service today.</p>
+        <div class="cta-banner__actions">
+          <a href="booking.html" class="btn btn--outline-white btn--lg">Book a Service</a>
+          <a href="contact.html" class="btn btn--outline-white btn--lg">Get in Touch</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__main">
+      <div class="footer__brand"><a href="index.html" class="footer__logo"><img src="assets/logo.svg" alt="Wash&amp;Go" width="160" height="40"></a><p class="footer__tagline">Premium mobile car detailing and house cleaning services delivered to your door.</p></div>
+      <div><h3 class="footer__col-title">Services</h3><ul class="footer__links" role="list"><li><a href="services.html#car-detailing" class="footer__link">Car Detailing</a></li><li><a href="services.html#house-cleaning" class="footer__link">House Cleaning</a></li></ul></div>
+      <div><h3 class="footer__col-title">Company</h3><ul class="footer__links" role="list"><li><a href="about.html" class="footer__link">About Us</a></li><li><a href="gallery.html" class="footer__link">Gallery</a></li><li><a href="faq.html" class="footer__link">FAQ</a></li><li><a href="contact.html" class="footer__link">Contact</a></li></ul></div>
+      <div><h3 class="footer__col-title">Contact</h3><address style="font-style:normal;"><div class="footer__contact-item"><span class="footer__contact-icon">📞</span><a href="tel:+15551234567" class="footer__link">(555) 123-4567</a></div><div class="footer__contact-item"><span class="footer__contact-icon">✉️</span><a href="mailto:hello@washgo.com" class="footer__link">hello@washgo.com</a></div></address></div>
+    </div>
+    <div class="container footer__bottom">
+      <p class="footer__copy">&copy; <span id="footer-year">2024</span> Wash&amp;Go LLC. All rights reserved.</p>
+      <nav class="footer__legal" aria-label="Legal"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms</a></nav>
+    </div>
+  </footer>
+
+  <script src="js/globals.js"></script>
+  <script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

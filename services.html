@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Wash&Go services — Mobile car detailing and house cleaning packages tailored to every need and budget.">
+  <title>Services — Wash&amp;Go</title>
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/globals.css">
+  <style>
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      justify-content: center;
+      margin-bottom: var(--space-10);
+    }
+    .filter-bar__btn {
+      padding: var(--space-2) var(--space-6);
+      border-radius: var(--radius-full);
+      font-size: var(--text-sm);
+      font-weight: var(--font-semibold);
+      border: 2px solid var(--color-border);
+      background: var(--color-white);
+      color: var(--color-dark-3);
+      cursor: pointer;
+      transition: all var(--transition-base);
+    }
+    .filter-bar__btn:hover,
+    .filter-bar__btn.is-active {
+      background-color: var(--color-primary);
+      border-color: var(--color-primary);
+      color: var(--color-white);
+    }
+    .service-features {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      margin-block: var(--space-4);
+      padding: 0;
+    }
+    .service-features li {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--text-sm);
+      color: var(--color-mid);
+    }
+    .service-features li::before {
+      content: '✓';
+      color: var(--color-primary);
+      font-weight: var(--font-bold);
+      flex-shrink: 0;
+    }
+    .add-on-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(240px,100%), 1fr));
+      gap: var(--space-4);
+    }
+    .add-on-card {
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      transition: border-color var(--transition-base), box-shadow var(--transition-base);
+    }
+    .add-on-card:hover {
+      border-color: var(--color-primary);
+      box-shadow: var(--shadow-md);
+    }
+    .add-on-card__icon {
+      font-size: var(--text-2xl);
+    }
+    .add-on-card__title {
+      font-size: var(--text-base);
+      font-weight: var(--font-semibold);
+    }
+    .add-on-card__price {
+      font-size: var(--text-sm);
+      color: var(--color-primary);
+      font-weight: var(--font-bold);
+    }
+  </style>
+</head>
+<body>
+  <!-- ═══════════════ NAVIGATION ═══════════════ -->
+  <header class="nav" role="banner">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo" aria-label="Wash&amp;Go Home">
+        <img src="assets/logo.svg" alt="Wash&amp;Go" width="180" height="44">
+      </a>
+      <nav aria-label="Main navigation">
+        <ul class="nav__links" role="list">
+          <li><a href="index.html" class="nav__link">Home</a></li>
+          <li><a href="services.html" class="nav__link">Services</a></li>
+          <li><a href="pricing.html" class="nav__link">Pricing</a></li>
+          <li><a href="gallery.html" class="nav__link">Gallery</a></li>
+          <li><a href="about.html" class="nav__link">About</a></li>
+          <li><a href="blog.html" class="nav__link">Blog</a></li>
+          <li><a href="contact.html" class="nav__link">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="nav__actions">
+        <a href="cart.html" class="btn btn--ghost btn--icon cart-badge" aria-label="Cart">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg>
+          <span class="cart-badge__count" style="display:none;">0</span>
+        </a>
+        <a href="account.html" class="btn btn--ghost btn--sm">Sign In</a>
+        <a href="booking.html" class="btn btn--primary btn--sm">Book Now</a>
+      </div>
+      <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+      </button>
+    </div>
+    <nav id="mobile-menu" class="nav__menu" aria-label="Mobile navigation">
+      <a href="index.html" class="nav__link">Home</a>
+      <a href="services.html" class="nav__link">Services</a>
+      <a href="pricing.html" class="nav__link">Pricing</a>
+      <a href="gallery.html" class="nav__link">Gallery</a>
+      <a href="about.html" class="nav__link">About</a>
+      <a href="blog.html" class="nav__link">Blog</a>
+      <a href="contact.html" class="nav__link">Contact</a>
+      <div class="nav__actions">
+        <a href="account.html" class="btn btn--outline">Sign In</a>
+        <a href="booking.html" class="btn btn--primary">Book Now</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="page-header__pattern" aria-hidden="true"></div>
+      <div class="container page-header__content">
+        <h1 class="page-header__title">Our Services</h1>
+        <p class="page-header__subtitle">Professional mobile car detailing and house cleaning — we bring the equipment, you keep your time.</p>
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="breadcrumb__sep" aria-hidden="true">/</span>
+          <span aria-current="page">Services</span>
+        </nav>
+      </div>
+    </div>
+
+    <!-- ═══ CAR DETAILING SECTION ═══ -->
+    <section class="section" id="car-detailing" aria-labelledby="car-title">
+      <div class="container">
+        <header class="section__header" data-reveal>
+          <span class="section__eyebrow">🚗 Mobile Car Detailing</span>
+          <h2 class="section__title" id="car-title">Showroom-Quality Results</h2>
+          <p class="section__subtitle">From a quick exterior refresh to a complete paint correction — we tailor every detail to your vehicle.</p>
+        </header>
+
+        <div class="grid-3">
+          <!-- Basic Wash -->
+          <article class="service-card" data-reveal>
+            <div class="service-card__image-wrap">
+              <div style="width:100%;aspect-ratio:4/3;background:linear-gradient(135deg,#0369a1,#38bdf8);display:flex;align-items:center;justify-content:center;font-size:4.5rem;" aria-hidden="true">🚿</div>
+            </div>
+            <div class="service-card__body">
+              <span class="service-card__category">Car Detailing</span>
+              <h3 class="service-card__title">Basic Exterior Wash</h3>
+              <p class="service-card__desc">Hand wash, rinse, dry and tire dressing. Perfect for a quick refresh between full details.</p>
+              <ul class="service-features" aria-label="Service includes">
+                <li>Hand exterior wash &amp; rinse</li>
+                <li>Window cleaning (exterior)</li>
+                <li>Tire dressing &amp; wheel shine</li>
+                <li>Door jamb wipe-down</li>
+              </ul>
+              <div class="service-card__footer">
+                <div>
+                  <p class="service-card__price-from">Starting from</p>
+                  <p class="service-card__price">$49</p>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:var(--space-2);">
+                  <a href="service-detail.html?service=basic-wash" class="btn btn--outline btn--sm">Details</a>
+                  <a href="booking.html?service=basic-wash" class="btn btn--primary btn--sm">Book</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Exterior Shine -->
+          <article class="service-card" data-reveal data-reveal-delay="1">
+            <div class="service-card__image-wrap">
+              <div style="width:100%;aspect-ratio:4/3;background:linear-gradient(135deg,#0c4a6e,#0ea5e9);display:flex;align-items:center;justify-content:center;font-size:4.5rem;" aria-hidden="true">✨</div>
+              <span class="service-card__badge">Popular</span>
+            </div>
+            <div class="service-card__body">
+              <span class="service-card__category">Car Detailing</span>
+              <h3 class="service-card__title">Exterior Wash &amp; Shine</h3>
+              <p class="service-card__desc">Full hand wash plus clay bar treatment, hand wax, and paint sealant for months of protection.</p>
+              <ul class="service-features" aria-label="Service includes">
+                <li>Everything in Basic Wash</li>
+                <li>Clay bar decontamination</li>
+                <li>Machine polish (light swirls)</li>
+                <li>Carnauba wax or sealant</li>
+                <li>Glass treatment</li>
+              </ul>
+              <div class="service-card__footer">
+                <div>
+                  <p class="service-card__price-from">Starting from</p>
+                  <p class="service-card__price">$79</p>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:var(--space-2);">
+                  <a href="service-detail.html?service=exterior-wash" class="btn btn--outline btn--sm">Details</a>
+                  <a href="booking.html?service=exterior-wash" class="btn btn--primary btn--sm">Book</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Interior Deep Clean -->
+          <article class="service-card" data-reveal data-reveal-delay="2">
+            <div class="service-card__image-wrap">
+              <div style="width:100%;aspect-ratio:4/3;background:linear-gradient(135deg,#1e3a5f,#0284c7);display:flex;align-items:center;justify-content:center;font-size:4.5rem;" aria-hidden="true">🪑</div>
+            </div>
+            <div class="service-card__body">
+              <span class="service-card__category">Car Detailing</span>
+              <h3 class="service-card__title">Interior Deep Clean</h3>
+              <p class="service-card__desc">Full interior extraction, steam cleaning, leather conditioning, and complete odor treatment.</p>
+              <ul class="service-features" aria-label="Service includes">
+                <li>Full vacuum (seats, floor, trunk)</li>
+                <li>Steam clean all surfaces</li>
+                <li>Leather condition &amp; protect</li>
+                <li>Dashboard &amp; console wipe-down</li>
+                <li>Odor eliminator treatment</li>
+              </ul>
+              <div class="service-card__footer">
+                <div>
+                  <p class="service-card__price-from">Starting from</p>
+                  <p class="service-card__price">$99</p>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:var(--space-2);">
+                  <a href="service-detail.html?service=interior-clean" class="btn btn--outline btn--sm">Details</a>
+                  <a href="booking.html?service=interior-clean" class="btn btn--primary btn--sm">Book</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Full Detail -->
+          <article class="service-card" data-reveal>
+            <div class="service-card__image-wrap">
+              <div style="width:100%;aspect-ratio:4/3;background:linear-gradient(135deg,#0f3460,#38bdf8);display:flex;align-items:center;justify-content:center;font-size:4.5rem;" aria-hidden="true">💎</div>
+              <span class="service-card__badge">Best Value</span>
+            </div>
+            <div class="service-card__body">
+              <span class="service-card__category">Car Detailing</span>
+              <h3 class="service-card__title">Full Detail Package</h3>
+              <p class="service-card__desc">The complete experience: interior + exterior deep clean, paint correction, and ceramic coating option.</p>
+              <ul class="service-features" aria-label="Service includes">
+                <li>Full exterior + interior detail</li>
+                <li>Paint correction (swirl removal)</li>
+                <li>Engine bay cleaning</li>
+                <li>Headlight restoration</li>
+                <li>Optional ceramic coat add-on</li>
+              </ul>
+              <div class="service-card__footer">
+                <div>
+                  <p class="service-card__price-from">Starting from</p>
+                  <p class="service-card__price">$199</p>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:var(--space-2);">
+                  <a href="service-detail.html?service=full-detail" class="btn btn--outline btn--sm">Details</a>
+                  <a href="booking.html?service=full-detail" class="btn btn--primary btn--sm">Book</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Paint Correction -->
+          <article class="service-card" data-reveal data-reveal-delay="1">
+            <div class="service-card__image-wrap">
+              <div style="width:100%;aspect-ratio:4/3;background:linear-gradient(135deg,#0369a1,#06b6d4);display:flex;align-items:center;justify-content:center;font-size:4.5rem;" aria-hidden="true">🎨</div>
+            </div>
+            <div class="service-card__body">
+              <span class="service-card__category">Car Detailing</span>
+              <h3 class="service-card__title">Paint Correction</h3>
+              <p class="service-card__desc">Multi-stage machine polishing to remove deep scratches, swirl marks, and oxidation for a mirror finish.</p>
+              <ul class="service-features" aria-label="Service includes">
+                <li>1, 2, or 3-stage correction</li>
+                <li>Machine polishing compounds</li>
+                <li>Panel-by-panel inspection</li>
+                <li>Final glaze &amp; protection</li>
+              </ul>
+              <div class="service-card__footer">
+                <div>
+                  <p class="service-card__price-from">Starting from</p>
+                  <p class="service-card__price">$249</p>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:var(--space-2);">
+                  <a href="service-detail.html?service=paint-correction" class="btn btn--outline btn--sm">Details</a>
+                  <a href="booking.html?service=paint-correction" class="btn btn--primary btn--sm">Book</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Ceramic Coating -->
+          <article class="service-card" data-reveal data-reveal-delay="2">
+            <div class="service-card__image-wrap">
+              <div style="width:100%;aspect-ratio:4/3;background:linear-gradient(135deg,#0c4a6e,#7dd3fc);display:flex;align-items:center;justify-content:center;font-size:4.5rem;" aria-hidden="true">🛡️</div>
+            </div>
+            <div class="service-card__body">
+              <span class="service-card__category">Car Detailing</span>
+              <h3 class="service-card__title">Ceramic Coating</h3>
+              <p class="service-card__desc">Premium nano ceramic coating that bonds to paint for years of hydrophobic, UV, and chemical protection.</p>
+              <ul class="service-features" aria-label="Service includes">
+                <li>Full paint decontamination</li>
+                <li>Pro-grade ceramic coating</li>
+                <li>2-5 year protection warranty</li>
+                <li>Hydrophobic self-cleaning effect</li>
+                <li>Certificate of application</li>
+              </ul>
+              <div class="service-card__footer">
+                <div>
+                  <p class="service-card__price-from">Starting from</p>
+                  <p class="service-card__price">$599</p>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:var(--space-2);">
+                  <a href="service-detail.html?service=ceramic-coating" class="btn btn--outline btn--sm">Details</a>
+                  <a href="booking.html?service=ceramic-coating" class="btn btn--primary btn--sm">Book</a>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ HOUSE CLEANING SECTION ═══ -->
+    <section class="section section--bg" id="house-cleaning" aria-labelledby="home-title">
+      <div class="container">
+        <header class="section__header" data-reveal>
+          <span class="section__eyebrow">🏠 House Cleaning</span>
+          <h2 class="section__title" id="home-title">A Pristine Home, Every Time</h2>
+          <p class="section__subtitle">From routine cleans to deep scrubs and move-out transformations — our certified cleaning teams deliver every time.</p>
+        </header>
+
+        <div class="grid-3">
+          <!-- Standard Clean -->
+          <article class="service-card" data-reveal>
+            <div class="service-card__image-wrap">
+              <div style="width:100%;aspect-ratio:4/3;background:linear-gradient(135deg,#0369a1,#22d3ee);display:flex;align-items:center;justify-content:center;font-size:4.5rem;" aria-hidden="true">🏠</div>
+            </div>
+            <div class="service-card__body">
+              <span class="service-card__category">House Cleaning</span>
+              <h3 class="service-card__title">Standard Clean</h3>
+              <p class="service-card__desc">Regular maintenance cleaning keeping your home fresh week after week. Ideal for recurring service.</p>
+              <ul class="service-features" aria-label="Service includes">
+                <li>Vacuum all rooms</li>
+                <li>Mop hard floors</li>
+                <li>Bathroom clean &amp; sanitize</li>
+                <li>Kitchen surfaces wipe-down</li>
+                <li>Dust furniture &amp; shelves</li>
+              </ul>
+              <div class="service-card__footer">
+                <div>
+                  <p class="service-card__price-from">Starting from</p>
+                  <p class="service-card__price">$89</p>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:var(--space-2);">
+                  <a href="service-detail.html?service=standard-clean" class="btn btn--outline btn--sm">Details</a>
+                  <a href="booking.html?service=standard-clean" class="btn btn--primary btn--sm">Book</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Deep Clean -->
+          <article class="service-card" data-reveal data-reveal-delay="1">
+            <div class="service-card__image-wrap">
+              <div style="width:100%;aspect-ratio:4/3;background:linear-gradient(135deg,#0c4a6e,#06b6d4);display:flex;align-items:center;justify-content:center;font-size:4.5rem;" aria-hidden="true">🧹</div>
+              <span class="service-card__badge">Popular</span>
+            </div>
+            <div class="service-card__body">
+              <span class="service-card__category">House Cleaning</span>
+              <h3 class="service-card__title">Deep Clean</h3>
+              <p class="service-card__desc">A comprehensive top-to-bottom scrub of every inch including appliance interiors, grout, and baseboards.</p>
+              <ul class="service-features" aria-label="Service includes">
+                <li>Everything in Standard Clean</li>
+                <li>Inside oven &amp; fridge</li>
+                <li>Grout scrubbing</li>
+                <li>Baseboard &amp; door trim clean</li>
+                <li>Window sills &amp; tracks</li>
+                <li>Behind furniture</li>
+              </ul>
+              <div class="service-card__footer">
+                <div>
+                  <p class="service-card__price-from">Starting from</p>
+                  <p class="service-card__price">$149</p>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:var(--space-2);">
+                  <a href="service-detail.html?service=deep-clean" class="btn btn--outline btn--sm">Details</a>
+                  <a href="booking.html?service=deep-clean" class="btn btn--primary btn--sm">Book</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Move In/Out -->
+          <article class="service-card" data-reveal data-reveal-delay="2">
+            <div class="service-card__image-wrap">
+              <div style="width:100%;aspect-ratio:4/3;background:linear-gradient(135deg,#1e3a5f,#7dd3fc);display:flex;align-items:center;justify-content:center;font-size:4.5rem;" aria-hidden="true">📦</div>
+            </div>
+            <div class="service-card__body">
+              <span class="service-card__category">House Cleaning</span>
+              <h3 class="service-card__title">Move In / Move Out</h3>
+              <p class="service-card__desc">Complete property cleaning for tenants and owners — maximise your deposit return or welcome new tenants.</p>
+              <ul class="service-features" aria-label="Service includes">
+                <li>Full deep clean (all rooms)</li>
+                <li>All appliances inside &amp; out</li>
+                <li>Walls spot-cleaned</li>
+                <li>Closets &amp; cabinets</li>
+                <li>Garage sweep (optional)</li>
+              </ul>
+              <div class="service-card__footer">
+                <div>
+                  <p class="service-card__price-from">Starting from</p>
+                  <p class="service-card__price">$219</p>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:var(--space-2);">
+                  <a href="service-detail.html?service=move-clean" class="btn btn--outline btn--sm">Details</a>
+                  <a href="booking.html?service=move-clean" class="btn btn--primary btn--sm">Book</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Post-Construction -->
+          <article class="service-card" data-reveal>
+            <div class="service-card__image-wrap">
+              <div style="width:100%;aspect-ratio:4/3;background:linear-gradient(135deg,#0f3460,#0ea5e9);display:flex;align-items:center;justify-content:center;font-size:4.5rem;" aria-hidden="true">🔨</div>
+            </div>
+            <div class="service-card__body">
+              <span class="service-card__category">House Cleaning</span>
+              <h3 class="service-card__title">Post-Construction Clean</h3>
+              <p class="service-card__desc">Specialized cleaning after renovations to remove dust, debris, and construction residue from every surface.</p>
+              <ul class="service-features" aria-label="Service includes">
+                <li>Construction dust removal</li>
+                <li>Surface debris cleanup</li>
+                <li>HEPA vacuum all areas</li>
+                <li>Window &amp; glass cleaning</li>
+                <li>Floor protection removal</li>
+              </ul>
+              <div class="service-card__footer">
+                <div>
+                  <p class="service-card__price-from">Starting from</p>
+                  <p class="service-card__price">$299</p>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:var(--space-2);">
+                  <a href="service-detail.html?service=post-construction" class="btn btn--outline btn--sm">Details</a>
+                  <a href="booking.html?service=post-construction" class="btn btn--primary btn--sm">Book</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Office Clean -->
+          <article class="service-card" data-reveal data-reveal-delay="1">
+            <div class="service-card__image-wrap">
+              <div style="width:100%;aspect-ratio:4/3;background:linear-gradient(135deg,#0369a1,#38bdf8);display:flex;align-items:center;justify-content:center;font-size:4.5rem;" aria-hidden="true">🏢</div>
+            </div>
+            <div class="service-card__body">
+              <span class="service-card__category">Commercial</span>
+              <h3 class="service-card__title">Office / Commercial Clean</h3>
+              <p class="service-card__desc">Keep your workplace spotless with regular or one-time professional cleaning for offices and small businesses.</p>
+              <ul class="service-features" aria-label="Service includes">
+                <li>Workstation &amp; desk cleaning</li>
+                <li>Break room sanitization</li>
+                <li>Restroom deep clean</li>
+                <li>Floor cleaning (all types)</li>
+                <li>Trash removal</li>
+              </ul>
+              <div class="service-card__footer">
+                <div>
+                  <p class="service-card__price-from">Custom quote</p>
+                  <p class="service-card__price">POA</p>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:var(--space-2);">
+                  <a href="contact.html?type=commercial" class="btn btn--outline btn--sm">Get Quote</a>
+                  <a href="booking.html?service=office-clean" class="btn btn--primary btn--sm">Book</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Subscription Plan -->
+          <article class="service-card" data-reveal data-reveal-delay="2">
+            <div class="service-card__image-wrap">
+              <div style="width:100%;aspect-ratio:4/3;background:linear-gradient(135deg,#0c4a6e,#0284c7);display:flex;align-items:center;justify-content:center;font-size:4.5rem;" aria-hidden="true">🔄</div>
+              <span class="service-card__badge">Save 20%</span>
+            </div>
+            <div class="service-card__body">
+              <span class="service-card__category">Subscription</span>
+              <h3 class="service-card__title">Recurring Plan</h3>
+              <p class="service-card__desc">Set up weekly, bi-weekly, or monthly visits and save up to 20% vs one-time bookings. Priority scheduling guaranteed.</p>
+              <ul class="service-features" aria-label="Service includes">
+                <li>Weekly, bi-weekly, or monthly</li>
+                <li>Same team each visit</li>
+                <li>Priority scheduling</li>
+                <li>Up to 20% discount</li>
+                <li>Cancel anytime</li>
+              </ul>
+              <div class="service-card__footer">
+                <div>
+                  <p class="service-card__price-from">From</p>
+                  <p class="service-card__price">$69<span>/visit</span></p>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:var(--space-2);">
+                  <a href="pricing.html#subscription" class="btn btn--outline btn--sm">Plans</a>
+                  <a href="booking.html?service=subscription" class="btn btn--primary btn--sm">Subscribe</a>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ADD-ONS ═══ -->
+    <section class="section" aria-labelledby="addons-title">
+      <div class="container">
+        <header class="section__header" data-reveal>
+          <span class="section__eyebrow">Customize Your Service</span>
+          <h2 class="section__title" id="addons-title">Popular Add-Ons</h2>
+          <p class="section__subtitle">Enhance any service with these popular upgrades — add them during booking.</p>
+        </header>
+        <div class="add-on-grid">
+          <div class="add-on-card" data-reveal>
+            <div class="add-on-card__icon" aria-hidden="true">🪟</div>
+            <h3 class="add-on-card__title">Interior Window Clean</h3>
+            <p class="add-on-card__price">+$25</p>
+          </div>
+          <div class="add-on-card" data-reveal data-reveal-delay="1">
+            <div class="add-on-card__icon" aria-hidden="true">🐾</div>
+            <h3 class="add-on-card__title">Pet Hair Removal</h3>
+            <p class="add-on-card__price">+$30</p>
+          </div>
+          <div class="add-on-card" data-reveal data-reveal-delay="2">
+            <div class="add-on-card__icon" aria-hidden="true">🌿</div>
+            <h3 class="add-on-card__title">Odor Eliminator</h3>
+            <p class="add-on-card__price">+$35</p>
+          </div>
+          <div class="add-on-card" data-reveal data-reveal-delay="3">
+            <div class="add-on-card__icon" aria-hidden="true">💡</div>
+            <h3 class="add-on-card__title">Headlight Restoration</h3>
+            <p class="add-on-card__price">+$45</p>
+          </div>
+          <div class="add-on-card" data-reveal>
+            <div class="add-on-card__icon" aria-hidden="true">🔧</div>
+            <h3 class="add-on-card__title">Engine Bay Cleaning</h3>
+            <p class="add-on-card__price">+$55</p>
+          </div>
+          <div class="add-on-card" data-reveal data-reveal-delay="1">
+            <div class="add-on-card__icon" aria-hidden="true">🛁</div>
+            <h3 class="add-on-card__title">Carpet Shampoo</h3>
+            <p class="add-on-card__price">+$40</p>
+          </div>
+          <div class="add-on-card" data-reveal data-reveal-delay="2">
+            <div class="add-on-card__icon" aria-hidden="true">🧺</div>
+            <h3 class="add-on-card__title">Laundry Fold (Home)</h3>
+            <p class="add-on-card__price">+$20</p>
+          </div>
+          <div class="add-on-card" data-reveal data-reveal-delay="3">
+            <div class="add-on-card__icon" aria-hidden="true">🍽️</div>
+            <h3 class="add-on-card__title">Dishwasher Unload (Home)</h3>
+            <p class="add-on-card__price">+$15</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Banner -->
+    <div class="cta-banner">
+      <div class="container cta-banner__content" data-reveal>
+        <h2 class="cta-banner__title">Not Sure Which Service You Need?</h2>
+        <p class="cta-banner__subtitle">Contact us for a free consultation and custom quote tailored to your vehicle or home.</p>
+        <div class="cta-banner__actions">
+          <a href="booking.html" class="btn btn--outline-white btn--lg">Book a Service</a>
+          <a href="contact.html" class="btn btn--outline-white btn--lg">Get a Free Quote</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__main">
+      <div class="footer__brand">
+        <a href="index.html" class="footer__logo" aria-label="Wash&amp;Go Home">
+          <img src="assets/logo.svg" alt="Wash&amp;Go" width="160" height="40">
+        </a>
+        <p class="footer__tagline">Premium mobile car detailing and house cleaning services delivered to your door. Serving the greater metro area with pride since 2016.</p>
+        <div class="footer__socials">
+          <a href="#" class="footer__social" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+          <a href="#" class="footer__social" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="#" class="footer__social" aria-label="Twitter/X"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h3 class="footer__col-title">Services</h3>
+        <ul class="footer__links" role="list">
+          <li><a href="services.html#car-detailing" class="footer__link">Car Detailing</a></li>
+          <li><a href="services.html#house-cleaning" class="footer__link">House Cleaning</a></li>
+          <li><a href="pricing.html" class="footer__link">Pricing</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer__col-title">Company</h3>
+        <ul class="footer__links" role="list">
+          <li><a href="about.html" class="footer__link">About Us</a></li>
+          <li><a href="gallery.html" class="footer__link">Gallery</a></li>
+          <li><a href="faq.html" class="footer__link">FAQ</a></li>
+          <li><a href="contact.html" class="footer__link">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer__col-title">Contact</h3>
+        <address style="font-style:normal;">
+          <div class="footer__contact-item"><span class="footer__contact-icon">📞</span><a href="tel:+15551234567" class="footer__link">(555) 123-4567</a></div>
+          <div class="footer__contact-item"><span class="footer__contact-icon">✉️</span><a href="mailto:hello@washgo.com" class="footer__link">hello@washgo.com</a></div>
+        </address>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <p class="footer__copy">&copy; <span id="footer-year">2024</span> Wash&amp;Go LLC. All rights reserved.</p>
+      <nav class="footer__legal" aria-label="Legal">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="js/globals.js"></script>
+  <script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

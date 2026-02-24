@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Your Wash&Go booking is confirmed! We'll see you soon.">
+  <title>Booking Confirmed — Wash&amp;Go</title>
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/globals.css">
+  <style>
+    .confirm-hero {
+      min-height: calc(100svh - var(--nav-height));
+      display: flex;
+      align-items: center;
+      background: linear-gradient(135deg, var(--color-primary-pale) 0%, white 60%);
+      padding-top: var(--nav-height);
+    }
+    .confirm-card {
+      background: var(--color-white);
+      border-radius: var(--radius-2xl);
+      box-shadow: var(--shadow-2xl);
+      padding: var(--space-12);
+      text-align: center;
+      max-width: 640px;
+      margin-inline: auto;
+      border: 1px solid var(--color-border);
+    }
+    .confirm-icon {
+      width: 6rem;
+      height: 6rem;
+      border-radius: var(--radius-full);
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      margin-inline: auto;
+      margin-bottom: var(--space-6);
+      box-shadow: var(--shadow-primary);
+      animation: pulse 2s ease-in-out 3;
+    }
+    .confirm-detail-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-4);
+      padding: var(--space-3) 0;
+      border-bottom: 1px solid var(--color-border);
+      font-size: var(--text-sm);
+    }
+    .confirm-detail-row:last-child { border-bottom: none; }
+    .confirm-detail-row dt { color: var(--color-mid); }
+    .confirm-detail-row dd { font-weight: var(--font-semibold); color: var(--color-dark); text-align: right; }
+    .next-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-4);
+      margin-top: var(--space-10);
+    }
+    .next-step {
+      text-align: center;
+      padding: var(--space-5);
+      background: var(--color-bg);
+      border-radius: var(--radius-xl);
+    }
+    .next-step__num {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: var(--radius-full);
+      background-color: var(--color-primary);
+      color: white;
+      font-size: var(--text-base);
+      font-weight: var(--font-bold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-inline: auto;
+      margin-bottom: var(--space-3);
+    }
+    @media (max-width: 767px) {
+      .confirm-card { padding: var(--space-8) var(--space-5); }
+      .next-steps { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav" role="banner">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo" aria-label="Wash&amp;Go Home"><img src="assets/logo.svg" alt="Wash&amp;Go" width="180" height="44"></a>
+      <div class="nav__actions" style="margin-left:auto;">
+        <a href="account.html" class="btn btn--ghost btn--sm">My Account</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <div class="confirm-hero">
+      <div class="container">
+        <div class="confirm-card" data-reveal>
+          <div class="confirm-icon" aria-hidden="true">✅</div>
+          <h1 style="font-size:clamp(var(--text-2xl),4vw,var(--text-4xl));margin-bottom:var(--space-3);">Booking Confirmed!</h1>
+          <p style="color:var(--color-mid);font-size:var(--text-lg);margin-bottom:var(--space-8);">You're all set! We'll see you soon. A confirmation email has been sent to your inbox.</p>
+
+          <!-- Booking Details -->
+          <div style="background:var(--color-bg);border-radius:var(--radius-xl);padding:var(--space-5);margin-bottom:var(--space-8);text-align:left;" aria-label="Booking details">
+            <p style="font-size:var(--text-sm);font-weight:var(--font-bold);color:var(--color-dark);margin-bottom:var(--space-3);">Booking Reference: <strong style="color:var(--color-primary);" id="confirm-ref">#WG-2026-0001</strong></p>
+            <dl>
+              <div class="confirm-detail-row"><dt>Service</dt><dd id="confirm-service">Exterior Wash &amp; Shine</dd></div>
+              <div class="confirm-detail-row"><dt>Date &amp; Time</dt><dd id="confirm-date">March 5, 2024 · 10:00 AM</dd></div>
+              <div class="confirm-detail-row"><dt>Address</dt><dd id="confirm-address">123 Main St, Springfield, IL</dd></div>
+              <div class="confirm-detail-row"><dt>Technician</dt><dd>Marcus (will be confirmed 1hr before)</dd></div>
+              <div class="confirm-detail-row"><dt>Payment</dt><dd>After service · Credit Card</dd></div>
+              <div class="confirm-detail-row"><dt>Total</dt><dd style="font-size:var(--text-xl);color:var(--color-primary);">$85.32</dd></div>
+            </dl>
+          </div>
+
+          <div style="display:flex;gap:var(--space-3);justify-content:center;flex-wrap:wrap;margin-bottom:var(--space-8);">
+            <a href="account.html" class="btn btn--primary btn--lg">View in My Account</a>
+            <a href="index.html" class="btn btn--outline btn--lg">Back to Home</a>
+          </div>
+
+          <!-- Share / Review prompt -->
+          <div style="border-top:1px solid var(--color-border);padding-top:var(--space-6);">
+            <p style="font-size:var(--text-sm);font-weight:var(--font-semibold);color:var(--color-dark);margin-bottom:var(--space-3);">After your service, share your experience!</p>
+            <div style="display:flex;gap:var(--space-3);justify-content:center;flex-wrap:wrap;">
+              <a href="https://g.page/r/washgo/review" class="btn btn--ghost btn--sm" target="_blank" rel="noopener noreferrer">⭐ Leave a Google Review</a>
+              <a href="https://instagram.com" class="btn btn--ghost btn--sm" target="_blank" rel="noopener noreferrer">📸 Share on Instagram</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- What Happens Next -->
+        <div class="next-steps" data-reveal>
+          <div class="next-step">
+            <div class="next-step__num" aria-hidden="true">1</div>
+            <h3 style="font-size:var(--text-base);margin-bottom:var(--space-2);">Email Confirmation</h3>
+            <p style="font-size:var(--text-sm);color:var(--color-mid);">Check your inbox for a full confirmation with booking details.</p>
+          </div>
+          <div class="next-step">
+            <div class="next-step__num" aria-hidden="true">2</div>
+            <h3 style="font-size:var(--text-base);margin-bottom:var(--space-2);">SMS Reminder</h3>
+            <p style="font-size:var(--text-sm);color:var(--color-mid);">We'll text you 1 hour before arrival with your technician's name.</p>
+          </div>
+          <div class="next-step">
+            <div class="next-step__num" aria-hidden="true">3</div>
+            <h3 style="font-size:var(--text-base);margin-bottom:var(--space-2);">Sit Back &amp; Relax</h3>
+            <p style="font-size:var(--text-sm);color:var(--color-mid);">Our pro arrives fully equipped. You enjoy the results.</p>
+          </div>
+        </div>
+
+        <!-- Newsletter -->
+        <div style="max-width:640px;margin-inline:auto;margin-top:var(--space-10);background:var(--color-dark-2);border-radius:var(--radius-2xl);padding:var(--space-8);text-align:center;" data-reveal>
+          <p style="font-size:var(--text-lg);font-weight:var(--font-bold);color:white;margin-bottom:var(--space-2);">Get 15% off your next booking</p>
+          <p style="font-size:var(--text-sm);color:rgba(255,255,255,0.65);margin-bottom:var(--space-5);">Join our newsletter for exclusive deals and cleaning tips.</p>
+          <form class="newsletter-form" style="max-width:400px;margin-inline:auto;" aria-label="Newsletter signup">
+            <label for="ty-email" class="sr-only">Email address</label>
+            <input type="email" id="ty-email" name="email" class="form-input" placeholder="Enter your email" required>
+            <button type="submit" class="btn btn--primary">Subscribe</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__bottom">
+      <p class="footer__copy">&copy; <span id="footer-year">2024</span> Wash&amp;Go LLC. All rights reserved.</p>
+      <nav class="footer__legal" aria-label="Legal"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></nav>
+    </div>
+  </footer>
+
+  <script src="js/globals.js"></script>
+  <script>
+    document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+    // Generate a unique booking reference from the current timestamp
+    const refNum = String(Date.now()).slice(-6);
+    const year   = new Date().getFullYear();
+    document.getElementById('confirm-ref').textContent = `#WG-${year}-${refNum}`;
+
+    // Pre-fill confirmation details from URL params or localStorage
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('service')) document.getElementById('confirm-service').textContent = decodeURIComponent(params.get('service'));
+    if (params.get('date'))    document.getElementById('confirm-date').textContent    = decodeURIComponent(params.get('date'));
+    if (params.get('address')) document.getElementById('confirm-address').textContent = decodeURIComponent(params.get('address'));
+  </script>
+</body>
+</html>

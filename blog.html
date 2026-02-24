@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Wash&Go Blog — car detailing tips, house cleaning guides, product reviews, and more.">
+  <title>Blog &amp; Tips — Wash&amp;Go</title>
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/globals.css">
+  <style>
+    .blog-layout {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: var(--space-12);
+      align-items: start;
+    }
+    .sidebar-widget {
+      background: var(--color-white);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      border: 1px solid var(--color-border);
+      margin-bottom: var(--space-5);
+    }
+    .sidebar-widget__title {
+      font-size: var(--text-base);
+      font-weight: var(--font-bold);
+      margin-bottom: var(--space-4);
+      padding-bottom: var(--space-3);
+      border-bottom: 2px solid var(--color-primary);
+      color: var(--color-dark);
+    }
+    .tag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+    }
+    .tag { padding: var(--space-1) var(--space-3); border-radius: var(--radius-full); border: 1px solid var(--color-border); font-size: var(--text-xs); cursor: pointer; transition: all var(--transition-fast); color: var(--color-dark-3); text-decoration: none; }
+    .tag:hover { background-color: var(--color-primary); border-color: var(--color-primary); color: white; }
+    .recent-post {
+      display: flex;
+      gap: var(--space-3);
+      padding-block: var(--space-3);
+      border-bottom: 1px solid var(--color-border);
+      text-decoration: none;
+    }
+    .recent-post:last-child { border-bottom: none; }
+    .recent-post:hover .recent-post__title { color: var(--color-primary); }
+    .recent-post__thumb { width: 4rem; height: 4rem; border-radius: var(--radius-md); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 1.75rem; }
+    .recent-post__title { font-size: var(--text-sm); font-weight: var(--font-semibold); color: var(--color-dark); transition: color var(--transition-fast); margin-bottom: var(--space-1); }
+    .recent-post__date { font-size: var(--text-xs); color: var(--color-mid); }
+    .featured-post {
+      background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-dark-2) 100%);
+      border-radius: var(--radius-2xl);
+      padding: var(--space-10);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: var(--space-8);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-8);
+      align-items: center;
+    }
+    .featured-post::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 80% 50%, rgb(14 165 233 / 0.15), transparent 60%);
+    }
+    .featured-post__content { position: relative; z-index: 1; }
+    .featured-post__visual { font-size: 8rem; text-align: center; position: relative; z-index: 1; }
+    @media (max-width: 1023px) {
+      .blog-layout { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 767px) {
+      .featured-post { grid-template-columns: 1fr; }
+      .featured-post__visual { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav" role="banner">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo" aria-label="Wash&amp;Go Home"><img src="assets/logo.svg" alt="Wash&amp;Go" width="180" height="44"></a>
+      <nav aria-label="Main navigation"><ul class="nav__links" role="list">
+        <li><a href="index.html" class="nav__link">Home</a></li>
+        <li><a href="services.html" class="nav__link">Services</a></li>
+        <li><a href="pricing.html" class="nav__link">Pricing</a></li>
+        <li><a href="gallery.html" class="nav__link">Gallery</a></li>
+        <li><a href="about.html" class="nav__link">About</a></li>
+        <li><a href="blog.html" class="nav__link">Blog</a></li>
+        <li><a href="contact.html" class="nav__link">Contact</a></li>
+      </ul></nav>
+      <div class="nav__actions">
+        <a href="cart.html" class="btn btn--ghost btn--icon cart-badge" aria-label="Cart"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg><span class="cart-badge__count" style="display:none;">0</span></a>
+        <a href="account.html" class="btn btn--ghost btn--sm">Sign In</a>
+        <a href="booking.html" class="btn btn--primary btn--sm">Book Now</a>
+      </div>
+      <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu"><span class="nav__toggle-bar"></span><span class="nav__toggle-bar"></span><span class="nav__toggle-bar"></span></button>
+    </div>
+    <nav id="mobile-menu" class="nav__menu" aria-label="Mobile navigation">
+      <a href="index.html" class="nav__link">Home</a><a href="services.html" class="nav__link">Services</a><a href="pricing.html" class="nav__link">Pricing</a><a href="about.html" class="nav__link">About</a><a href="contact.html" class="nav__link">Contact</a>
+      <div class="nav__actions"><a href="account.html" class="btn btn--outline">Sign In</a><a href="booking.html" class="btn btn--primary">Book Now</a></div>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <div class="page-header">
+      <div class="page-header__pattern" aria-hidden="true"></div>
+      <div class="container page-header__content">
+        <h1 class="page-header__title">Blog &amp; Tips</h1>
+        <p class="page-header__subtitle">Expert car detailing advice, home cleaning hacks, product guides, and more.</p>
+        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span class="breadcrumb__sep" aria-hidden="true">/</span><span aria-current="page">Blog</span></nav>
+      </div>
+    </div>
+
+    <section class="section" aria-labelledby="blog-heading">
+      <div class="container">
+        <h2 id="blog-heading" class="sr-only">Blog Posts</h2>
+
+        <!-- Featured Article -->
+        <div class="featured-post" data-reveal aria-labelledby="featured-title">
+          <div class="featured-post__content">
+            <span class="section__eyebrow" style="color:var(--color-primary-light);">Featured Article</span>
+            <h2 id="featured-title" style="font-size:var(--text-3xl);color:white;margin-block:var(--space-3);">The Ultimate Car Detailing Guide for 2024</h2>
+            <p style="color:rgba(255,255,255,0.7);font-size:var(--text-sm);margin-bottom:var(--space-5);line-height:var(--leading-relaxed);">Everything you need to know about keeping your car in showroom condition — from weekly washes to annual ceramic coating maintenance. Professional tips from our certified detailers.</p>
+            <div style="display:flex;align-items:center;gap:var(--space-4);margin-bottom:var(--space-5);">
+              <div style="display:flex;align-items:center;gap:var(--space-2);">
+                <span style="width:2rem;height:2rem;border-radius:50%;background:var(--color-primary);display:flex;align-items:center;justify-content:center;font-size:1rem;" aria-hidden="true">👨‍🔧</span>
+                <span style="font-size:var(--text-sm);color:rgba(255,255,255,0.7);">Marcus Chen</span>
+              </div>
+              <span style="color:rgba(255,255,255,0.4);">•</span>
+              <span style="font-size:var(--text-sm);color:rgba(255,255,255,0.5);">Jan 15, 2024 · 8 min read</span>
+            </div>
+            <a href="blog-post.html" class="btn btn--primary">Read Article →</a>
+          </div>
+          <div class="featured-post__visual" aria-hidden="true">🚗✨</div>
+        </div>
+
+        <div class="blog-layout">
+          <!-- Blog Posts -->
+          <div>
+            <div class="grid-2" style="gap:var(--space-6);">
+              <article class="blog-card" data-reveal>
+                <div class="blog-card__image" style="aspect-ratio:16/9;background:linear-gradient(135deg,#0c4a6e,#38bdf8);display:flex;align-items:center;justify-content:center;font-size:4rem;" aria-hidden="true">🧼</div>
+                <div class="blog-card__body">
+                  <div class="blog-card__meta"><span class="blog-card__category">Car Tips</span><span>•</span><span>Feb 2, 2024</span></div>
+                  <h3 class="blog-card__title"><a href="blog-post.html" style="color:inherit;text-decoration:none;">How Often Should You Wash Your Car?</a></h3>
+                  <p class="blog-card__excerpt">The golden rule for car washing frequency, and why waiting too long can actually damage your paint...</p>
+                  <a href="blog-post.html" class="blog-card__link">Read More →</a>
+                </div>
+              </article>
+              <article class="blog-card" data-reveal data-reveal-delay="1">
+                <div class="blog-card__image" style="aspect-ratio:16/9;background:linear-gradient(135deg,#0369a1,#06b6d4);display:flex;align-items:center;justify-content:center;font-size:4rem;" aria-hidden="true">🏠</div>
+                <div class="blog-card__body">
+                  <div class="blog-card__meta"><span class="blog-card__category">Home Tips</span><span>•</span><span>Jan 28, 2024</span></div>
+                  <h3 class="blog-card__title"><a href="blog-post.html" style="color:inherit;text-decoration:none;">10 Areas You Always Forget to Clean</a></h3>
+                  <p class="blog-card__excerpt">From ceiling fans to behind the fridge — the hidden spots that harbour dust and bacteria in every home...</p>
+                  <a href="blog-post.html" class="blog-card__link">Read More →</a>
+                </div>
+              </article>
+              <article class="blog-card" data-reveal>
+                <div class="blog-card__image" style="aspect-ratio:16/9;background:linear-gradient(135deg,#0f3460,#0ea5e9);display:flex;align-items:center;justify-content:center;font-size:4rem;" aria-hidden="true">🛡️</div>
+                <div class="blog-card__body">
+                  <div class="blog-card__meta"><span class="blog-card__category">Car Tips</span><span>•</span><span>Jan 20, 2024</span></div>
+                  <h3 class="blog-card__title"><a href="blog-post.html" style="color:inherit;text-decoration:none;">Ceramic Coating vs. Wax: Which is Right for You?</a></h3>
+                  <p class="blog-card__excerpt">A complete cost-benefit comparison between traditional carnauba wax and modern ceramic coatings...</p>
+                  <a href="blog-post.html" class="blog-card__link">Read More →</a>
+                </div>
+              </article>
+              <article class="blog-card" data-reveal data-reveal-delay="1">
+                <div class="blog-card__image" style="aspect-ratio:16/9;background:linear-gradient(135deg,#1e3a5f,#22d3ee);display:flex;align-items:center;justify-content:center;font-size:4rem;" aria-hidden="true">🌿</div>
+                <div class="blog-card__body">
+                  <div class="blog-card__meta"><span class="blog-card__category">Eco</span><span>•</span><span>Jan 10, 2024</span></div>
+                  <h3 class="blog-card__title"><a href="blog-post.html" style="color:inherit;text-decoration:none;">Eco-Friendly Cleaning: What We Use and Why</a></h3>
+                  <p class="blog-card__excerpt">Behind the scenes look at the biodegradable, non-toxic products that keep your home and car clean without harming the planet...</p>
+                  <a href="blog-post.html" class="blog-card__link">Read More →</a>
+                </div>
+              </article>
+              <article class="blog-card" data-reveal>
+                <div class="blog-card__image" style="aspect-ratio:16/9;background:linear-gradient(135deg,#0c4a6e,#0284c7);display:flex;align-items:center;justify-content:center;font-size:4rem;" aria-hidden="true">🐾</div>
+                <div class="blog-card__body">
+                  <div class="blog-card__meta"><span class="blog-card__category">Home Tips</span><span>•</span><span>Dec 28, 2023</span></div>
+                  <h3 class="blog-card__title"><a href="blog-post.html" style="color:inherit;text-decoration:none;">The Pet Owner's Guide to a Clean Home</a></h3>
+                  <p class="blog-card__excerpt">Managing pet hair, odors, and stains — professional tips from our cleaning teams who handle it daily...</p>
+                  <a href="blog-post.html" class="blog-card__link">Read More →</a>
+                </div>
+              </article>
+              <article class="blog-card" data-reveal data-reveal-delay="1">
+                <div class="blog-card__image" style="aspect-ratio:16/9;background:linear-gradient(135deg,#0369a1,#7dd3fc);display:flex;align-items:center;justify-content:center;font-size:4rem;" aria-hidden="true">💎</div>
+                <div class="blog-card__body">
+                  <div class="blog-card__meta"><span class="blog-card__category">Car Tips</span><span>•</span><span>Dec 15, 2023</span></div>
+                  <h3 class="blog-card__title"><a href="blog-post.html" style="color:inherit;text-decoration:none;">5 Signs Your Car Needs a Full Detail ASAP</a></h3>
+                  <p class="blog-card__excerpt">Ignoring these warning signs could lead to permanent damage to your paint, interior, and resale value...</p>
+                  <a href="blog-post.html" class="blog-card__link">Read More →</a>
+                </div>
+              </article>
+            </div>
+
+            <div class="text-center mt-8" data-reveal>
+              <button class="btn btn--outline">Load More Articles</button>
+            </div>
+          </div>
+
+          <!-- Sidebar -->
+          <aside aria-label="Blog sidebar" style="position:sticky;top:calc(var(--nav-height) + var(--space-4));">
+            <!-- Search -->
+            <div class="sidebar-widget">
+              <h3 class="sidebar-widget__title">Search</h3>
+              <form role="search" aria-label="Search blog">
+                <div style="display:flex;gap:var(--space-2);">
+                  <label for="blog-search" class="sr-only">Search articles</label>
+                  <input type="search" id="blog-search" class="form-input" placeholder="Search articles…" style="flex:1;">
+                  <button type="submit" class="btn btn--primary btn--sm" aria-label="Search">🔍</button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Categories -->
+            <div class="sidebar-widget">
+              <h3 class="sidebar-widget__title">Categories</h3>
+              <ul style="display:flex;flex-direction:column;gap:var(--space-2);list-style:none;">
+                <li><a href="#" style="display:flex;justify-content:space-between;font-size:var(--text-sm);color:var(--color-dark-3);text-decoration:none;padding:var(--space-1) 0;">Car Detailing Tips <span class="badge badge--primary">12</span></a></li>
+                <li><a href="#" style="display:flex;justify-content:space-between;font-size:var(--text-sm);color:var(--color-dark-3);text-decoration:none;padding:var(--space-1) 0;">House Cleaning Guides <span class="badge badge--primary">8</span></a></li>
+                <li><a href="#" style="display:flex;justify-content:space-between;font-size:var(--text-sm);color:var(--color-dark-3);text-decoration:none;padding:var(--space-1) 0;">Product Reviews <span class="badge badge--primary">5</span></a></li>
+                <li><a href="#" style="display:flex;justify-content:space-between;font-size:var(--text-sm);color:var(--color-dark-3);text-decoration:none;padding:var(--space-1) 0;">Eco &amp; Sustainability <span class="badge badge--primary">4</span></a></li>
+                <li><a href="#" style="display:flex;justify-content:space-between;font-size:var(--text-sm);color:var(--color-dark-3);text-decoration:none;padding:var(--space-1) 0;">Industry News <span class="badge badge--primary">6</span></a></li>
+              </ul>
+            </div>
+
+            <!-- Recent Posts -->
+            <div class="sidebar-widget">
+              <h3 class="sidebar-widget__title">Recent Posts</h3>
+              <nav aria-label="Recent blog posts">
+                <a href="blog-post.html" class="recent-post">
+                  <div class="recent-post__thumb" style="background:linear-gradient(135deg,#0c4a6e,#38bdf8);" aria-hidden="true">🚗</div>
+                  <div><p class="recent-post__title">Ultimate Car Detailing Guide 2024</p><p class="recent-post__date">Jan 15, 2024</p></div>
+                </a>
+                <a href="blog-post.html" class="recent-post">
+                  <div class="recent-post__thumb" style="background:linear-gradient(135deg,#0369a1,#22d3ee);" aria-hidden="true">🏠</div>
+                  <div><p class="recent-post__title">10 Areas You Always Forget to Clean</p><p class="recent-post__date">Jan 28, 2024</p></div>
+                </a>
+                <a href="blog-post.html" class="recent-post">
+                  <div class="recent-post__thumb" style="background:linear-gradient(135deg,#0f3460,#0ea5e9);" aria-hidden="true">🛡️</div>
+                  <div><p class="recent-post__title">Ceramic Coating vs. Wax Guide</p><p class="recent-post__date">Jan 20, 2024</p></div>
+                </a>
+              </nav>
+            </div>
+
+            <!-- Tags -->
+            <div class="sidebar-widget">
+              <h3 class="sidebar-widget__title">Popular Tags</h3>
+              <div class="tag-cloud">
+                <a href="#" class="tag">car detailing</a>
+                <a href="#" class="tag">house cleaning</a>
+                <a href="#" class="tag">ceramic coating</a>
+                <a href="#" class="tag">pet hair</a>
+                <a href="#" class="tag">eco-friendly</a>
+                <a href="#" class="tag">waxing</a>
+                <a href="#" class="tag">move-out</a>
+                <a href="#" class="tag">deep clean</a>
+                <a href="#" class="tag">tips</a>
+                <a href="#" class="tag">DIY</a>
+              </div>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="sidebar-widget" style="background:var(--color-primary-pale);border-color:var(--color-primary-light);">
+              <h3 class="sidebar-widget__title" style="color:var(--color-primary-dark);">Get Tips by Email</h3>
+              <p style="font-size:var(--text-sm);color:var(--color-primary-darker);margin-bottom:var(--space-4);">Weekly cleaning tips + exclusive subscriber discounts.</p>
+              <form class="newsletter-form" style="flex-direction:column;" aria-label="Newsletter signup">
+                <label for="sidebar-email" class="sr-only">Email address</label>
+                <input type="email" id="sidebar-email" name="email" class="form-input" placeholder="your@email.com" required>
+                <button type="submit" class="btn btn--primary btn--sm" style="margin-top:var(--space-3);">Subscribe Free</button>
+              </form>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__main">
+      <div class="footer__brand"><a href="index.html" class="footer__logo"><img src="assets/logo.svg" alt="Wash&amp;Go" width="160" height="40"></a><p class="footer__tagline">Premium mobile car detailing and house cleaning services delivered to your door.</p></div>
+      <div><h3 class="footer__col-title">Services</h3><ul class="footer__links" role="list"><li><a href="services.html#car-detailing" class="footer__link">Car Detailing</a></li><li><a href="services.html#house-cleaning" class="footer__link">House Cleaning</a></li></ul></div>
+      <div><h3 class="footer__col-title">Company</h3><ul class="footer__links" role="list"><li><a href="about.html" class="footer__link">About</a></li><li><a href="faq.html" class="footer__link">FAQ</a></li><li><a href="contact.html" class="footer__link">Contact</a></li></ul></div>
+      <div><h3 class="footer__col-title">Contact</h3><address style="font-style:normal;"><div class="footer__contact-item"><span class="footer__contact-icon">📞</span><a href="tel:+15551234567" class="footer__link">(555) 123-4567</a></div></address></div>
+    </div>
+    <div class="container footer__bottom">
+      <p class="footer__copy">&copy; <span id="footer-year">2024</span> Wash&amp;Go LLC. All rights reserved.</p>
+      <nav class="footer__legal" aria-label="Legal"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></nav>
+    </div>
+  </footer>
+
+  <script src="js/globals.js"></script>
+  <script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

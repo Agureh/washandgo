@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Checkout — complete your Wash&Go service booking securely.">
+  <title>Checkout — Wash&amp;Go</title>
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/globals.css">
+  <style>
+    .checkout-layout {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: var(--space-10);
+      align-items: start;
+    }
+    .payment-methods {
+      display: flex;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+      margin-bottom: var(--space-5);
+    }
+    .payment-tab {
+      padding: var(--space-2) var(--space-4);
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-md);
+      font-size: var(--text-sm);
+      font-weight: var(--font-medium);
+      cursor: pointer;
+      background: var(--color-white);
+      transition: all var(--transition-fast);
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+    .payment-tab:hover, .payment-tab.is-active {
+      border-color: var(--color-primary);
+      background-color: var(--color-primary-pale);
+      color: var(--color-primary-dark);
+    }
+    .card-icons { display: flex; gap: var(--space-1); align-items: center; }
+    .card-icon { width: 2.5rem; height: 1.6rem; background: var(--color-border); border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: bold; color: var(--color-mid); }
+    .security-badges { display: flex; align-items: center; gap: var(--space-4); flex-wrap: wrap; margin-top: var(--space-4); }
+    .security-badge { display: flex; align-items: center; gap: var(--space-2); font-size: var(--text-xs); color: var(--color-mid); }
+    @media (max-width: 1023px) { .checkout-layout { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <header class="nav" role="banner">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo" aria-label="Wash&amp;Go Home"><img src="assets/logo.svg" alt="Wash&amp;Go" width="180" height="44"></a>
+      <div class="nav__actions" style="margin-left:auto;">
+        <p style="font-size:var(--text-sm);color:var(--color-mid);">🔒 Secure Checkout</p>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <div style="background:var(--color-bg);border-bottom:1px solid var(--color-border);padding:var(--space-3) 0;">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Checkout progress">
+          <a href="cart.html" style="color:var(--color-primary);">Cart</a>
+          <span class="breadcrumb__sep" aria-hidden="true">›</span>
+          <span style="color:var(--color-dark);font-weight:var(--font-semibold);" aria-current="step">Checkout</span>
+          <span class="breadcrumb__sep" aria-hidden="true">›</span>
+          <span style="color:var(--color-light);">Confirmation</span>
+        </nav>
+      </div>
+    </div>
+
+    <section class="section" aria-labelledby="checkout-title">
+      <div class="container">
+        <h1 id="checkout-title" style="font-size:var(--text-3xl);margin-bottom:var(--space-8);">Checkout</h1>
+
+        <div class="checkout-layout">
+          <!-- Left: Checkout Form -->
+          <div>
+            <form id="checkout-form" novalidate aria-label="Checkout form">
+
+              <!-- Section 1: Contact -->
+              <section aria-labelledby="contact-section" style="margin-bottom:var(--space-8);">
+                <h2 id="contact-section" style="font-size:var(--text-xl);font-weight:var(--font-bold);margin-bottom:var(--space-5);display:flex;align-items:center;gap:var(--space-3);">
+                  <span style="width:2rem;height:2rem;border-radius:50%;background:var(--color-primary);color:white;display:flex;align-items:center;justify-content:center;font-size:var(--text-sm);flex-shrink:0;" aria-hidden="true">1</span>
+                  Contact Information
+                </h2>
+                <div class="grid-2" style="margin-bottom:var(--space-4);">
+                  <div class="form-group"><label class="form-label" for="co-first">First Name <span aria-hidden="true">*</span></label><input type="text" id="co-first" name="first_name" class="form-input" placeholder="Jane" data-validate="required" aria-required="true" autocomplete="given-name"><span class="form-error" hidden></span></div>
+                  <div class="form-group"><label class="form-label" for="co-last">Last Name <span aria-hidden="true">*</span></label><input type="text" id="co-last" name="last_name" class="form-input" placeholder="Smith" data-validate="required" aria-required="true" autocomplete="family-name"><span class="form-error" hidden></span></div>
+                </div>
+                <div class="grid-2">
+                  <div class="form-group"><label class="form-label" for="co-email">Email <span aria-hidden="true">*</span></label><input type="email" id="co-email" name="email" class="form-input" placeholder="jane@example.com" data-validate="required email" aria-required="true" autocomplete="email"><span class="form-error" hidden></span></div>
+                  <div class="form-group"><label class="form-label" for="co-phone">Phone <span aria-hidden="true">*</span></label><input type="tel" id="co-phone" name="phone" class="form-input" placeholder="(555) 123-4567" data-validate="required phone" aria-required="true" autocomplete="tel"><span class="form-error" hidden></span></div>
+                </div>
+              </section>
+
+              <!-- Section 2: Service Address -->
+              <section aria-labelledby="address-section" style="margin-bottom:var(--space-8);">
+                <h2 id="address-section" style="font-size:var(--text-xl);font-weight:var(--font-bold);margin-bottom:var(--space-5);display:flex;align-items:center;gap:var(--space-3);">
+                  <span style="width:2rem;height:2rem;border-radius:50%;background:var(--color-primary);color:white;display:flex;align-items:center;justify-content:center;font-size:var(--text-sm);flex-shrink:0;" aria-hidden="true">2</span>
+                  Service Address
+                </h2>
+                <div class="form-group" style="margin-bottom:var(--space-4);">
+                  <label class="form-label" for="co-address">Street Address <span aria-hidden="true">*</span></label>
+                  <input type="text" id="co-address" name="address" class="form-input" placeholder="123 Main St" data-validate="required" aria-required="true" autocomplete="street-address">
+                  <span class="form-error" hidden></span>
+                </div>
+                <div class="grid-3" style="gap:var(--space-3);">
+                  <div class="form-group" style="grid-column:span 1;"><label class="form-label" for="co-apt">Apt/Unit</label><input type="text" id="co-apt" name="apt" class="form-input" placeholder="Apt 4B" autocomplete="address-line2"></div>
+                  <div class="form-group"><label class="form-label" for="co-city">City <span aria-hidden="true">*</span></label><input type="text" id="co-city" name="city" class="form-input" placeholder="Springfield" data-validate="required" aria-required="true" autocomplete="address-level2"><span class="form-error" hidden></span></div>
+                  <div class="form-group"><label class="form-label" for="co-zip">ZIP <span aria-hidden="true">*</span></label><input type="text" id="co-zip" name="zip" class="form-input" placeholder="62701" data-validate="required zip" aria-required="true" maxlength="10" autocomplete="postal-code"><span class="form-error" hidden></span></div>
+                </div>
+                <div class="form-group" style="margin-top:var(--space-4);">
+                  <label class="form-label" for="co-access">Access Notes</label>
+                  <input type="text" id="co-access" name="access_notes" class="form-input" placeholder="e.g. gate code #1234, ring doorbell…">
+                </div>
+              </section>
+
+              <!-- Section 3: Payment -->
+              <section aria-labelledby="payment-section" style="margin-bottom:var(--space-8);">
+                <h2 id="payment-section" style="font-size:var(--text-xl);font-weight:var(--font-bold);margin-bottom:var(--space-5);display:flex;align-items:center;gap:var(--space-3);">
+                  <span style="width:2rem;height:2rem;border-radius:50%;background:var(--color-primary);color:white;display:flex;align-items:center;justify-content:center;font-size:var(--text-sm);flex-shrink:0;" aria-hidden="true">3</span>
+                  Payment Method
+                </h2>
+                <div style="background:var(--color-primary-pale);border:1px solid var(--color-primary-light);border-radius:var(--radius-lg);padding:var(--space-4);margin-bottom:var(--space-5);">
+                  <p style="font-size:var(--text-sm);color:var(--color-primary-darker);">💳 <strong>Pay After Service</strong> — Payment is collected after the job is complete to your satisfaction. No upfront charge.</p>
+                </div>
+
+                <div class="payment-methods" role="radiogroup" aria-label="Payment method">
+                  <label class="payment-tab is-active"><input type="radio" name="payment" value="card" class="sr-only" checked> 💳 Credit / Debit Card</label>
+                  <label class="payment-tab"><input type="radio" name="payment" value="apple" class="sr-only">  Apple Pay</label>
+                  <label class="payment-tab"><input type="radio" name="payment" value="google" class="sr-only"> 🌐 Google Pay</label>
+                  <label class="payment-tab"><input type="radio" name="payment" value="cash" class="sr-only"> 💵 Cash</label>
+                </div>
+
+                <div id="card-fields">
+                  <div class="form-group" style="margin-bottom:var(--space-4);">
+                    <label class="form-label" for="card-number">Card Number</label>
+                    <div style="position:relative;">
+                      <input type="text" id="card-number" name="card_number" class="form-input" placeholder="1234 5678 9012 3456" maxlength="19" inputmode="numeric" autocomplete="cc-number" style="padding-right:7rem;">
+                      <div class="card-icons" style="position:absolute;right:var(--space-3);top:50%;transform:translateY(-50%);">
+                        <div class="card-icon">VISA</div>
+                        <div class="card-icon">MC</div>
+                        <div class="card-icon">AMEX</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="grid-2">
+                    <div class="form-group"><label class="form-label" for="card-expiry">Expiry</label><input type="text" id="card-expiry" name="card_expiry" class="form-input" placeholder="MM/YY" maxlength="5" autocomplete="cc-exp"></div>
+                    <div class="form-group"><label class="form-label" for="card-cvc">CVC <button type="button" class="btn btn--ghost btn--sm" style="font-size:var(--text-xs);padding:0;color:var(--color-primary);" aria-label="What is CVC?">?</button></label><input type="text" id="card-cvc" name="card_cvc" class="form-input" placeholder="123" maxlength="4" autocomplete="cc-csc"></div>
+                  </div>
+                </div>
+
+                <div class="security-badges" aria-label="Security indicators">
+                  <div class="security-badge"><span aria-hidden="true">🔒</span>256-bit SSL</div>
+                  <div class="security-badge"><span aria-hidden="true">✅</span>PCI Compliant</div>
+                  <div class="security-badge"><span aria-hidden="true">🛡️</span>Fraud Protected</div>
+                </div>
+              </section>
+
+              <!-- T&C -->
+              <div class="form-group" style="margin-bottom:var(--space-6);">
+                <label class="form-check">
+                  <input type="checkbox" name="terms" class="form-check__input" data-validate="required" required>
+                  <span class="form-check__label">I agree to the <a href="terms.html" style="color:var(--color-primary);" target="_blank">Terms of Service</a> and confirm I have read the <a href="privacy.html" style="color:var(--color-primary);" target="_blank">Privacy Policy</a>.</span>
+                </label>
+                <span class="form-error" hidden></span>
+              </div>
+
+              <button type="submit" class="btn btn--primary btn--full btn--lg">
+                🔒 Place Order &amp; Confirm Booking
+              </button>
+            </form>
+          </div>
+
+          <!-- Right: Order Summary -->
+          <aside>
+            <div class="order-summary" aria-label="Order summary">
+              <h3 class="order-summary__title">Order Summary</h3>
+              <!-- Items from cart storage -->
+              <div id="checkout-items" style="margin-bottom:var(--space-4);">
+                <p style="font-size:var(--text-sm);color:var(--color-mid);">Loading cart…</p>
+              </div>
+              <div class="order-summary__row"><span>Subtotal</span><span id="co-subtotal">—</span></div>
+              <div class="order-summary__row"><span>Tax (8%)</span><span id="co-tax">—</span></div>
+              <div class="order-summary__total"><span>Total Due After Service</span><span id="co-total">—</span></div>
+              <div style="margin-top:var(--space-4);display:flex;flex-direction:column;gap:var(--space-2);">
+                <p style="font-size:var(--text-xs);color:var(--color-mid);">✅ 100% satisfaction guarantee</p>
+                <p style="font-size:var(--text-xs);color:var(--color-mid);">🚫 Free cancellation up to 2 hours before</p>
+                <p style="font-size:var(--text-xs);color:var(--color-mid);">📧 Instant email confirmation</p>
+              </div>
+            </div>
+
+            <div style="text-align:center;margin-top:var(--space-4);">
+              <a href="cart.html" style="font-size:var(--text-sm);color:var(--color-primary);">← Edit Cart</a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__bottom">
+      <p class="footer__copy">&copy; <span id="footer-year">2024</span> Wash&amp;Go LLC. All rights reserved.</p>
+      <nav class="footer__legal" aria-label="Legal"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></nav>
+    </div>
+  </footer>
+
+  <script src="js/globals.js"></script>
+  <script>
+    document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+    // Payment tab toggle
+    document.querySelectorAll('.payment-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.payment-tab').forEach(t => t.classList.remove('is-active'));
+        tab.classList.add('is-active');
+        const val = tab.querySelector('input')?.value;
+        const cardFields = document.getElementById('card-fields');
+        if (cardFields) cardFields.style.display = val === 'card' ? 'block' : 'none';
+      });
+    });
+
+    // Card number formatting
+    document.getElementById('card-number')?.addEventListener('input', function() {
+      let v = this.value.replace(/\D/g, '').substring(0, 16);
+      this.value = v.replace(/(.{4})/g, '$1 ').trim();
+    });
+
+    // Expiry formatting
+    document.getElementById('card-expiry')?.addEventListener('input', function() {
+      let v = this.value.replace(/\D/g, '').substring(0, 4);
+      if (v.length > 2) v = v.substring(0, 2) + '/' + v.substring(2);
+      this.value = v;
+    });
+
+    // Load cart summary
+    (function() {
+      const items = window.WashGo?.Cart.getItems() || [];
+      const container = document.getElementById('checkout-items');
+      if (!container) return;
+
+      if (!items.length) {
+        container.innerHTML = '<p style="font-size:var(--text-sm);color:var(--color-mid);">No items in cart. <a href="services.html">Browse services</a>.</p>';
+        return;
+      }
+
+      container.innerHTML = items.map(item => `
+        <div style="display:flex;justify-content:space-between;font-size:var(--text-sm);margin-bottom:var(--space-3);">
+          <span>${item.name} × ${item.qty}</span>
+          <span style="font-weight:var(--font-semibold);">$${(item.price * item.qty).toFixed(2)}</span>
+        </div>
+      `).join('');
+
+      const subtotal = window.WashGo.Cart.getTotal();
+      const tax      = subtotal * 0.08;
+      const total    = subtotal + tax;
+
+      const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+      set('co-subtotal', `$${subtotal.toFixed(2)}`);
+      set('co-tax',      `$${tax.toFixed(2)}`);
+      set('co-total',    `$${total.toFixed(2)}`);
+    })();
+  </script>
+</body>
+</html>

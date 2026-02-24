@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Wash&Go Sitemap — find every page on our website quickly.">
+  <title>Sitemap — Wash&amp;Go</title>
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/globals.css">
+  <style>
+    .sitemap-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
+      gap: var(--space-8);
+    }
+    .sitemap-section h2 {
+      font-size: var(--text-lg);
+      font-weight: var(--font-bold);
+      color: var(--color-dark);
+      border-bottom: 2px solid var(--color-primary);
+      padding-bottom: var(--space-2);
+      margin-bottom: var(--space-4);
+    }
+    .sitemap-section ul { display: flex; flex-direction: column; gap: var(--space-2); }
+    .sitemap-section li { display: flex; align-items: center; gap: var(--space-2); }
+    .sitemap-section a {
+      color: var(--color-dark-3);
+      font-size: var(--text-sm);
+      transition: color var(--transition-fast);
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+    .sitemap-section a:hover { color: var(--color-primary); }
+    .sitemap-section a::before {
+      content: '→';
+      color: var(--color-primary);
+      font-size: var(--text-xs);
+    }
+  </style>
+</head>
+<body>
+  <!-- ═══════════════ NAVIGATION ═══════════════ -->
+  <header class="nav" role="banner">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo" aria-label="Wash&amp;Go Home">
+        <img src="assets/logo.svg" alt="Wash&amp;Go" width="180" height="44">
+      </a>
+      <nav aria-label="Main navigation">
+        <ul class="nav__links" role="list">
+          <li><a href="index.html"    class="nav__link">Home</a></li>
+          <li><a href="services.html" class="nav__link">Services</a></li>
+          <li><a href="pricing.html"  class="nav__link">Pricing</a></li>
+          <li><a href="gallery.html"  class="nav__link">Gallery</a></li>
+          <li><a href="about.html"    class="nav__link">About</a></li>
+          <li><a href="blog.html"     class="nav__link">Blog</a></li>
+          <li><a href="contact.html"  class="nav__link">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="nav__actions">
+        <a href="account.html" class="btn btn--ghost btn--sm">Sign In</a>
+        <a href="booking.html" class="btn btn--primary btn--sm">Book Now</a>
+      </div>
+      <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+      </button>
+    </div>
+    <nav id="mobile-menu" class="nav__menu" aria-label="Mobile navigation">
+      <a href="index.html"    class="nav__link">Home</a>
+      <a href="services.html" class="nav__link">Services</a>
+      <a href="pricing.html"  class="nav__link">Pricing</a>
+      <a href="about.html"    class="nav__link">About</a>
+      <a href="contact.html"  class="nav__link">Contact</a>
+      <div class="nav__actions">
+        <a href="account.html" class="btn btn--outline">Sign In</a>
+        <a href="booking.html" class="btn btn--primary">Book Now</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <div class="page-hero">
+      <div class="container">
+        <h1 class="page-hero__title">Sitemap</h1>
+        <p class="page-hero__subtitle">A complete map of every page on the Wash&amp;Go website.</p>
+        <nav aria-label="Breadcrumb" class="breadcrumb">
+          <a href="index.html">Home</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">Sitemap</span>
+        </nav>
+      </div>
+    </div>
+
+    <section class="section" aria-label="Sitemap">
+      <div class="container">
+        <div class="sitemap-grid">
+
+          <div class="sitemap-section">
+            <h2>Main Pages</h2>
+            <ul role="list">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="services.html">Services</a></li>
+              <li><a href="pricing.html">Pricing</a></li>
+              <li><a href="gallery.html">Gallery</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="blog.html">Blog &amp; Tips</a></li>
+              <li><a href="contact.html">Contact</a></li>
+              <li><a href="faq.html">FAQ</a></li>
+            </ul>
+          </div>
+
+          <div class="sitemap-section">
+            <h2>Car Detailing Services</h2>
+            <ul role="list">
+              <li><a href="service-detail.html?service=basic-wash">Basic Exterior Wash</a></li>
+              <li><a href="service-detail.html?service=exterior-wash">Exterior Wash &amp; Shine</a></li>
+              <li><a href="service-detail.html?service=interior-clean">Interior Deep Clean</a></li>
+              <li><a href="service-detail.html?service=full-detail">Full Detail Package</a></li>
+              <li><a href="services.html#car-detailing">Paint Correction</a></li>
+              <li><a href="services.html#car-detailing">Ceramic Coating</a></li>
+            </ul>
+          </div>
+
+          <div class="sitemap-section">
+            <h2>House Cleaning Services</h2>
+            <ul role="list">
+              <li><a href="service-detail.html?service=standard-clean">Standard Home Clean</a></li>
+              <li><a href="service-detail.html?service=deep-clean">Deep House Clean</a></li>
+              <li><a href="service-detail.html?service=move-clean">Move In / Move Out</a></li>
+              <li><a href="services.html#house-cleaning">Post-Construction Clean</a></li>
+              <li><a href="services.html#subscription">Subscription Plans</a></li>
+            </ul>
+          </div>
+
+          <div class="sitemap-section">
+            <h2>Booking &amp; Account</h2>
+            <ul role="list">
+              <li><a href="booking.html">Book a Service</a></li>
+              <li><a href="booking.html?type=car">Book Car Detailing</a></li>
+              <li><a href="booking.html?type=home">Book House Cleaning</a></li>
+              <li><a href="account.html">My Account</a></li>
+              <li><a href="cart.html">Shopping Cart</a></li>
+              <li><a href="checkout.html">Checkout</a></li>
+              <li><a href="thank-you.html">Booking Confirmed</a></li>
+            </ul>
+          </div>
+
+          <div class="sitemap-section">
+            <h2>Legal</h2>
+            <ul role="list">
+              <li><a href="privacy.html">Privacy Policy</a></li>
+              <li><a href="terms.html">Terms of Service</a></li>
+              <li><a href="sitemap.html" aria-current="page">Sitemap</a></li>
+            </ul>
+          </div>
+
+          <div class="sitemap-section">
+            <h2>Contact &amp; Support</h2>
+            <ul role="list">
+              <li><a href="contact.html">Send a Message</a></li>
+              <li><a href="faq.html">Frequently Asked Questions</a></li>
+              <li><a href="tel:+15551234567">Call (555) 123-4567</a></li>
+              <li><a href="mailto:hello@washgo.com">Email Us</a></li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__bottom">
+      <p class="footer__copy">&copy; <span id="footer-year">2026</span> Wash&amp;Go LLC. All rights reserved.</p>
+      <nav class="footer__legal" aria-label="Legal">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="sitemap.html" aria-current="page">Sitemap</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="js/globals.js"></script>
+  <script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 60" role="img" aria-label="Wash&amp;Go Logo">
+  <defs>
+    <linearGradient id="dropGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#38bdf8;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#0ea5e9;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="sparkleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7dd3fc;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#0284c7;stop-opacity:1"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Water drop icon -->
+  <g transform="translate(4, 4)">
+    <!-- Main drop shape -->
+    <path d="M24 0 C24 0 8 16 8 26 C8 34.84 15.16 42 24 42 C32.84 42 40 34.84 40 26 C40 16 24 0 24 0Z"
+          fill="url(#dropGrad)" />
+    <!-- Inner highlight -->
+    <ellipse cx="19" cy="22" rx="4" ry="6" fill="white" opacity="0.35" transform="rotate(-20,19,22)"/>
+    <!-- Sparkle top-right -->
+    <g transform="translate(36,4)">
+      <line x1="0" y1="-5" x2="0" y2="5" stroke="url(#sparkleGrad)" stroke-width="2" stroke-linecap="round"/>
+      <line x1="-5" y1="0" x2="5" y2="0" stroke="url(#sparkleGrad)" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    <!-- Sparkle small -->
+    <g transform="translate(42,14)">
+      <line x1="0" y1="-3" x2="0" y2="3" stroke="#7dd3fc" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="-3" y1="0" x2="3" y2="0" stroke="#7dd3fc" stroke-width="1.5" stroke-linecap="round"/>
+    </g>
+  </g>
+
+  <!-- Wordmark -->
+  <!-- "Wash" text -->
+  <text x="56" y="36"
+        font-family="'Segoe UI', Arial, sans-serif"
+        font-size="26"
+        font-weight="800"
+        fill="#0ea5e9"
+        letter-spacing="-0.5">Wash</text>
+
+  <!-- Ampersand "&" -->
+  <text x="118" y="36"
+        font-family="'Segoe UI', Arial, sans-serif"
+        font-size="26"
+        font-weight="800"
+        fill="#38bdf8">&amp;</text>
+
+  <!-- "Go" text -->
+  <text x="138" y="36"
+        font-family="'Segoe UI', Arial, sans-serif"
+        font-size="26"
+        font-weight="800"
+        fill="#0369a1">Go</text>
+
+  <!-- Tagline -->
+  <text x="57" y="50"
+        font-family="'Segoe UI', Arial, sans-serif"
+        font-size="9"
+        font-weight="400"
+        fill="#64748b"
+        letter-spacing="2">MOBILE DETAILING &amp; CLEANING</text>
+</svg>

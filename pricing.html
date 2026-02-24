@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Wash&Go transparent pricing for car detailing and house cleaning. Choose a one-time or recurring plan.">
+  <title>Pricing — Wash&amp;Go</title>
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/globals.css">
+  <style>
+    .pricing-toggle-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-4);
+      margin-bottom: var(--space-10);
+    }
+    .toggle-label {
+      font-weight: var(--font-medium);
+      color: var(--color-mid);
+      font-size: var(--text-sm);
+    }
+    .toggle-label.is-active { color: var(--color-dark); font-weight: var(--font-semibold); }
+    /* iOS-style toggle */
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 3rem;
+      height: 1.75rem;
+    }
+    .toggle-switch input { opacity: 0; width: 0; height: 0; }
+    .toggle-slider {
+      position: absolute;
+      inset: 0;
+      background-color: var(--color-primary);
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: background-color var(--transition-base);
+    }
+    .toggle-slider::before {
+      content: '';
+      position: absolute;
+      width: 1.25rem;
+      height: 1.25rem;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      border-radius: 50%;
+      transition: transform var(--transition-base);
+    }
+    .toggle-switch input:checked + .toggle-slider::before { transform: translateX(1.25rem); }
+    .toggle-switch input:checked + .toggle-slider { background-color: var(--color-primary-dark); }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-6);
+      align-items: start;
+    }
+    .save-badge {
+      display: inline-block;
+      background-color: var(--color-success);
+      color: white;
+      font-size: var(--text-xs);
+      font-weight: var(--font-bold);
+      padding: var(--space-1) var(--space-3);
+      border-radius: var(--radius-full);
+      margin-left: var(--space-2);
+    }
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--text-sm);
+    }
+    .comparison-table th,
+    .comparison-table td {
+      padding: var(--space-3) var(--space-4);
+      border-bottom: 1px solid var(--color-border);
+      text-align: center;
+    }
+    .comparison-table th { font-weight: var(--font-semibold); background-color: var(--color-bg); }
+    .comparison-table td:first-child { text-align: left; color: var(--color-dark-3); }
+    .comparison-table tr:last-child td,
+    .comparison-table tr:last-child th { border-bottom: none; }
+    .check { color: var(--color-success); font-size: var(--text-lg); }
+    .cross { color: var(--color-light); font-size: var(--text-lg); }
+    .th-featured { background-color: var(--color-primary-pale) !important; color: var(--color-primary-dark); }
+
+    @media (max-width: 1023px) { .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin-inline: auto; } }
+  </style>
+</head>
+<body>
+  <!-- NAVIGATION -->
+  <header class="nav" role="banner">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo" aria-label="Wash&amp;Go Home">
+        <img src="assets/logo.svg" alt="Wash&amp;Go" width="180" height="44">
+      </a>
+      <nav aria-label="Main navigation">
+        <ul class="nav__links" role="list">
+          <li><a href="index.html" class="nav__link">Home</a></li>
+          <li><a href="services.html" class="nav__link">Services</a></li>
+          <li><a href="pricing.html" class="nav__link">Pricing</a></li>
+          <li><a href="gallery.html" class="nav__link">Gallery</a></li>
+          <li><a href="about.html" class="nav__link">About</a></li>
+          <li><a href="blog.html" class="nav__link">Blog</a></li>
+          <li><a href="contact.html" class="nav__link">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="nav__actions">
+        <a href="cart.html" class="btn btn--ghost btn--icon cart-badge" aria-label="Cart">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg>
+          <span class="cart-badge__count" style="display:none;">0</span>
+        </a>
+        <a href="account.html" class="btn btn--ghost btn--sm">Sign In</a>
+        <a href="booking.html" class="btn btn--primary btn--sm">Book Now</a>
+      </div>
+      <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+      </button>
+    </div>
+    <nav id="mobile-menu" class="nav__menu" aria-label="Mobile navigation">
+      <a href="index.html" class="nav__link">Home</a>
+      <a href="services.html" class="nav__link">Services</a>
+      <a href="pricing.html" class="nav__link">Pricing</a>
+      <a href="about.html" class="nav__link">About</a>
+      <a href="contact.html" class="nav__link">Contact</a>
+      <div class="nav__actions">
+        <a href="account.html" class="btn btn--outline">Sign In</a>
+        <a href="booking.html" class="btn btn--primary">Book Now</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <div class="page-header">
+      <div class="page-header__pattern" aria-hidden="true"></div>
+      <div class="container page-header__content">
+        <h1 class="page-header__title">Simple, Transparent Pricing</h1>
+        <p class="page-header__subtitle">No hidden fees. No surprises. Just the price quoted is the price paid.</p>
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="breadcrumb__sep" aria-hidden="true">/</span>
+          <span aria-current="page">Pricing</span>
+        </nav>
+      </div>
+    </div>
+
+    <!-- ═══ CAR DETAILING PRICING ═══ -->
+    <section class="section" aria-labelledby="car-pricing-title">
+      <div class="container">
+        <header class="section__header" data-reveal>
+          <span class="section__eyebrow">🚗 Car Detailing</span>
+          <h2 class="section__title" id="car-pricing-title">Car Detailing Packages</h2>
+          <p class="section__subtitle">Priced by vehicle size. Sedans / coupes at base price; SUVs add $20; trucks/vans add $40.</p>
+        </header>
+
+        <div class="pricing-grid" data-reveal>
+          <!-- Basic -->
+          <div class="pricing-card">
+            <div>
+              <p class="pricing-card__tier">Starter</p>
+              <h3 class="pricing-card__title">Basic Wash</h3>
+            </div>
+            <div class="pricing-card__price">
+              <span class="pricing-card__amount" data-price-onetime="49" data-price-monthly="39">$49</span>
+              <span class="pricing-card__period" data-price-label>one-time</span>
+            </div>
+            <ul class="pricing-card__features">
+              <li class="pricing-card__feature"><span class="pricing-card__feature-icon" aria-hidden="true">✓</span>Hand exterior wash &amp; rinse</li>
+              <li class="pricing-card__feature"><span class="pricing-card__feature-icon" aria-hidden="true">✓</span>Window cleaning (exterior)</li>
+              <li class="pricing-card__feature"><span class="pricing-card__feature-icon" aria-hidden="true">✓</span>Tire dressing</li>
+              <li class="pricing-card__feature"><span class="pricing-card__feature-icon" aria-hidden="true">✓</span>Door jamb wipe-down</li>
+              <li class="pricing-card__feature pricing-card__feature--disabled"><span class="pricing-card__feature-icon" aria-hidden="true">✗</span>Interior cleaning</li>
+              <li class="pricing-card__feature pricing-card__feature--disabled"><span class="pricing-card__feature-icon" aria-hidden="true">✗</span>Wax or sealant</li>
+            </ul>
+            <a href="booking.html?service=basic-wash" class="btn btn--outline btn--full">Book Basic Wash</a>
+          </div>
+
+          <!-- Shine (Featured) -->
+          <div class="pricing-card pricing-card--featured">
+            <span class="pricing-card__badge">Most Popular</span>
+            <div>
+              <p class="pricing-card__tier">Recommended</p>
+              <h3 class="pricing-card__title">Exterior Shine</h3>
+            </div>
+            <div class="pricing-card__price">
+              <span class="pricing-card__amount" data-price-onetime="79" data-price-monthly="63">$79</span>
+              <span class="pricing-card__period" data-price-label>one-time</span>
+            </div>
+            <ul class="pricing-card__features">
+              <li class="pricing-card__feature"><span class="pricing-card__feature-icon" aria-hidden="true">✓</span>Everything in Basic Wash</li>
+              <li class="pricing-card__feature"><span class="pricing-card__feature-icon" aria-hidden="true">✓</span>Clay bar treatment</li>
+              <li class="pricing-card__feature"><span class="pricing-card__feature-icon" aria-hidden="true">✓</span>Machine polish</li>
+              <li class="pricing-card__feature"><span class="pricing-card__feature-icon" aria-hidden="true">✓</span>Carnauba wax or sealant</li>
+              <li class="pricing-card__feature"><span class="pricing-card__feature-icon" aria-hidden="true">✓</span>Glass water repellent</li>
+              <li class="pricing-card__feature pricing-card__feature--disabled"><span class="pricing-card__feature-icon" aria-hidden="true">✗</span>Interior cleaning</li>
+            </ul>
+            <a href="booking.html?service=exterior-wash" class="btn btn--primary btn--full">Book Exterior Shine</a>
+          </div>
+
+          <!-- Full Detail -->
+          <div class="pricing-card">
+            <div>
+              <p class="pricing-card__tier">Premium</p>
+              <h3 class="pricing-card__title">Full Detail</h3>
+            </div>
+            <div class="pricing-card__price">
+              <span class="pricing-card__amount" data-price-onetime="199" data-price-monthly="159">$199</span>
+              <span class="pricing-card__period" data-price-label>one-time</span>
+            </div>
+            <ul class="pricing-card__features">
+              <li class="pricing-card__feature"><span class="pricing-card__feature-icon" aria-hidden="true">✓</span>Full exterior detail</li>
+              <li class="pricing-card__feature"><span class="pricing-card__feature-icon" aria-hidden="true">✓</span>Interior deep clean</li>
+              <li class="pricing-card__feature"><span class="pricing-card__feature-icon" aria-hidden="true">✓</span>Paint correction (light)</li>
+              <li class="pricing-card__feature"><span class="pricing-card__feature-icon" aria-hidden="true">✓</span>Engine bay cleaning</li>
+              <li class="pricing-card__feature"><span class="pricing-card__feature-icon" aria-hidden="true">✓</span>Odor elimination</li>
+              <li class="pricing-card__feature"><span class="pricing-card__feature-icon" aria-hidden="true">✓</span>Headlight restoration</li>
+            </ul>
+            <a href="booking.html?service=full-detail" class="btn btn--outline btn--full">Book Full Detail</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ HOUSE CLEANING PRICING ═══ -->
+    <section class="section section--bg" id="subscription" aria-labelledby="home-pricing-title">
+      <div class="container">
+        <header class="section__header" data-reveal>
+          <span class="section__eyebrow">🏠 House Cleaning</span>
+          <h2 class="section__title" id="home-pricing-title">House Cleaning Plans</h2>
+          <p class="section__subtitle">
+            Save with a subscription plan. Toggle below to see recurring prices.
+            <span class="save-badge">Save up to 20%</span>
+          </p>
+        </header>
+
+        <!-- Toggle -->
+        <div class="pricing-toggle-wrap" data-reveal>
+          <span class="toggle-label is-active" id="one-time-label">One-Time</span>
+          <label class="toggle-switch" aria-label="Toggle between one-time and recurring pricing">
+            <input type="checkbox" id="pricing-toggle" role="switch" aria-checked="false">
+            <span class="toggle-slider"></span>
+          </label>
+          <span class="toggle-label" id="recurring-label">Recurring <span class="save-badge">20% off</span></span>
+        </div>
+
+        <div class="pricing-grid" data-reveal>
+          <!-- Standard -->
+          <div class="pricing-card">
+            <div>
+              <p class="pricing-card__tier">Essential</p>
+              <h3 class="pricing-card__title">Standard Clean</h3>
+            </div>
+            <div class="pricing-card__price">
+              <span class="pricing-card__amount" data-price-onetime="89" data-price-monthly="71">$89</span>
+              <span class="pricing-card__period" data-price-label>one-time</span>
+            </div>
+            <ul class="pricing-card__features">
+              <li class="pricing-card__feature"><span class="pricing-card__feature-icon" aria-hidden="true">✓</span>Vacuum all rooms</li>
+              <li class="pricing-card__feature"><span class="pricing-card__feature-icon" aria-hidden="true">✓</span>Mop hard floors</li>
+              <li class="pricing-card__feature"><span class="pricing-card__feature-icon" aria-hidden="true">✓</span>Bathroom sanitize</li>
+              <li class="pricing-card__feature"><span class="pricing-card__feature-icon" aria-hidden="true">✓</span>Kitchen wipe-down</li>
+              <li class="pricing-card__feature"><span class="pricing-card__feature-icon" aria-hidden="true">✓</span>Dust &amp; tidy</li>
+              <li class="pricing-card__feature pricing-card__feature--disabled"><span class="pricing-card__feature-icon" aria-hidden="true">✗</span>Inside appliances</li>
+            </ul>
+            <a href="booking.html?service=standard-clean" class="btn btn--outline btn--full">Book Standard Clean</a>
+          </div>
+
+          <!-- Deep Clean (Featured) -->
+          <div class="pricing-card pricing-card--featured">
+            <span class="pricing-card__badge">Best Value</span>
+            <div>
+              <p class="pricing-card__tier">Popular</p>
+              <h3 class="pricing-card__title">Deep Clean</h3>
+            </div>
+            <div class="pricing-card__price">
+              <span class="pricing-card__amount" data-price-onetime="149" data-price-monthly="119">$149</span>
+              <span class="pricing-card__period" data-price-label>one-time</span>
+            </div>
+            <ul class="pricing-card__features">
+              <li class="pricing-card__feature"><span class="pricing-card__feature-icon" aria-hidden="true">✓</span>Everything in Standard</li>
+              <li class="pricing-card__feature"><span class="pricing-card__feature-icon" aria-hidden="true">✓</span>Inside oven &amp; refrigerator</li>
+              <li class="pricing-card__feature"><span class="pricing-card__feature-icon" aria-hidden="true">✓</span>Grout scrubbing</li>
+              <li class="pricing-card__feature"><span class="pricing-card__feature-icon" aria-hidden="true">✓</span>Baseboard &amp; door trim</li>
+              <li class="pricing-card__feature"><span class="pricing-card__feature-icon" aria-hidden="true">✓</span>Window sills &amp; tracks</li>
+              <li class="pricing-card__feature"><span class="pricing-card__feature-icon" aria-hidden="true">✓</span>Behind &amp; under furniture</li>
+            </ul>
+            <a href="booking.html?service=deep-clean" class="btn btn--primary btn--full">Book Deep Clean</a>
+          </div>
+
+          <!-- Move Out -->
+          <div class="pricing-card">
+            <div>
+              <p class="pricing-card__tier">Complete</p>
+              <h3 class="pricing-card__title">Move In/Out</h3>
+            </div>
+            <div class="pricing-card__price">
+              <span class="pricing-card__amount" data-price-onetime="219" data-price-monthly="175">$219</span>
+              <span class="pricing-card__period" data-price-label>one-time</span>
+            </div>
+            <ul class="pricing-card__features">
+              <li class="pricing-card__feature"><span class="pricing-card__feature-icon" aria-hidden="true">✓</span>Full deep clean</li>
+              <li class="pricing-card__feature"><span class="pricing-card__feature-icon" aria-hidden="true">✓</span>All appliances in &amp; out</li>
+              <li class="pricing-card__feature"><span class="pricing-card__feature-icon" aria-hidden="true">✓</span>Closets &amp; cabinets</li>
+              <li class="pricing-card__feature"><span class="pricing-card__feature-icon" aria-hidden="true">✓</span>Walls spot-cleaned</li>
+              <li class="pricing-card__feature"><span class="pricing-card__feature-icon" aria-hidden="true">✓</span>Balcony / patio sweep</li>
+              <li class="pricing-card__feature"><span class="pricing-card__feature-icon" aria-hidden="true">✓</span>Deposit-ready guarantee</li>
+            </ul>
+            <a href="booking.html?service=move-clean" class="btn btn--outline btn--full">Book Move Clean</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ COMPARISON TABLE ═══ -->
+    <section class="section" aria-labelledby="compare-title">
+      <div class="container container--lg">
+        <header class="section__header" data-reveal>
+          <span class="section__eyebrow">Feature Comparison</span>
+          <h2 class="section__title" id="compare-title">What's Included</h2>
+        </header>
+        <div style="overflow-x:auto;" data-reveal>
+          <table class="comparison-table" aria-label="Service feature comparison">
+            <thead>
+              <tr>
+                <th scope="col" style="text-align:left;">Feature</th>
+                <th scope="col">Basic</th>
+                <th scope="col" class="th-featured">Shine / Deep</th>
+                <th scope="col">Full / Move Out</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Exterior wash</td><td class="check" aria-label="Included">✓</td><td class="check" aria-label="Included">✓</td><td class="check" aria-label="Included">✓</td></tr>
+              <tr><td>Interior vacuum</td><td class="cross" aria-label="Not included">—</td><td class="check" aria-label="Included">✓</td><td class="check" aria-label="Included">✓</td></tr>
+              <tr><td>Wax / Sealant</td><td class="cross" aria-label="Not included">—</td><td class="check" aria-label="Included">✓</td><td class="check" aria-label="Included">✓</td></tr>
+              <tr><td>Clay bar / Grout scrub</td><td class="cross" aria-label="Not included">—</td><td class="check" aria-label="Included">✓</td><td class="check" aria-label="Included">✓</td></tr>
+              <tr><td>Engine / Appliance deep clean</td><td class="cross" aria-label="Not included">—</td><td class="cross" aria-label="Not included">—</td><td class="check" aria-label="Included">✓</td></tr>
+              <tr><td>Paint correction / Wall spot-clean</td><td class="cross" aria-label="Not included">—</td><td class="cross" aria-label="Not included">—</td><td class="check" aria-label="Included">✓</td></tr>
+              <tr><td>Odor elimination</td><td class="cross" aria-label="Not included">—</td><td class="cross" aria-label="Not included">—</td><td class="check" aria-label="Included">✓</td></tr>
+              <tr><td>Satisfaction guarantee</td><td class="check" aria-label="Included">✓</td><td class="check" aria-label="Included">✓</td><td class="check" aria-label="Included">✓</td></tr>
+              <tr><td>Eco-friendly products</td><td class="check" aria-label="Included">✓</td><td class="check" aria-label="Included">✓</td><td class="check" aria-label="Included">✓</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="cta-banner">
+      <div class="container cta-banner__content" data-reveal>
+        <h2 class="cta-banner__title">Not Sure Which Plan? Talk to Us.</h2>
+        <p class="cta-banner__subtitle">Get a free custom quote tailored to your specific vehicle or home. No obligation.</p>
+        <div class="cta-banner__actions">
+          <a href="booking.html" class="btn btn--outline-white btn--lg">Book Now</a>
+          <a href="contact.html" class="btn btn--outline-white btn--lg">Get Free Quote</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__main">
+      <div class="footer__brand">
+        <a href="index.html" class="footer__logo"><img src="assets/logo.svg" alt="Wash&amp;Go" width="160" height="40"></a>
+        <p class="footer__tagline">Premium mobile car detailing and house cleaning services delivered to your door.</p>
+      </div>
+      <div><h3 class="footer__col-title">Quick Links</h3><ul class="footer__links" role="list"><li><a href="services.html" class="footer__link">Services</a></li><li><a href="booking.html" class="footer__link">Book Now</a></li><li><a href="faq.html" class="footer__link">FAQ</a></li><li><a href="contact.html" class="footer__link">Contact</a></li></ul></div>
+      <div><h3 class="footer__col-title">Company</h3><ul class="footer__links" role="list"><li><a href="about.html" class="footer__link">About Us</a></li><li><a href="gallery.html" class="footer__link">Gallery</a></li><li><a href="blog.html" class="footer__link">Blog</a></li></ul></div>
+      <div><h3 class="footer__col-title">Contact</h3><address style="font-style:normal;"><div class="footer__contact-item"><span class="footer__contact-icon">📞</span><a href="tel:+15551234567" class="footer__link">(555) 123-4567</a></div><div class="footer__contact-item"><span class="footer__contact-icon">✉️</span><a href="mailto:hello@washgo.com" class="footer__link">hello@washgo.com</a></div></address></div>
+    </div>
+    <div class="container footer__bottom">
+      <p class="footer__copy">&copy; <span id="footer-year">2024</span> Wash&amp;Go LLC. All rights reserved.</p>
+      <nav class="footer__legal" aria-label="Legal"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms</a></nav>
+    </div>
+  </footer>
+
+  <script src="js/globals.js"></script>
+  <script>
+    document.getElementById('footer-year').textContent = new Date().getFullYear();
+    // Pricing toggle label sync
+    const toggle = document.getElementById('pricing-toggle');
+    const oneTimeLabel = document.getElementById('one-time-label');
+    const recurringLabel = document.getElementById('recurring-label');
+    toggle?.addEventListener('change', () => {
+      if (toggle.checked) {
+        oneTimeLabel.classList.remove('is-active');
+        recurringLabel.classList.add('is-active');
+        toggle.setAttribute('aria-checked', 'true');
+      } else {
+        oneTimeLabel.classList.add('is-active');
+        recurringLabel.classList.remove('is-active');
+        toggle.setAttribute('aria-checked', 'false');
+      }
+    });
+  </script>
+</body>
+</html>

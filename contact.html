@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact Wash&Go — call, email, or fill out our form to get a free quote or ask questions about our services.">
+  <title>Contact Us — Wash&amp;Go</title>
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/globals.css">
+  <style>
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 480px;
+      gap: var(--space-12);
+      align-items: start;
+    }
+    .contact-info-card {
+      background: var(--color-white);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      box-shadow: var(--shadow-md);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5);
+      border: 1px solid var(--color-border);
+    }
+    .contact-method {
+      display: flex;
+      gap: var(--space-4);
+      align-items: flex-start;
+      padding: var(--space-4);
+      border-radius: var(--radius-lg);
+      background-color: var(--color-bg);
+      transition: background-color var(--transition-fast);
+    }
+    .contact-method:hover { background-color: var(--color-primary-pale); }
+    .contact-method__icon {
+      width: 3rem;
+      height: 3rem;
+      border-radius: var(--radius-lg);
+      background-color: var(--color-primary-pale);
+      color: var(--color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--text-xl);
+      flex-shrink: 0;
+    }
+    .contact-method__title { font-size: var(--text-sm); font-weight: var(--font-bold); color: var(--color-dark); margin-bottom: var(--space-1); }
+    .contact-method__detail { font-size: var(--text-sm); color: var(--color-mid); }
+    .contact-method a { color: var(--color-primary); text-decoration: none; font-weight: var(--font-medium); }
+    .hours-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2); font-size: var(--text-sm); }
+    .hours-grid dt { color: var(--color-dark-3); }
+    .hours-grid dd { color: var(--color-mid); text-align: right; }
+    .map-placeholder {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: var(--radius-xl);
+      background: linear-gradient(135deg,var(--color-primary-pale),var(--color-primary-light));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-3);
+      border: 2px solid var(--color-border);
+      font-size: var(--text-sm);
+      color: var(--color-primary-dark);
+    }
+    @media (max-width: 1023px) { .contact-layout { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <header class="nav" role="banner">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo" aria-label="Wash&amp;Go Home"><img src="assets/logo.svg" alt="Wash&amp;Go" width="180" height="44"></a>
+      <nav aria-label="Main navigation"><ul class="nav__links" role="list">
+        <li><a href="index.html" class="nav__link">Home</a></li>
+        <li><a href="services.html" class="nav__link">Services</a></li>
+        <li><a href="pricing.html" class="nav__link">Pricing</a></li>
+        <li><a href="gallery.html" class="nav__link">Gallery</a></li>
+        <li><a href="about.html" class="nav__link">About</a></li>
+        <li><a href="blog.html" class="nav__link">Blog</a></li>
+        <li><a href="contact.html" class="nav__link">Contact</a></li>
+      </ul></nav>
+      <div class="nav__actions">
+        <a href="cart.html" class="btn btn--ghost btn--icon cart-badge" aria-label="Cart"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg><span class="cart-badge__count" style="display:none;">0</span></a>
+        <a href="account.html" class="btn btn--ghost btn--sm">Sign In</a>
+        <a href="booking.html" class="btn btn--primary btn--sm">Book Now</a>
+      </div>
+      <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu"><span class="nav__toggle-bar"></span><span class="nav__toggle-bar"></span><span class="nav__toggle-bar"></span></button>
+    </div>
+    <nav id="mobile-menu" class="nav__menu" aria-label="Mobile navigation">
+      <a href="index.html" class="nav__link">Home</a><a href="services.html" class="nav__link">Services</a><a href="pricing.html" class="nav__link">Pricing</a><a href="about.html" class="nav__link">About</a><a href="contact.html" class="nav__link">Contact</a>
+      <div class="nav__actions"><a href="account.html" class="btn btn--outline">Sign In</a><a href="booking.html" class="btn btn--primary">Book Now</a></div>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <div class="page-header">
+      <div class="page-header__pattern" aria-hidden="true"></div>
+      <div class="container page-header__content">
+        <h1 class="page-header__title">Get in Touch</h1>
+        <p class="page-header__subtitle">We'd love to hear from you. Reach out for quotes, questions, or anything else.</p>
+        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span class="breadcrumb__sep" aria-hidden="true">/</span><span aria-current="page">Contact</span></nav>
+      </div>
+    </div>
+
+    <section class="section" aria-labelledby="contact-heading">
+      <div class="container">
+        <h2 id="contact-heading" class="sr-only">Contact Information and Form</h2>
+        <div class="contact-layout">
+          <!-- Left: Info + Map -->
+          <div data-reveal>
+            <h2 style="font-size:var(--text-2xl);margin-bottom:var(--space-6);">Contact Information</h2>
+            <div class="contact-info-card">
+              <a href="tel:+15551234567" class="contact-method" style="text-decoration:none;">
+                <div class="contact-method__icon" aria-hidden="true">📞</div>
+                <div>
+                  <p class="contact-method__title">Phone</p>
+                  <p class="contact-method__detail"><a href="tel:+15551234567">(555) 123-4567</a></p>
+                  <p class="contact-method__detail" style="margin-top:2px;">Mon–Fri 7am–7pm, Sat–Sun 8am–5pm</p>
+                </div>
+              </a>
+              <a href="mailto:hello@washgo.com" class="contact-method" style="text-decoration:none;">
+                <div class="contact-method__icon" aria-hidden="true">✉️</div>
+                <div>
+                  <p class="contact-method__title">Email</p>
+                  <p class="contact-method__detail"><a href="mailto:hello@washgo.com">hello@washgo.com</a></p>
+                  <p class="contact-method__detail" style="margin-top:2px;">We reply within 2 business hours</p>
+                </div>
+              </a>
+              <div class="contact-method">
+                <div class="contact-method__icon" aria-hidden="true">📍</div>
+                <div>
+                  <p class="contact-method__title">Service Area</p>
+                  <p class="contact-method__detail">Greater Metro Area — we come to you!</p>
+                  <p class="contact-method__detail" style="margin-top:2px;">Home, office, or parking lot — your choice</p>
+                </div>
+              </div>
+              <div class="contact-method">
+                <div class="contact-method__icon" aria-hidden="true">🕐</div>
+                <div>
+                  <p class="contact-method__title">Hours of Operation</p>
+                  <dl class="hours-grid" style="margin-top:var(--space-2);">
+                    <dt>Monday – Friday</dt><dd>7:00 AM – 7:00 PM</dd>
+                    <dt>Saturday</dt><dd>8:00 AM – 5:00 PM</dd>
+                    <dt>Sunday</dt><dd>9:00 AM – 3:00 PM</dd>
+                    <dt>Holidays</dt><dd>By appointment</dd>
+                  </dl>
+                </div>
+              </div>
+            </div>
+
+            <!-- Map placeholder -->
+            <div class="map-placeholder" style="margin-top:var(--space-6);" role="img" aria-label="Service area map placeholder">
+              <span style="font-size:4rem;" aria-hidden="true">🗺️</span>
+              <p style="font-weight:var(--font-semibold);">Interactive Service Map</p>
+              <p style="color:var(--color-primary-dark);">Enter your ZIP code to confirm we serve your area</p>
+              <form style="display:flex;gap:var(--space-2);" aria-label="Service area check">
+                <label for="zip-check" class="sr-only">ZIP Code</label>
+                <input type="text" id="zip-check" class="form-input" placeholder="ZIP code" maxlength="5" pattern="\d{5}" style="max-width:10rem;" aria-label="Enter ZIP code">
+                <button type="button" class="btn btn--primary btn--sm" id="zip-check-btn">Check</button>
+              </form>
+            </div>
+
+            <!-- Social -->
+            <div style="margin-top:var(--space-6);">
+              <p style="font-size:var(--text-sm);font-weight:var(--font-semibold);color:var(--color-dark);margin-bottom:var(--space-3);">Follow Us</p>
+              <div style="display:flex;gap:var(--space-3);">
+                <a href="#" class="footer__social" style="background:var(--color-primary-pale);color:var(--color-primary);" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+                <a href="#" class="footer__social" style="background:var(--color-primary-pale);color:var(--color-primary);" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Contact Form -->
+          <div data-reveal data-reveal-delay="1">
+            <div style="background:var(--color-white);border-radius:var(--radius-2xl);box-shadow:var(--shadow-xl);padding:var(--space-8);border:1px solid var(--color-border);">
+              <h2 style="font-size:var(--text-2xl);margin-bottom:var(--space-2);">Send Us a Message</h2>
+              <p style="color:var(--color-mid);font-size:var(--text-sm);margin-bottom:var(--space-6);">We'll get back to you within 2 hours during business hours.</p>
+
+              <form id="contact-form" novalidate aria-label="Contact form">
+                <div class="grid-2" style="gap:var(--space-4);margin-bottom:var(--space-4);">
+                  <div class="form-group">
+                    <label class="form-label" for="c-first">First Name <span aria-hidden="true">*</span></label>
+                    <input type="text" id="c-first" name="first_name" class="form-input" placeholder="Jane" data-validate="required minLen:2" aria-required="true" autocomplete="given-name">
+                    <span class="form-error" hidden></span>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="c-last">Last Name <span aria-hidden="true">*</span></label>
+                    <input type="text" id="c-last" name="last_name" class="form-input" placeholder="Smith" data-validate="required minLen:2" aria-required="true" autocomplete="family-name">
+                    <span class="form-error" hidden></span>
+                  </div>
+                </div>
+                <div class="form-group" style="margin-bottom:var(--space-4);">
+                  <label class="form-label" for="c-email">Email <span aria-hidden="true">*</span></label>
+                  <input type="email" id="c-email" name="email" class="form-input" placeholder="jane@example.com" data-validate="required email" aria-required="true" autocomplete="email">
+                  <span class="form-error" hidden></span>
+                </div>
+                <div class="form-group" style="margin-bottom:var(--space-4);">
+                  <label class="form-label" for="c-phone">Phone</label>
+                  <input type="tel" id="c-phone" name="phone" class="form-input" placeholder="(555) 123-4567" autocomplete="tel">
+                </div>
+                <div class="form-group" style="margin-bottom:var(--space-4);">
+                  <label class="form-label" for="c-subject">Subject <span aria-hidden="true">*</span></label>
+                  <select id="c-subject" name="subject" class="form-select" data-validate="required" aria-required="true">
+                    <option value="">Select a topic…</option>
+                    <option value="quote">Request a Quote</option>
+                    <option value="booking">Booking Question</option>
+                    <option value="complaint">Service Feedback</option>
+                    <option value="commercial">Commercial / Business Inquiry</option>
+                    <option value="careers">Careers</option>
+                    <option value="other">Other</option>
+                  </select>
+                  <span class="form-error" hidden></span>
+                </div>
+                <div class="form-group" style="margin-bottom:var(--space-6);">
+                  <label class="form-label" for="c-message">Message <span aria-hidden="true">*</span></label>
+                  <textarea id="c-message" name="message" class="form-textarea" rows="5" placeholder="Tell us what you need…" data-validate="required minLen:20" aria-required="true"></textarea>
+                  <span class="form-error" hidden></span>
+                </div>
+                <button type="submit" class="btn btn--primary btn--full btn--lg">Send Message →</button>
+                <p style="text-align:center;font-size:var(--text-xs);color:var(--color-mid);margin-top:var(--space-3);">🔒 Your information is protected and never shared.</p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Links -->
+    <section class="section section--bg" aria-labelledby="quick-title">
+      <div class="container">
+        <header class="section__header" data-reveal>
+          <h2 class="section__title" id="quick-title">Quick Links</h2>
+        </header>
+        <div class="grid-3" data-reveal>
+          <a href="booking.html" style="text-decoration:none;" class="card" aria-label="Book a service">
+            <div class="card__body" style="text-align:center;">
+              <div class="card__icon" style="margin-inline:auto;" aria-hidden="true">📅</div>
+              <h3 class="card__title">Book a Service</h3>
+              <p class="card__text">Ready to schedule? Use our online booking system for instant confirmation.</p>
+            </div>
+          </a>
+          <a href="faq.html" style="text-decoration:none;" class="card" aria-label="Read FAQ">
+            <div class="card__body" style="text-align:center;">
+              <div class="card__icon" style="margin-inline:auto;" aria-hidden="true">❓</div>
+              <h3 class="card__title">Read the FAQ</h3>
+              <p class="card__text">Find answers to the most common questions about our services and process.</p>
+            </div>
+          </a>
+          <a href="pricing.html" style="text-decoration:none;" class="card" aria-label="View pricing">
+            <div class="card__body" style="text-align:center;">
+              <div class="card__icon" style="margin-inline:auto;" aria-hidden="true">💰</div>
+              <h3 class="card__title">View Pricing</h3>
+              <p class="card__text">Transparent, upfront pricing with no hidden fees or surprise charges.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__main">
+      <div class="footer__brand"><a href="index.html" class="footer__logo"><img src="assets/logo.svg" alt="Wash&amp;Go" width="160" height="40"></a><p class="footer__tagline">Premium mobile car detailing and house cleaning services delivered to your door.</p></div>
+      <div><h3 class="footer__col-title">Services</h3><ul class="footer__links" role="list"><li><a href="services.html#car-detailing" class="footer__link">Car Detailing</a></li><li><a href="services.html#house-cleaning" class="footer__link">House Cleaning</a></li></ul></div>
+      <div><h3 class="footer__col-title">Company</h3><ul class="footer__links" role="list"><li><a href="about.html" class="footer__link">About Us</a></li><li><a href="faq.html" class="footer__link">FAQ</a></li></ul></div>
+      <div><h3 class="footer__col-title">Contact</h3><address style="font-style:normal;"><div class="footer__contact-item"><span class="footer__contact-icon">📞</span><a href="tel:+15551234567" class="footer__link">(555) 123-4567</a></div><div class="footer__contact-item"><span class="footer__contact-icon">✉️</span><a href="mailto:hello@washgo.com" class="footer__link">hello@washgo.com</a></div></address></div>
+    </div>
+    <div class="container footer__bottom">
+      <p class="footer__copy">&copy; <span id="footer-year">2024</span> Wash&amp;Go LLC. All rights reserved.</p>
+      <nav class="footer__legal" aria-label="Legal"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms</a></nav>
+    </div>
+  </footer>
+
+  <script src="js/globals.js"></script>
+  <script>
+    document.getElementById('footer-year').textContent = new Date().getFullYear();
+    document.getElementById('zip-check-btn')?.addEventListener('click', () => {
+      const zip = document.getElementById('zip-check').value.trim();
+      if (/^\d{5}$/.test(zip)) {
+        window.WashGo?.Toast.success('Great news!', `We service ZIP code ${zip}. Book online or call us.`);
+      } else {
+        window.WashGo?.Toast.error('Invalid ZIP', 'Please enter a 5-digit US ZIP code.');
+      }
+    });
+  </script>
+</body>
+</html>

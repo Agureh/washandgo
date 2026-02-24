@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Wash&Go gallery — browse real before and after photos of our car detailing and house cleaning work.">
+  <title>Gallery — Wash&amp;Go</title>
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/globals.css">
+  <style>
+    .gallery-filter {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      justify-content: center;
+      margin-bottom: var(--space-8);
+    }
+    .gallery-filter__btn {
+      padding: var(--space-2) var(--space-5);
+      border-radius: var(--radius-full);
+      font-size: var(--text-sm);
+      font-weight: var(--font-medium);
+      border: 2px solid var(--color-border);
+      background: var(--color-white);
+      color: var(--color-dark-3);
+      cursor: pointer;
+      transition: all var(--transition-base);
+    }
+    .gallery-filter__btn:hover,
+    .gallery-filter__btn.is-active {
+      background-color: var(--color-primary);
+      border-color: var(--color-primary);
+      color: var(--color-white);
+    }
+
+    /* Masonry-ish grid */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: 200px;
+      gap: var(--space-3);
+    }
+    .photo-cell {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+    .photo-cell--wide  { grid-column: span 2; }
+    .photo-cell--tall  { grid-row:    span 2; }
+    .photo-cell__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      transition: transform var(--transition-slow);
+    }
+    .photo-cell:hover .photo-cell__img { transform: scale(1.06); }
+    .photo-cell__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.75), transparent 50%);
+      opacity: 0;
+      transition: opacity var(--transition-base);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: var(--space-4);
+    }
+    .photo-cell:hover .photo-cell__overlay,
+    .photo-cell:focus-within .photo-cell__overlay { opacity: 1; }
+    .photo-cell__title { font-size: var(--text-sm); font-weight: var(--font-bold); color: white; }
+    .photo-cell__tag { font-size: var(--text-xs); color: var(--color-primary-light); }
+
+    /* Before/after section */
+    .ba-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-6);
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: var(--z-modal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition-base);
+    }
+    .lightbox.is-open { opacity: 1; pointer-events: auto; }
+    .lightbox__close {
+      position: absolute;
+      top: var(--space-5);
+      right: var(--space-5);
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: var(--radius-full);
+      background: rgba(255,255,255,0.1);
+      color: white;
+      font-size: var(--text-2xl);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background var(--transition-fast);
+    }
+    .lightbox__close:hover { background: rgba(255,255,255,0.2); }
+    .lightbox__content {
+      max-width: 90vw;
+      max-height: 85vh;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      font-size: 8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 300px;
+      min-height: 200px;
+    }
+
+    @media (max-width: 767px) {
+      .photo-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 150px; }
+      .photo-cell--wide { grid-column: span 2; }
+      .ba-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 479px) {
+      .photo-grid { grid-template-columns: 1fr; grid-auto-rows: 200px; }
+      .photo-cell--wide { grid-column: span 1; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav" role="banner">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo" aria-label="Wash&amp;Go Home"><img src="assets/logo.svg" alt="Wash&amp;Go" width="180" height="44"></a>
+      <nav aria-label="Main navigation"><ul class="nav__links" role="list">
+        <li><a href="index.html" class="nav__link">Home</a></li>
+        <li><a href="services.html" class="nav__link">Services</a></li>
+        <li><a href="pricing.html" class="nav__link">Pricing</a></li>
+        <li><a href="gallery.html" class="nav__link">Gallery</a></li>
+        <li><a href="about.html" class="nav__link">About</a></li>
+        <li><a href="blog.html" class="nav__link">Blog</a></li>
+        <li><a href="contact.html" class="nav__link">Contact</a></li>
+      </ul></nav>
+      <div class="nav__actions">
+        <a href="cart.html" class="btn btn--ghost btn--icon cart-badge" aria-label="Cart"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg><span class="cart-badge__count" style="display:none;">0</span></a>
+        <a href="account.html" class="btn btn--ghost btn--sm">Sign In</a>
+        <a href="booking.html" class="btn btn--primary btn--sm">Book Now</a>
+      </div>
+      <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu"><span class="nav__toggle-bar"></span><span class="nav__toggle-bar"></span><span class="nav__toggle-bar"></span></button>
+    </div>
+    <nav id="mobile-menu" class="nav__menu" aria-label="Mobile navigation">
+      <a href="index.html" class="nav__link">Home</a><a href="services.html" class="nav__link">Services</a><a href="pricing.html" class="nav__link">Pricing</a><a href="about.html" class="nav__link">About</a><a href="contact.html" class="nav__link">Contact</a>
+      <div class="nav__actions"><a href="account.html" class="btn btn--outline">Sign In</a><a href="booking.html" class="btn btn--primary">Book Now</a></div>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <div class="page-header">
+      <div class="page-header__pattern" aria-hidden="true"></div>
+      <div class="container page-header__content">
+        <h1 class="page-header__title">Photo Gallery</h1>
+        <p class="page-header__subtitle">Real results from real customers. Every photo is from an actual Wash&amp;Go service.</p>
+        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span class="breadcrumb__sep" aria-hidden="true">/</span><span aria-current="page">Gallery</span></nav>
+      </div>
+    </div>
+
+    <!-- Photo Grid -->
+    <section class="section" aria-labelledby="gallery-title">
+      <div class="container container--2xl">
+        <header class="section__header" data-reveal>
+          <span class="section__eyebrow">Our Work</span>
+          <h2 class="section__title" id="gallery-title">Browse Our Portfolio</h2>
+        </header>
+
+        <!-- Filter -->
+        <div class="gallery-filter" role="group" aria-label="Gallery filter" data-reveal>
+          <button class="gallery-filter__btn is-active" data-filter="all">All Work</button>
+          <button class="gallery-filter__btn" data-filter="car">Car Detailing</button>
+          <button class="gallery-filter__btn" data-filter="home">House Cleaning</button>
+          <button class="gallery-filter__btn" data-filter="ceramic">Ceramic Coating</button>
+          <button class="gallery-filter__btn" data-filter="interior">Interiors</button>
+        </div>
+
+        <!-- Photo grid (emoji placeholders — replace with real photos) -->
+        <div class="photo-grid" data-reveal>
+          <div class="photo-cell photo-cell--wide" data-category="car" tabindex="0" role="button" aria-label="Full exterior detail — BMW 5 Series">
+            <div class="photo-cell__img" style="background:linear-gradient(135deg,#0c4a6e,#38bdf8);" aria-hidden="true">🚗✨</div>
+            <div class="photo-cell__overlay"><p class="photo-cell__tag">Car Detailing</p><p class="photo-cell__title">Full Exterior Detail — BMW 5 Series</p></div>
+          </div>
+          <div class="photo-cell photo-cell--tall" data-category="interior" tabindex="0" role="button" aria-label="Interior deep clean — leather seats">
+            <div class="photo-cell__img" style="background:linear-gradient(135deg,#1e3a5f,#0284c7);" aria-hidden="true">🪑</div>
+            <div class="photo-cell__overlay"><p class="photo-cell__tag">Interior</p><p class="photo-cell__title">Leather Interior Restoration</p></div>
+          </div>
+          <div class="photo-cell" data-category="home" tabindex="0" role="button" aria-label="Kitchen deep clean">
+            <div class="photo-cell__img" style="background:linear-gradient(135deg,#0369a1,#22d3ee);" aria-hidden="true">🍽️</div>
+            <div class="photo-cell__overlay"><p class="photo-cell__tag">House Cleaning</p><p class="photo-cell__title">Kitchen Deep Clean</p></div>
+          </div>
+          <div class="photo-cell" data-category="car" tabindex="0" role="button" aria-label="Ceramic coating — Tesla Model 3">
+            <div class="photo-cell__img" style="background:linear-gradient(135deg,#0f3460,#0ea5e9);" aria-hidden="true">🛡️</div>
+            <div class="photo-cell__overlay"><p class="photo-cell__tag">Ceramic Coating</p><p class="photo-cell__title">Ceramic Coat — Tesla Model 3</p></div>
+          </div>
+          <div class="photo-cell" data-category="ceramic" tabindex="0" role="button" aria-label="Paint correction results">
+            <div class="photo-cell__img" style="background:linear-gradient(135deg,#0c4a6e,#7dd3fc);" aria-hidden="true">🎨</div>
+            <div class="photo-cell__overlay"><p class="photo-cell__tag">Paint Correction</p><p class="photo-cell__title">Mirror Finish Result</p></div>
+          </div>
+          <div class="photo-cell photo-cell--wide" data-category="home" tabindex="0" role="button" aria-label="Move-out cleaning — living room">
+            <div class="photo-cell__img" style="background:linear-gradient(135deg,#0284c7,#06b6d4);" aria-hidden="true">🏠✨</div>
+            <div class="photo-cell__overlay"><p class="photo-cell__tag">House Cleaning</p><p class="photo-cell__title">Move-Out — 3BR Apartment</p></div>
+          </div>
+          <div class="photo-cell" data-category="car" tabindex="0" role="button" aria-label="Truck detailing exterior">
+            <div class="photo-cell__img" style="background:linear-gradient(135deg,#1e3a5f,#38bdf8);" aria-hidden="true">🚛</div>
+            <div class="photo-cell__overlay"><p class="photo-cell__tag">Car Detailing</p><p class="photo-cell__title">Full Truck Detail</p></div>
+          </div>
+          <div class="photo-cell" data-category="interior" tabindex="0" role="button" aria-label="Dashboard cleaning and conditioning">
+            <div class="photo-cell__img" style="background:linear-gradient(135deg,#0369a1,#0ea5e9);" aria-hidden="true">🎛️</div>
+            <div class="photo-cell__overlay"><p class="photo-cell__tag">Interior</p><p class="photo-cell__title">Dashboard Detailing</p></div>
+          </div>
+          <div class="photo-cell" data-category="home" tabindex="0" role="button" aria-label="Bathroom deep clean">
+            <div class="photo-cell__img" style="background:linear-gradient(135deg,#0c4a6e,#22d3ee);" aria-hidden="true">🛁</div>
+            <div class="photo-cell__overlay"><p class="photo-cell__tag">House Cleaning</p><p class="photo-cell__title">Bathroom Deep Clean</p></div>
+          </div>
+        </div>
+
+        <div class="text-center mt-8" data-reveal>
+          <button class="btn btn--outline" id="load-more-btn">Load More Photos</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Before / After -->
+    <section class="section section--bg" aria-labelledby="ba-title">
+      <div class="container">
+        <header class="section__header" data-reveal>
+          <span class="section__eyebrow">Transformations</span>
+          <h2 class="section__title" id="ba-title">Before &amp; After</h2>
+          <p class="section__subtitle">Drag the handle to reveal the transformation — 100% real, no editing.</p>
+        </header>
+
+        <div class="ba-row">
+          <div data-reveal>
+            <p style="text-align:center;font-size:var(--text-sm);font-weight:var(--font-semibold);margin-bottom:var(--space-3);color:var(--color-primary);">Interior Deep Clean</p>
+            <div class="before-after" aria-label="Interior deep clean before and after">
+              <div class="before-after__img" style="background:linear-gradient(135deg,#374151,#4b5563);display:flex;align-items:center;justify-content:center;font-size:6rem;" aria-hidden="true">🪑😔</div>
+              <div class="before-after__after" style="background:linear-gradient(135deg,#0c4a6e,#0ea5e9);display:flex;align-items:center;justify-content:center;font-size:6rem;" aria-hidden="true">🪑✨</div>
+              <div class="before-after__divider"><div class="before-after__handle" aria-hidden="true">⇄</div></div>
+              <span class="before-after__label before-after__label--before">Before</span>
+              <span class="before-after__label before-after__label--after">After</span>
+            </div>
+          </div>
+          <div data-reveal data-reveal-delay="1">
+            <p style="text-align:center;font-size:var(--text-sm);font-weight:var(--font-semibold);margin-bottom:var(--space-3);color:var(--color-primary);">Bathroom Deep Clean</p>
+            <div class="before-after" aria-label="Bathroom deep clean before and after">
+              <div class="before-after__img" style="background:linear-gradient(135deg,#4b5563,#6b7280);display:flex;align-items:center;justify-content:center;font-size:6rem;" aria-hidden="true">🛁😔</div>
+              <div class="before-after__after" style="background:linear-gradient(135deg,#0369a1,#06b6d4);display:flex;align-items:center;justify-content:center;font-size:6rem;" aria-hidden="true">🛁✨</div>
+              <div class="before-after__divider"><div class="before-after__handle" aria-hidden="true">⇄</div></div>
+              <span class="before-after__label before-after__label--before">Before</span>
+              <span class="before-after__label before-after__label--after">After</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Submit Your Photos CTA -->
+    <section class="section" aria-labelledby="submit-title">
+      <div class="container container--md text-center" data-reveal>
+        <span style="font-size:4rem;" aria-hidden="true">📸</span>
+        <h2 style="font-size:var(--text-3xl);margin-block:var(--space-4);" id="submit-title">Share Your Wash&amp;Go Moment</h2>
+        <p style="color:var(--color-mid);max-width:45ch;margin-inline:auto;margin-bottom:var(--space-8);">Tag us on Instagram <strong>@washgodetail</strong> and use <strong>#WashGoShine</strong> — your photo could be featured here and you'll get 10% off your next service!</p>
+        <div style="display:flex;gap:var(--space-4);justify-content:center;flex-wrap:wrap;">
+          <a href="booking.html" class="btn btn--primary btn--lg">Book Your Service</a>
+          <a href="https://instagram.com/washgodetail" class="btn btn--outline btn--lg" target="_blank" rel="noopener noreferrer">Follow on Instagram</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" aria-hidden="true">
+    <button class="lightbox__close" id="lightbox-close" aria-label="Close lightbox">✕</button>
+    <div class="lightbox__content" id="lightbox-content"></div>
+  </div>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__main">
+      <div class="footer__brand"><a href="index.html" class="footer__logo"><img src="assets/logo.svg" alt="Wash&amp;Go" width="160" height="40"></a><p class="footer__tagline">Premium mobile car detailing and house cleaning services delivered to your door.</p></div>
+      <div><h3 class="footer__col-title">Services</h3><ul class="footer__links" role="list"><li><a href="services.html#car-detailing" class="footer__link">Car Detailing</a></li><li><a href="services.html#house-cleaning" class="footer__link">House Cleaning</a></li></ul></div>
+      <div><h3 class="footer__col-title">Company</h3><ul class="footer__links" role="list"><li><a href="about.html" class="footer__link">About Us</a></li><li><a href="faq.html" class="footer__link">FAQ</a></li><li><a href="contact.html" class="footer__link">Contact</a></li></ul></div>
+      <div><h3 class="footer__col-title">Contact</h3><address style="font-style:normal;"><div class="footer__contact-item"><span class="footer__contact-icon">📞</span><a href="tel:+15551234567" class="footer__link">(555) 123-4567</a></div></address></div>
+    </div>
+    <div class="container footer__bottom">
+      <p class="footer__copy">&copy; <span id="footer-year">2024</span> Wash&amp;Go LLC. All rights reserved.</p>
+      <nav class="footer__legal" aria-label="Legal"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms</a></nav>
+    </div>
+  </footer>
+
+  <script src="js/globals.js"></script>
+  <script>
+    document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+    // Gallery filter
+    document.querySelectorAll('.gallery-filter__btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.gallery-filter__btn').forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.photo-cell').forEach(cell => {
+          cell.style.display = (filter === 'all' || cell.dataset.category === filter) ? '' : 'none';
+        });
+      });
+    });
+
+    // Lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lightboxContent = document.getElementById('lightbox-content');
+    document.querySelectorAll('.photo-cell').forEach(cell => {
+      cell.addEventListener('click', () => {
+        lightboxContent.innerHTML = cell.querySelector('.photo-cell__img').outerHTML;
+        lightbox.classList.add('is-open');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      });
+      cell.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') cell.click(); });
+    });
+    document.getElementById('lightbox-close')?.addEventListener('click', () => {
+      lightbox.classList.remove('is-open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    });
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) lightbox.querySelector('button').click(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && lightbox.classList.contains('is-open')) lightbox.querySelector('button').click(); });
+
+    // Load more (demo)
+    document.getElementById('load-more-btn')?.addEventListener('click', () => {
+      window.WashGo?.Toast.info('More photos coming soon!', 'We\'re uploading new work weekly.');
+    });
+  </script>
+</body>
+</html>
