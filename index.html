@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Wash & Go — premium mobile car and home detailing &amp; cleaning service that comes to you. Book today for a spotless finish." />
+  <meta name="theme-color" content="#0a74da" />
+
+  <!-- Open Graph -->
+  <meta property="og:title"       content="Wash & Go — Mobile Detailing &amp; Cleaning" />
+  <meta property="og:description" content="Premium mobile car and home detailing service. We come to you!" />
+  <meta property="og:type"        content="website" />
+  <meta property="og:image"       content="https://via.placeholder.com/1200x630/0a74da/ffffff?text=Wash+%26+Go" />
+
+  <title>Wash &amp; Go — Mobile Detailing &amp; Cleaning</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/globals.css" />
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- ══════════════════════════════════════════════════════
+       HEADER
+  ══════════════════════════════════════════════════════ -->
+  <header class="site-header" role="banner">
+    <div class="container site-header__inner">
+
+      <a href="index.html" class="site-logo" aria-label="Wash &amp; Go — Home">
+        <span class="site-logo__mark" aria-hidden="true">W</span>
+        <span class="site-logo__text"><span>Wash</span>&amp;Go</span>
+      </a>
+
+      <nav class="nav-desktop" aria-label="Primary navigation">
+        <a href="index.html"    class="nav-desktop__link active" aria-current="page">Home</a>
+        <a href="services.html" class="nav-desktop__link">Services</a>
+        <a href="about.html"    class="nav-desktop__link">About</a>
+        <a href="contact.html"  class="nav-desktop__link">Contact</a>
+        <a href="booking.html"  class="btn btn-primary btn-sm nav-desktop__cta">Book Now</a>
+      </nav>
+
+      <button class="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <nav class="nav-mobile" id="mobile-nav" aria-label="Mobile navigation">
+    <a href="index.html"    class="nav-mobile__link active" aria-current="page">Home</a>
+    <a href="services.html" class="nav-mobile__link">Services</a>
+    <a href="about.html"    class="nav-mobile__link">About</a>
+    <a href="contact.html"  class="nav-mobile__link">Contact</a>
+    <a href="booking.html"  class="btn btn-primary nav-mobile__cta">Book Now</a>
+  </nav>
+
+  <!-- ══════════════════════════════════════════════════════
+       MAIN
+  ══════════════════════════════════════════════════════ -->
+  <main id="main">
+
+    <!-- ── Hero ───────────────────────────────────────────── -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero__bg-pattern" aria-hidden="true"></div>
+
+      <div class="container hero__content">
+        <!-- Left: Copy -->
+        <div>
+          <span class="hero__badge" aria-label="Now available in your area">
+            <span class="hero__badge-dot" aria-hidden="true"></span>
+            Now Serving Your Area
+          </span>
+
+          <h1 class="hero__heading" id="hero-heading">
+            We Bring the<br />
+            <span class="hero__heading-accent">Shine to You</span>
+          </h1>
+
+          <p class="hero__description">
+            Premium mobile car detailing and home cleaning — delivered
+            right to your doorstep. No queues, no hassle, just spotless results.
+          </p>
+
+          <div class="hero__actions">
+            <a href="booking.html" class="btn btn-secondary btn-lg">
+              Book a Service
+            </a>
+            <a href="services.html" class="btn btn-outline-white btn-lg">
+              View Services
+            </a>
+          </div>
+
+          <!-- Stats -->
+          <div class="hero__stats" aria-label="Company statistics">
+            <div>
+              <span class="hero__stat-number" data-counter="2500" data-counter-suffix="+">2500+</span>
+              <span class="hero__stat-label">Happy Customers</span>
+            </div>
+            <div>
+              <span class="hero__stat-number" data-counter="98" data-counter-suffix="%">98%</span>
+              <span class="hero__stat-label">Satisfaction Rate</span>
+            </div>
+            <div>
+              <span class="hero__stat-number" data-counter="5" data-counter-suffix=" yrs">5 yrs</span>
+              <span class="hero__stat-label">In Business</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Visual -->
+        <div class="hero__visual" aria-hidden="true">
+          <div class="hero__image-wrapper">
+            <img
+              src="https://images.unsplash.com/photo-1581275288608-db63ffc4e02d?w=800&q=80"
+              alt="Technician detailing a car exterior"
+              width="800"
+              height="600"
+              loading="eager"
+            />
+          </div>
+
+          <div class="hero__badge-float hero__badge-float--bottom">
+            <div class="hero__badge-float-icon hero__badge-float-icon--green" aria-hidden="true">✓</div>
+            <div>
+              <span class="hero__badge-float-title">Eco-Friendly Products</span>
+              <span class="hero__badge-float-sub">Safe for pets &amp; kids</span>
+            </div>
+          </div>
+
+          <div class="hero__badge-float hero__badge-float--top">
+            <div class="hero__badge-float-icon hero__badge-float-icon--blue" aria-hidden="true">★</div>
+            <div>
+              <span class="hero__badge-float-title">5-Star Rated</span>
+              <span class="hero__badge-float-sub">500+ reviews</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Trusted By / Logos ─────────────────────────────── -->
+    <section class="section-padding bg-off-white" aria-labelledby="trusted-heading">
+      <div class="container text-center">
+        <p class="text-sm text-muted tracking-wider uppercase font-semibold" id="trusted-heading">
+          Trusted by households and fleets across the region
+        </p>
+        <div class="flex items-center justify-center flex-wrap gap-8" style="margin-top: var(--space-8); opacity: 0.55;">
+          <span style="font-size: var(--font-size-lg); font-weight: var(--font-weight-bold); font-family: var(--font-family-heading);">FleetCo</span>
+          <span style="font-size: var(--font-size-lg); font-weight: var(--font-weight-bold); font-family: var(--font-family-heading);">AutoPro</span>
+          <span style="font-size: var(--font-size-lg); font-weight: var(--font-weight-bold); font-family: var(--font-family-heading);">HomePure</span>
+          <span style="font-size: var(--font-size-lg); font-weight: var(--font-weight-bold); font-family: var(--font-family-heading);">CityRide</span>
+          <span style="font-size: var(--font-size-lg); font-weight: var(--font-weight-bold); font-family: var(--font-family-heading);">LuxeDrive</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Services Overview ─────────────────────────────── -->
+    <section class="section-padding" id="services" aria-labelledby="services-heading">
+      <div class="container">
+        <div class="text-center reveal">
+          <span class="section-label">What We Offer</span>
+          <h2 class="section-title" id="services-heading">Services Built Around You</h2>
+          <p class="section-subtitle" style="margin-inline: auto;">
+            From a quick refresh to a deep-clean transformation — for your car,
+            your home, or both.
+          </p>
+        </div>
+
+        <div class="auto-grid gap-8" style="margin-top: var(--space-12);">
+
+          <article class="service-card reveal reveal-delay-1">
+            <div class="service-card__icon" aria-hidden="true">🚗</div>
+            <h3 class="service-card__title">Car Wash &amp; Detail</h3>
+            <p class="service-card__description">
+              Exterior wash, interior vacuum, window polish and tyre shine.
+              Your car looking showroom-ready without leaving home.
+            </p>
+            <p class="service-card__price">
+              From $29 <span>/ visit</span>
+            </p>
+            <a href="services.html#car" class="btn btn-outline btn-sm">Learn More</a>
+          </article>
+
+          <article class="service-card reveal reveal-delay-2">
+            <div class="service-card__icon" aria-hidden="true">🏠</div>
+            <h3 class="service-card__title">Home Deep Clean</h3>
+            <p class="service-card__description">
+              Full house cleaning, kitchen degreasing, bathroom sanitising
+              and upholstery care using eco-friendly products.
+            </p>
+            <p class="service-card__price">
+              From $79 <span>/ session</span>
+            </p>
+            <a href="services.html#home" class="btn btn-outline btn-sm">Learn More</a>
+          </article>
+
+          <article class="service-card reveal reveal-delay-3">
+            <div class="service-card__icon" aria-hidden="true">✨</div>
+            <h3 class="service-card__title">Premium Combo</h3>
+            <p class="service-card__description">
+              Bundle your car detail and home clean for the best value.
+              One booking, one team, total convenience.
+            </p>
+            <p class="service-card__price">
+              From $189 <span>/ combo</span>
+            </p>
+            <a href="services.html#combo" class="btn btn-outline btn-sm">Learn More</a>
+          </article>
+
+          <article class="service-card reveal reveal-delay-4">
+            <div class="service-card__icon" aria-hidden="true">🏢</div>
+            <h3 class="service-card__title">Fleet &amp; Commercial</h3>
+            <p class="service-card__description">
+              Regular maintenance packages for vehicle fleets and
+              commercial premises. Volume discounts available.
+            </p>
+            <p class="service-card__price">
+              Custom <span>pricing</span>
+            </p>
+            <a href="contact.html" class="btn btn-outline btn-sm">Get a Quote</a>
+          </article>
+
+        </div>
+
+        <div class="text-center" style="margin-top: var(--space-10);">
+          <a href="services.html" class="btn btn-primary btn-lg">See All Services</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── How It Works ──────────────────────────────────── -->
+    <section class="section-padding bg-off-white" aria-labelledby="how-heading">
+      <div class="container">
+        <div class="text-center reveal">
+          <span class="section-label">Simple Process</span>
+          <h2 class="section-title" id="how-heading">Getting Clean Is Easy</h2>
+          <p class="section-subtitle" style="margin-inline: auto;">
+            Three steps and we handle the rest.
+          </p>
+        </div>
+
+        <div class="process-steps-grid" style="margin-top: var(--space-12);">
+          <div class="process-step reveal reveal-delay-1">
+            <div class="process-step__number" aria-hidden="true">1</div>
+            <h3 class="process-step__title">Book Online</h3>
+            <p class="process-step__desc">Choose your service, pick a date and time that suits you.</p>
+          </div>
+          <div class="process-step reveal reveal-delay-2">
+            <div class="process-step__number" aria-hidden="true">2</div>
+            <h3 class="process-step__title">We Come to You</h3>
+            <p class="process-step__desc">Our trained technicians arrive at your location, fully equipped.</p>
+          </div>
+          <div class="process-step reveal reveal-delay-3">
+            <div class="process-step__number" aria-hidden="true">3</div>
+            <h3 class="process-step__title">Sit Back &amp; Relax</h3>
+            <p class="process-step__desc">Enjoy your day while we deliver a spotless finish.</p>
+          </div>
+          <div class="process-step reveal reveal-delay-4">
+            <div class="process-step__number" aria-hidden="true">4</div>
+            <h3 class="process-step__title">Rate &amp; Repeat</h3>
+            <p class="process-step__desc">Share your feedback and lock in a recurring schedule.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Why Choose Us ─────────────────────────────────── -->
+    <section class="section-padding" aria-labelledby="why-heading">
+      <div class="container">
+        <div class="grid" style="grid-template-columns: 1fr 1fr; gap: var(--space-16); align-items: center;">
+
+          <!-- Image -->
+          <div class="reveal">
+            <img
+              src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80"
+              alt="Technician using eco-friendly cleaning products on a car"
+              width="700"
+              height="500"
+              loading="lazy"
+              style="border-radius: var(--radius-2xl); box-shadow: var(--shadow-xl); width: 100%;"
+            />
+          </div>
+
+          <!-- Features -->
+          <div>
+            <span class="section-label">Why Wash &amp; Go</span>
+            <h2 class="section-title" id="why-heading">Professional Results, Effortless Experience</h2>
+
+            <div class="flex-col gap-6" style="margin-top: var(--space-8);">
+
+              <div class="feature-item reveal reveal-delay-1">
+                <div class="feature-item__icon" aria-hidden="true">🌿</div>
+                <div>
+                  <h3 class="feature-item__title">Eco-Friendly Products</h3>
+                  <p class="feature-item__desc">
+                    All our cleaning agents are biodegradable and safe for children, pets and the environment.
+                  </p>
+                </div>
+              </div>
+
+              <div class="feature-item reveal reveal-delay-2">
+                <div class="feature-item__icon" aria-hidden="true">⏱️</div>
+                <div>
+                  <h3 class="feature-item__title">On-Time, Every Time</h3>
+                  <p class="feature-item__desc">
+                    We respect your schedule. Our team arrives within the agreed window — guaranteed.
+                  </p>
+                </div>
+              </div>
+
+              <div class="feature-item reveal reveal-delay-3">
+                <div class="feature-item__icon" aria-hidden="true">🛡️</div>
+                <div>
+                  <h3 class="feature-item__title">Fully Insured &amp; Vetted</h3>
+                  <p class="feature-item__desc">
+                    Every technician is background-checked, trained and covered by full liability insurance.
+                  </p>
+                </div>
+              </div>
+
+              <div class="feature-item reveal reveal-delay-4">
+                <div class="feature-item__icon" aria-hidden="true">💯</div>
+                <div>
+                  <h3 class="feature-item__title">Satisfaction Guarantee</h3>
+                  <p class="feature-item__desc">
+                    Not happy? We'll come back and make it right — at no extra cost to you.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Testimonials ───────────────────────────────────── -->
+    <section class="section-padding bg-off-white" aria-labelledby="testimonials-heading">
+      <div class="container">
+        <div class="text-center reveal">
+          <span class="section-label">Customer Stories</span>
+          <h2 class="section-title" id="testimonials-heading">What Our Customers Say</h2>
+        </div>
+
+        <div class="auto-grid gap-6" style="margin-top: var(--space-12);">
+
+          <article class="testimonial-card reveal reveal-delay-1">
+            <div class="testimonial-card__stars" aria-label="5 stars">★★★★★</div>
+            <p class="testimonial-card__text">
+              "My SUV looked brand new after the premium detail. The team was
+              professional, on time and incredibly thorough. 10/10 would recommend!"
+            </p>
+            <div class="testimonial-card__author">
+              <div class="testimonial-card__avatar" aria-hidden="true">SJ</div>
+              <div>
+                <span class="testimonial-card__name">Sarah Johnson</span>
+                <span class="testimonial-card__role">Car Detail Customer</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="testimonial-card reveal reveal-delay-2">
+            <div class="testimonial-card__stars" aria-label="5 stars">★★★★★</div>
+            <p class="testimonial-card__text">
+              "Booked the combo package for my car and apartment. Saved so much
+              time and money compared to separate services. Brilliant value!"
+            </p>
+            <div class="testimonial-card__author">
+              <div class="testimonial-card__avatar" aria-hidden="true">MT</div>
+              <div>
+                <span class="testimonial-card__name">Michael Thompson</span>
+                <span class="testimonial-card__role">Combo Package Customer</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="testimonial-card reveal reveal-delay-3">
+            <div class="testimonial-card__stars" aria-label="5 stars">★★★★★</div>
+            <p class="testimonial-card__text">
+              "We use Wash &amp; Go for our entire delivery fleet. Reliable, affordable
+              and our vehicles always look presentable. Highly recommended for businesses."
+            </p>
+            <div class="testimonial-card__author">
+              <div class="testimonial-card__avatar" aria-hidden="true">OP</div>
+              <div>
+                <span class="testimonial-card__name">Olivia Parker</span>
+                <span class="testimonial-card__role">Fleet Manager, LogiRun</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA Banner ─────────────────────────────────────── -->
+    <section class="hero" style="min-height: auto; padding-block: var(--space-20);" aria-labelledby="cta-heading">
+      <div class="hero__bg-pattern" aria-hidden="true"></div>
+      <div class="container text-center reveal">
+        <h2 class="section-title text-white" id="cta-heading">Ready for a Spotless Finish?</h2>
+        <p style="color: rgba(255,255,255,0.75); font-size: var(--font-size-md); margin-bottom: var(--space-8);">
+          Book your first service today and get 10% off with code <strong>FIRSTSHINE</strong>.
+        </p>
+        <div class="flex justify-center flex-wrap gap-4">
+          <a href="booking.html" class="btn btn-secondary btn-lg">Book Now</a>
+          <a href="tel:+15551234567" class="btn btn-outline-white btn-lg">📞 (555) 123-4567</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══════════════════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════════════════ -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="site-footer__grid">
+
+        <!-- Brand -->
+        <div class="site-footer__brand">
+          <a href="index.html" class="site-logo" aria-label="Wash &amp; Go — Home">
+            <span class="site-logo__mark" aria-hidden="true">W</span>
+            <span class="site-logo__text" style="color: var(--color-white);"><span>Wash</span>&amp;Go</span>
+          </a>
+          <p class="site-footer__tagline">
+            Premium mobile car detailing and home cleaning — delivered to your door.
+          </p>
+          <div class="site-footer__socials" aria-label="Social media links">
+            <a href="#" class="site-footer__social" aria-label="Facebook">f</a>
+            <a href="#" class="site-footer__social" aria-label="Instagram">in</a>
+            <a href="#" class="site-footer__social" aria-label="Twitter / X">𝕏</a>
+            <a href="#" class="site-footer__social" aria-label="YouTube">▶</a>
+          </div>
+        </div>
+
+        <!-- Services -->
+        <div>
+          <h3 class="site-footer__col-title">Services</h3>
+          <ul class="site-footer__links">
+            <li><a href="services.html#car"   class="site-footer__link">Car Wash</a></li>
+            <li><a href="services.html#car"   class="site-footer__link">Car Detailing</a></li>
+            <li><a href="services.html#home"  class="site-footer__link">Home Cleaning</a></li>
+            <li><a href="services.html#combo" class="site-footer__link">Combo Packages</a></li>
+            <li><a href="services.html"       class="site-footer__link">Fleet &amp; Commercial</a></li>
+          </ul>
+        </div>
+
+        <!-- Company -->
+        <div>
+          <h3 class="site-footer__col-title">Company</h3>
+          <ul class="site-footer__links">
+            <li><a href="about.html"   class="site-footer__link">About Us</a></li>
+            <li><a href="about.html"   class="site-footer__link">Our Team</a></li>
+            <li><a href="about.html"   class="site-footer__link">Careers</a></li>
+            <li><a href="contact.html" class="site-footer__link">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact -->
+        <div>
+          <h3 class="site-footer__col-title">Contact Us</h3>
+          <address style="font-style: normal;">
+            <p class="site-footer__contact-item">
+              <span class="site-footer__contact-icon" aria-hidden="true">📞</span>
+              <a href="tel:+15551234567" class="site-footer__link">(555) 123-4567</a>
+            </p>
+            <p class="site-footer__contact-item">
+              <span class="site-footer__contact-icon" aria-hidden="true">✉</span>
+              <a href="mailto:hello@washandgo.com" class="site-footer__link">hello@washandgo.com</a>
+            </p>
+            <p class="site-footer__contact-item">
+              <span class="site-footer__contact-icon" aria-hidden="true">🕐</span>
+              <span>Mon–Sat, 7 am – 7 pm</span>
+            </p>
+          </address>
+        </div>
+
+      </div><!-- /.site-footer__grid -->
+
+      <div class="site-footer__bottom">
+        <p>&copy; <span id="footer-year">2025</span> Wash &amp; Go. All rights reserved.</p>
+        <nav class="site-footer__bottom-links" aria-label="Legal links">
+          <a href="#" class="site-footer__bottom-link">Privacy Policy</a>
+          <a href="#" class="site-footer__bottom-link">Terms of Service</a>
+          <a href="#" class="site-footer__bottom-link">Cookie Policy</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/globals.js"></script>
+  <script>
+    // Update footer year dynamically
+    const yearEl = document.getElementById('footer-year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

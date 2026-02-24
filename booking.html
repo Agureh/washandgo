@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Book a mobile car detailing or home cleaning service with Wash &amp; Go. Choose your service, pick a time, and we come to you." />
+  <meta name="theme-color" content="#0a74da" />
+  <title>Book a Service — Wash &amp; Go</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/globals.css" />
+
+  <style>
+    .booking-layout {
+      display: grid;
+      grid-template-columns: 1fr 22rem;
+      gap: var(--space-12);
+      align-items: flex-start;
+    }
+
+    .booking-sidebar {
+      position: sticky;
+      top: calc(var(--header-height) + var(--space-6));
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+    }
+
+    .sidebar-card {
+      background-color: var(--color-white);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--color-light-gray);
+    }
+
+    .sidebar-card__title {
+      font-size: var(--font-size-md);
+      font-weight: var(--font-weight-bold);
+      margin-bottom: var(--space-4);
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      font-size: var(--font-size-sm);
+      color: var(--color-dark-gray);
+      padding-block: var(--space-2);
+    }
+
+    .trust-item + .trust-item {
+      border-top: 1px solid var(--color-light-gray);
+    }
+
+    .trust-item__icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    .price-summary {
+      background: color-mix(in srgb, var(--color-primary) 6%, transparent);
+      border: 1px solid color-mix(in srgb, var(--color-primary) 20%, transparent);
+      border-radius: var(--radius-lg);
+      padding: var(--space-4);
+      font-size: var(--font-size-sm);
+      margin-top: var(--space-4);
+    }
+
+    .form-section {
+      background-color: var(--color-white);
+      border-radius: var(--radius-xl);
+      padding: var(--space-8);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--color-light-gray);
+      margin-bottom: var(--space-6);
+    }
+
+    .form-section__title {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-bold);
+      margin-bottom: var(--space-6);
+      padding-bottom: var(--space-4);
+      border-bottom: 1px solid var(--color-light-gray);
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .form-section__step {
+      width: 1.75rem;
+      height: 1.75rem;
+      border-radius: var(--radius-full);
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      color: var(--color-white);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-bold);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4);
+    }
+
+    .service-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+      gap: var(--space-3);
+    }
+
+    .service-option {
+      position: relative;
+    }
+
+    .service-option__input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .service-option__label {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+      padding: var(--space-4);
+      border: 2px solid var(--color-light-gray);
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      transition: border-color var(--transition-fast), background-color var(--transition-fast);
+    }
+
+    .service-option__label:hover {
+      border-color: var(--color-primary-light);
+      background-color: color-mix(in srgb, var(--color-primary) 4%, transparent);
+    }
+
+    .service-option__input:checked + .service-option__label {
+      border-color: var(--color-primary);
+      background-color: color-mix(in srgb, var(--color-primary) 6%, transparent);
+    }
+
+    .service-option__input:focus-visible + .service-option__label {
+      outline: 3px solid var(--color-primary-light);
+      outline-offset: 2px;
+    }
+
+    .service-option__name  { font-weight: var(--font-weight-semibold); font-size: var(--font-size-sm); }
+    .service-option__price { color: var(--color-primary); font-weight: var(--font-weight-bold); font-size: var(--font-size-sm); }
+    .service-option__price del {
+      color: var(--color-mid-gray);
+      font-weight: var(--font-weight-regular);
+    }
+
+    @media (max-width: 64em) {
+      .booking-layout {
+        grid-template-columns: 1fr;
+      }
+      .booking-sidebar {
+        position: static;
+        order: -1;
+      }
+    }
+
+    @media (max-width: 36em) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- HEADER -->
+  <header class="site-header" role="banner">
+    <div class="container site-header__inner">
+      <a href="index.html" class="site-logo" aria-label="Wash &amp; Go — Home">
+        <span class="site-logo__mark" aria-hidden="true">W</span>
+        <span class="site-logo__text"><span>Wash</span>&amp;Go</span>
+      </a>
+      <nav class="nav-desktop" aria-label="Primary navigation">
+        <a href="index.html"    class="nav-desktop__link">Home</a>
+        <a href="services.html" class="nav-desktop__link">Services</a>
+        <a href="about.html"    class="nav-desktop__link">About</a>
+        <a href="contact.html"  class="nav-desktop__link">Contact</a>
+        <a href="booking.html"  class="btn btn-primary btn-sm nav-desktop__cta active" aria-current="page">Book Now</a>
+      </nav>
+      <button class="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <nav class="nav-mobile" id="mobile-nav" aria-label="Mobile navigation">
+    <a href="index.html"    class="nav-mobile__link">Home</a>
+    <a href="services.html" class="nav-mobile__link">Services</a>
+    <a href="about.html"    class="nav-mobile__link">About</a>
+    <a href="contact.html"  class="nav-mobile__link">Contact</a>
+    <a href="booking.html"  class="btn btn-primary nav-mobile__cta active" aria-current="page">Book Now</a>
+  </nav>
+
+  <main id="main">
+
+    <!-- Page Banner -->
+    <section class="page-banner" aria-labelledby="page-title">
+      <div class="page-banner__bg" aria-hidden="true"></div>
+      <div class="container">
+        <span class="page-banner__label">Get Started</span>
+        <h1 class="page-banner__title" id="page-title">Book Your Service</h1>
+        <p class="page-banner__subtitle">
+          Fill in the form below and we'll confirm your appointment within minutes.
+        </p>
+      </div>
+    </section>
+
+    <!-- ── Booking Form ────────────────────────────────────── -->
+    <section class="section-padding" aria-labelledby="booking-heading">
+      <div class="container">
+        <h2 class="sr-only" id="booking-heading">Booking form</h2>
+
+        <div class="booking-layout">
+          <!-- Form -->
+          <div>
+            <form
+              id="booking-form"
+              data-validate
+              novalidate
+              aria-label="Service booking form"
+            >
+
+              <!-- Step 1: Service -->
+              <div class="form-section">
+                <h3 class="form-section__title">
+                  <span class="form-section__step" aria-hidden="true">1</span>
+                  Choose Your Service
+                </h3>
+
+                <div class="service-options" role="group" aria-label="Select a service">
+                  <div class="service-option">
+                    <input type="radio" name="service-type" id="opt-car-basic"    class="service-option__input" value="car-basic"      />
+                    <label for="opt-car-basic"    class="service-option__label"><span class="service-option__name">Basic Car Wash</span><span class="service-option__price">$29</span><span class="service-option__desc">~45 min</span></label>
+                  </div>
+                  <div class="service-option">
+                    <input type="radio" name="service-type" id="opt-car-std"      class="service-option__input" value="car-standard"   />
+                    <label for="opt-car-std"      class="service-option__label"><span class="service-option__name">Standard Car Detail</span><span class="service-option__price">$59</span><span class="service-option__desc">~1.5 hrs</span></label>
+                  </div>
+                  <div class="service-option">
+                    <input type="radio" name="service-type" id="opt-car-prem"     class="service-option__input" value="car-premium"    />
+                    <label for="opt-car-prem"     class="service-option__label"><span class="service-option__name">Premium Car Detail</span><span class="service-option__price">$99</span><span class="service-option__desc">~3 hrs</span></label>
+                  </div>
+                  <div class="service-option">
+                    <input type="radio" name="service-type" id="opt-home-basic"   class="service-option__input" value="house-basic"    />
+                    <label for="opt-home-basic"   class="service-option__label"><span class="service-option__name">Basic Home Clean</span><span class="service-option__price">$79</span><span class="service-option__desc">~2 hrs</span></label>
+                  </div>
+                  <div class="service-option">
+                    <input type="radio" name="service-type" id="opt-home-std"     class="service-option__input" value="house-standard" />
+                    <label for="opt-home-std"     class="service-option__label"><span class="service-option__name">Standard Home Clean</span><span class="service-option__price">$129</span><span class="service-option__desc">~3 hrs</span></label>
+                  </div>
+                  <div class="service-option">
+                    <input type="radio" name="service-type" id="opt-home-prem"    class="service-option__input" value="house-premium"  />
+                    <label for="opt-home-prem"    class="service-option__label"><span class="service-option__name">Premium Home Detail</span><span class="service-option__price">$199</span><span class="service-option__desc">~5 hrs</span></label>
+                  </div>
+                  <div class="service-option">
+                    <input type="radio" name="service-type" id="opt-combo"        class="service-option__input" value="car-house-combo"/>
+                    <label for="opt-combo"        class="service-option__label"><span class="service-option__name">Car + Home Combo</span><span class="service-option__price">$169 <del>$188</del></span><span class="service-option__desc">Best value</span></label>
+                  </div>
+                </div>
+
+                <!-- Hidden select for JS price summary -->
+                <div class="form-group" style="display: none;">
+                  <label for="service" class="form-label">Service (internal)</label>
+                  <select id="service" name="service" class="form-control">
+                    <option value="">Select a service</option>
+                    <option value="car-basic">Basic Car Wash — $29</option>
+                    <option value="car-standard">Standard Car Detail — $59</option>
+                    <option value="car-premium">Premium Car Detail — $99</option>
+                    <option value="house-basic">Basic Home Clean — $79</option>
+                    <option value="house-standard">Standard Home Clean — $129</option>
+                    <option value="house-premium">Premium Home Detail — $199</option>
+                    <option value="car-house-combo">Car + Home Combo — $169</option>
+                  </select>
+                </div>
+              </div><!-- /.form-section -->
+
+              <!-- Step 2: Schedule -->
+              <div class="form-section">
+                <h3 class="form-section__title">
+                  <span class="form-section__step" aria-hidden="true">2</span>
+                  Pick a Date &amp; Time
+                </h3>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="date" class="form-label form-label--required">Preferred Date</label>
+                    <input
+                      type="date"
+                      id="date"
+                      name="date"
+                      class="form-control"
+                      required
+                      data-error-required="Please select a date."
+                      aria-required="true"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="time-slot" class="form-label form-label--required">Preferred Time</label>
+                    <select
+                      id="time-slot"
+                      name="time-slot"
+                      class="form-control"
+                      required
+                      data-error-required="Please choose a time slot."
+                      aria-required="true"
+                    >
+                      <option value="">Select a time</option>
+                      <option value="07:00">7:00 AM</option>
+                      <option value="08:00">8:00 AM</option>
+                      <option value="09:00">9:00 AM</option>
+                      <option value="10:00">10:00 AM</option>
+                      <option value="11:00">11:00 AM</option>
+                      <option value="12:00">12:00 PM</option>
+                      <option value="13:00">1:00 PM</option>
+                      <option value="14:00">2:00 PM</option>
+                      <option value="15:00">3:00 PM</option>
+                      <option value="16:00">4:00 PM</option>
+                      <option value="17:00">5:00 PM</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group" style="margin-top: var(--space-4);">
+                  <label for="address" class="form-label form-label--required">Service Address</label>
+                  <input
+                    type="text"
+                    id="address"
+                    name="address"
+                    class="form-control"
+                    placeholder="123 Main Street, City, State"
+                    required
+                    minlength="10"
+                    data-error-required="Please enter your address."
+                    data-error-min="Please enter your full address."
+                    aria-required="true"
+                  />
+                  <span class="form-hint">We'll come to this location.</span>
+                </div>
+              </div><!-- /.form-section -->
+
+              <!-- Step 3: Contact -->
+              <div class="form-section">
+                <h3 class="form-section__title">
+                  <span class="form-section__step" aria-hidden="true">3</span>
+                  Your Details
+                </h3>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="first-name" class="form-label form-label--required">First Name</label>
+                    <input
+                      type="text"
+                      id="first-name"
+                      name="first-name"
+                      class="form-control"
+                      placeholder="Jane"
+                      required
+                      minlength="2"
+                      data-error-required="First name is required."
+                      aria-required="true"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="last-name" class="form-label form-label--required">Last Name</label>
+                    <input
+                      type="text"
+                      id="last-name"
+                      name="last-name"
+                      class="form-control"
+                      placeholder="Smith"
+                      required
+                      minlength="2"
+                      data-error-required="Last name is required."
+                      aria-required="true"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-row" style="margin-top: var(--space-4);">
+                  <div class="form-group">
+                    <label for="email" class="form-label form-label--required">Email Address</label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      class="form-control"
+                      placeholder="jane@example.com"
+                      required
+                      data-error-required="Email address is required."
+                      data-error-email="Please enter a valid email."
+                      aria-required="true"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="phone" class="form-label form-label--required">Phone Number</label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      class="form-control"
+                      placeholder="(555) 000-0000"
+                      required
+                      data-error-required="Phone number is required."
+                      data-error-tel="Please enter a valid phone number."
+                      aria-required="true"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group" style="margin-top: var(--space-4);">
+                  <label for="vehicle-type" class="form-label">Vehicle Type (if car service)</label>
+                  <select id="vehicle-type" name="vehicle-type" class="form-control">
+                    <option value="">Select vehicle type</option>
+                    <option value="sedan">Sedan</option>
+                    <option value="suv">SUV / Crossover</option>
+                    <option value="hatchback">Hatchback</option>
+                    <option value="ute">Ute / Truck</option>
+                    <option value="van">Van / Minivan</option>
+                    <option value="coupe">Coupe</option>
+                    <option value="wagon">Station Wagon</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+
+                <div class="form-group" style="margin-top: var(--space-4);">
+                  <label for="notes" class="form-label">Special Instructions</label>
+                  <textarea
+                    id="notes"
+                    name="notes"
+                    class="form-control"
+                    rows="3"
+                    placeholder="e.g. pet hair, specific stains, entry codes…"
+                    maxlength="500"
+                  ></textarea>
+                  <span class="form-hint">Optional. Up to 500 characters.</span>
+                </div>
+
+                <div class="form-group" style="margin-top: var(--space-4);">
+                  <label class="form-check">
+                    <input type="checkbox" id="promo" name="promo" class="form-check__input" value="yes" />
+                    <span class="form-check__label">
+                      Send me exclusive offers and promotions by email.
+                    </span>
+                  </label>
+                </div>
+
+                <div class="form-group" style="margin-top: var(--space-2);">
+                  <label class="form-check">
+                    <input type="checkbox" id="terms" name="terms" class="form-check__input" required aria-required="true" data-error-required="You must agree to continue." />
+                    <span class="form-check__label">
+                      I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>. <span aria-hidden="true" style="color: var(--color-error);">*</span>
+                    </span>
+                  </label>
+                </div>
+
+                <!-- Price summary (populated by JS) -->
+                <div id="price-summary" class="price-summary" hidden aria-live="polite" aria-label="Price estimate"></div>
+
+                <button type="submit" class="btn btn-primary btn-lg btn-full" style="margin-top: var(--space-6);">
+                  Confirm Booking
+                </button>
+
+                <p class="text-xs text-muted text-center" style="margin-top: var(--space-3);">
+                  🔒 Your information is secure and never shared with third parties.
+                </p>
+              </div><!-- /.form-section -->
+
+            </form>
+          </div>
+
+          <!-- Sidebar -->
+          <aside class="booking-sidebar" aria-label="Booking information">
+
+            <div class="sidebar-card">
+              <h3 class="sidebar-card__title">Why Book With Us?</h3>
+              <div class="trust-item">
+                <span class="trust-item__icon" aria-hidden="true">✅</span>
+                <span>Instant booking confirmation</span>
+              </div>
+              <div class="trust-item">
+                <span class="trust-item__icon" aria-hidden="true">🔄</span>
+                <span>Free reschedule up to 24 hrs</span>
+              </div>
+              <div class="trust-item">
+                <span class="trust-item__icon" aria-hidden="true">🛡️</span>
+                <span>Fully insured technicians</span>
+              </div>
+              <div class="trust-item">
+                <span class="trust-item__icon" aria-hidden="true">🌿</span>
+                <span>Eco-certified products</span>
+              </div>
+              <div class="trust-item">
+                <span class="trust-item__icon" aria-hidden="true">💯</span>
+                <span>100% satisfaction guarantee</span>
+              </div>
+            </div>
+
+            <div class="sidebar-card">
+              <h3 class="sidebar-card__title">Need Help?</h3>
+              <p style="font-size: var(--font-size-sm); color: var(--color-dark-gray); margin-bottom: var(--space-4);">
+                Our team is available Mon–Sat, 7 am – 7 pm.
+              </p>
+              <a href="tel:+15551234567" class="btn btn-outline btn-full" style="margin-bottom: var(--space-2);">
+                📞 (555) 123-4567
+              </a>
+              <a href="mailto:hello@washandgo.com" class="btn btn-ghost btn-full" style="font-size: var(--font-size-sm);">
+                hello@washandgo.com
+              </a>
+            </div>
+
+            <div class="sidebar-card" style="background: linear-gradient(135deg, var(--color-primary), var(--color-secondary)); color: var(--color-white); border: none;">
+              <p style="font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold); margin-bottom: var(--space-2);">
+                🎉 First-time customer?
+              </p>
+              <p style="font-size: var(--font-size-sm); color: rgba(255,255,255,0.85);">
+                Use code <strong>FIRSTSHINE</strong> at checkout for 10% off your first service.
+              </p>
+            </div>
+
+          </aside>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="site-footer__grid">
+        <div class="site-footer__brand">
+          <a href="index.html" class="site-logo" aria-label="Wash &amp; Go — Home">
+            <span class="site-logo__mark" aria-hidden="true">W</span>
+            <span class="site-logo__text" style="color: var(--color-white);"><span>Wash</span>&amp;Go</span>
+          </a>
+          <p class="site-footer__tagline">Premium mobile car detailing and home cleaning — delivered to your door.</p>
+          <div class="site-footer__socials" aria-label="Social media links">
+            <a href="#" class="site-footer__social" aria-label="Facebook">f</a>
+            <a href="#" class="site-footer__social" aria-label="Instagram">in</a>
+            <a href="#" class="site-footer__social" aria-label="Twitter / X">𝕏</a>
+            <a href="#" class="site-footer__social" aria-label="YouTube">▶</a>
+          </div>
+        </div>
+        <div>
+          <h3 class="site-footer__col-title">Services</h3>
+          <ul class="site-footer__links">
+            <li><a href="services.html" class="site-footer__link">Car Detailing</a></li>
+            <li><a href="services.html" class="site-footer__link">Home Cleaning</a></li>
+            <li><a href="services.html" class="site-footer__link">Combo Packages</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="site-footer__col-title">Company</h3>
+          <ul class="site-footer__links">
+            <li><a href="about.html"   class="site-footer__link">About Us</a></li>
+            <li><a href="contact.html" class="site-footer__link">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="site-footer__col-title">Contact</h3>
+          <address style="font-style: normal;">
+            <p class="site-footer__contact-item"><span class="site-footer__contact-icon" aria-hidden="true">📞</span><a href="tel:+15551234567" class="site-footer__link">(555) 123-4567</a></p>
+            <p class="site-footer__contact-item"><span class="site-footer__contact-icon" aria-hidden="true">✉</span><a href="mailto:hello@washandgo.com" class="site-footer__link">hello@washandgo.com</a></p>
+            <p class="site-footer__contact-item"><span class="site-footer__contact-icon" aria-hidden="true">🕐</span><span>Mon–Sat, 7 am – 7 pm</span></p>
+          </address>
+        </div>
+      </div>
+      <div class="site-footer__bottom">
+        <p>&copy; <span id="footer-year">2025</span> Wash &amp; Go. All rights reserved.</p>
+        <nav class="site-footer__bottom-links" aria-label="Legal links">
+          <a href="#" class="site-footer__bottom-link">Privacy Policy</a>
+          <a href="#" class="site-footer__bottom-link">Terms of Service</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/globals.js"></script>
+  <script>
+    // Update footer year
+    const yearEl = document.getElementById('footer-year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    // Set min date for date input to today
+    const dateInput = document.getElementById('date');
+    if (dateInput) {
+      const today = new Date().toISOString().split('T')[0];
+      dateInput.min = today;
+    }
+
+    // Sync radio buttons → hidden select → price summary
+    const radioOptions = document.querySelectorAll('.service-option__input');
+    const hiddenSelect = document.getElementById('service');
+
+    radioOptions.forEach((radio) => {
+      radio.addEventListener('change', () => {
+        if (hiddenSelect) {
+          hiddenSelect.value = radio.value;
+          hiddenSelect.dispatchEvent(new Event('change'));
+        }
+      });
+    });
+
+    // Pre-select from URL query string
+    const params  = new URLSearchParams(window.location.search);
+    const presel  = params.get('service');
+    if (presel) {
+      const targetRadio = document.querySelector(`.service-option__input[value="${presel}"]`);
+      if (targetRadio) {
+        targetRadio.checked = true;
+        targetRadio.dispatchEvent(new Event('change'));
+      }
+    }
+  </script>
+</body>
+</html>

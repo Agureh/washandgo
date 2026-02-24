@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Contact Wash &amp; Go for questions, quotes and booking support. Call, email or send us a message." />
+  <meta name="theme-color" content="#0a74da" />
+  <title>Contact Us — Wash &amp; Go</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/globals.css" />
+
+  <style>
+    /* ── Page-specific ──────────────────────────────────────── */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: var(--space-12);
+      align-items: flex-start;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+    }
+
+    .contact-card {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-4);
+      padding: var(--space-5);
+      background-color: var(--color-white);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--color-light-gray);
+      transition: box-shadow var(--transition-normal), transform var(--transition-normal);
+    }
+
+    .contact-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .contact-card__icon {
+      width: 3rem;
+      height: 3rem;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, color-mix(in srgb, var(--color-primary) 12%, transparent), color-mix(in srgb, var(--color-secondary) 10%, transparent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.375rem;
+      flex-shrink: 0;
+    }
+
+    .contact-card__title {
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      margin-bottom: var(--space-1);
+    }
+
+    .contact-card__detail {
+      font-size: var(--font-size-sm);
+      color: var(--color-dark-gray);
+    }
+
+    .contact-card__detail a {
+      color: var(--color-primary);
+      font-weight: var(--font-weight-medium);
+    }
+
+    .contact-form-card {
+      background-color: var(--color-white);
+      border-radius: var(--radius-2xl);
+      padding: var(--space-8);
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--color-light-gray);
+    }
+
+    .map-placeholder {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: var(--radius-2xl);
+      background: linear-gradient(135deg, #0a1628, #0a3d62);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: var(--font-size-sm);
+      letter-spacing: var(--letter-spacing-wide);
+      text-transform: uppercase;
+      border: 1px solid var(--color-light-gray);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .map-placeholder__text {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .hours-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2);
+      margin-top: var(--space-4);
+    }
+
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      padding: var(--space-2) 0;
+      font-size: var(--font-size-sm);
+      border-bottom: 1px solid var(--color-light-gray);
+    }
+
+    .hours-row:last-child {
+      border-bottom: none;
+    }
+
+    .hours-row__day {
+      color: var(--color-dark-gray);
+    }
+
+    .hours-row__time {
+      font-weight: var(--font-weight-medium);
+    }
+
+    .hours-row--closed .hours-row__time {
+      color: var(--color-mid-gray);
+    }
+
+    @media (max-width: 64em) {
+      .contact-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- HEADER -->
+  <header class="site-header" role="banner">
+    <div class="container site-header__inner">
+      <a href="index.html" class="site-logo" aria-label="Wash &amp; Go — Home">
+        <span class="site-logo__mark" aria-hidden="true">W</span>
+        <span class="site-logo__text"><span>Wash</span>&amp;Go</span>
+      </a>
+      <nav class="nav-desktop" aria-label="Primary navigation">
+        <a href="index.html"    class="nav-desktop__link">Home</a>
+        <a href="services.html" class="nav-desktop__link">Services</a>
+        <a href="about.html"    class="nav-desktop__link">About</a>
+        <a href="contact.html"  class="nav-desktop__link active" aria-current="page">Contact</a>
+        <a href="booking.html"  class="btn btn-primary btn-sm nav-desktop__cta">Book Now</a>
+      </nav>
+      <button class="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <nav class="nav-mobile" id="mobile-nav" aria-label="Mobile navigation">
+    <a href="index.html"    class="nav-mobile__link">Home</a>
+    <a href="services.html" class="nav-mobile__link">Services</a>
+    <a href="about.html"    class="nav-mobile__link">About</a>
+    <a href="contact.html"  class="nav-mobile__link active" aria-current="page">Contact</a>
+    <a href="booking.html"  class="btn btn-primary nav-mobile__cta">Book Now</a>
+  </nav>
+
+  <main id="main">
+
+    <!-- Page Banner -->
+    <section class="page-banner" aria-labelledby="page-title">
+      <div class="page-banner__bg" aria-hidden="true"></div>
+      <div class="container">
+        <span class="page-banner__label">Get in Touch</span>
+        <h1 class="page-banner__title" id="page-title">Contact Us</h1>
+        <p class="page-banner__subtitle">
+          Questions, quotes or feedback — we'd love to hear from you.
+        </p>
+      </div>
+    </section>
+
+    <!-- ── Contact Grid ───────────────────────────────────── -->
+    <section class="section-padding" aria-labelledby="contact-heading">
+      <div class="container">
+        <h2 class="sr-only" id="contact-heading">Contact information and form</h2>
+
+        <div class="contact-layout">
+
+          <!-- Info column -->
+          <div class="contact-info reveal">
+
+            <div class="contact-card">
+              <div class="contact-card__icon" aria-hidden="true">📞</div>
+              <div>
+                <h3 class="contact-card__title">Phone</h3>
+                <p class="contact-card__detail">
+                  <a href="tel:+15551234567">(555) 123-4567</a>
+                </p>
+                <p class="contact-card__detail">Mon–Sat, 7 am – 7 pm</p>
+              </div>
+            </div>
+
+            <div class="contact-card">
+              <div class="contact-card__icon" aria-hidden="true">✉</div>
+              <div>
+                <h3 class="contact-card__title">Email</h3>
+                <p class="contact-card__detail">
+                  <a href="mailto:hello@washandgo.com">hello@washandgo.com</a>
+                </p>
+                <p class="contact-card__detail">We reply within 24 hours</p>
+              </div>
+            </div>
+
+            <div class="contact-card">
+              <div class="contact-card__icon" aria-hidden="true">📍</div>
+              <div>
+                <h3 class="contact-card__title">Service Area</h3>
+                <p class="contact-card__detail">
+                  Greater Metro Region &amp; surrounding suburbs.<br />
+                  We come to you — no base location visit needed.
+                </p>
+              </div>
+            </div>
+
+            <div class="contact-card" style="flex-direction: column; gap: var(--space-3);">
+              <div class="flex items-center gap-4">
+                <div class="contact-card__icon" aria-hidden="true">🕐</div>
+                <h3 class="contact-card__title" style="margin: 0;">Operating Hours</h3>
+              </div>
+              <div>
+                <div class="hours-row">
+                  <span class="hours-row__day">Monday – Friday</span>
+                  <span class="hours-row__time">7:00 AM – 7:00 PM</span>
+                </div>
+                <div class="hours-row">
+                  <span class="hours-row__day">Saturday</span>
+                  <span class="hours-row__time">7:00 AM – 5:00 PM</span>
+                </div>
+                <div class="hours-row hours-row--closed">
+                  <span class="hours-row__day">Sunday</span>
+                  <span class="hours-row__time">Closed</span>
+                </div>
+                <div class="hours-row hours-row--closed">
+                  <span class="hours-row__day">Public Holidays</span>
+                  <span class="hours-row__time">Varies</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Social links -->
+            <div>
+              <h3 class="text-sm font-semibold" style="margin-bottom: var(--space-3); color: var(--color-dark-gray);">Follow Us</h3>
+              <div class="flex flex-wrap gap-3">
+                <a href="#" class="btn btn-outline btn-sm" aria-label="Facebook">Facebook</a>
+                <a href="#" class="btn btn-outline btn-sm" aria-label="Instagram">Instagram</a>
+                <a href="#" class="btn btn-outline btn-sm" aria-label="Twitter / X">X / Twitter</a>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Contact form -->
+          <div class="contact-form-card reveal">
+            <h2 style="font-size: var(--font-size-xl); font-weight: var(--font-weight-bold); margin-bottom: var(--space-6);">
+              Send Us a Message
+            </h2>
+
+            <form
+              id="contact-form"
+              data-validate
+              novalidate
+              aria-label="Contact form"
+            >
+              <div class="flex gap-4" style="flex-wrap: wrap;">
+                <div class="form-group" style="flex: 1; min-width: 12rem;">
+                  <label for="cf-name" class="form-label form-label--required">Full Name</label>
+                  <input
+                    type="text"
+                    id="cf-name"
+                    name="name"
+                    class="form-control"
+                    placeholder="Jane Smith"
+                    required
+                    minlength="2"
+                    data-error-required="Your name is required."
+                    aria-required="true"
+                  />
+                </div>
+
+                <div class="form-group" style="flex: 1; min-width: 12rem;">
+                  <label for="cf-email" class="form-label form-label--required">Email Address</label>
+                  <input
+                    type="email"
+                    id="cf-email"
+                    name="email"
+                    class="form-control"
+                    placeholder="jane@example.com"
+                    required
+                    data-error-required="Email address is required."
+                    data-error-email="Please enter a valid email."
+                    aria-required="true"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group" style="margin-top: var(--space-4);">
+                <label for="cf-phone" class="form-label">Phone Number</label>
+                <input
+                  type="tel"
+                  id="cf-phone"
+                  name="phone"
+                  class="form-control"
+                  placeholder="(555) 000-0000"
+                  data-error-tel="Please enter a valid phone number."
+                />
+              </div>
+
+              <div class="form-group" style="margin-top: var(--space-4);">
+                <label for="cf-subject" class="form-label form-label--required">Subject</label>
+                <select
+                  id="cf-subject"
+                  name="subject"
+                  class="form-control"
+                  required
+                  data-error-required="Please select a subject."
+                  aria-required="true"
+                >
+                  <option value="">Select a subject</option>
+                  <option value="quote">Request a Quote</option>
+                  <option value="booking">Booking Enquiry</option>
+                  <option value="fleet">Fleet / Commercial</option>
+                  <option value="complaint">Complaint</option>
+                  <option value="feedback">General Feedback</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div class="form-group" style="margin-top: var(--space-4);">
+                <label for="cf-message" class="form-label form-label--required">Message</label>
+                <textarea
+                  id="cf-message"
+                  name="message"
+                  class="form-control"
+                  rows="5"
+                  placeholder="Tell us how we can help…"
+                  required
+                  minlength="20"
+                  maxlength="2000"
+                  data-error-required="Please enter your message."
+                  data-error-min="Message must be at least 20 characters."
+                  aria-required="true"
+                ></textarea>
+                <span class="form-hint">Minimum 20 characters. Up to 2,000 characters.</span>
+              </div>
+
+              <div class="form-group" style="margin-top: var(--space-4);">
+                <label class="form-check">
+                  <input type="checkbox" id="cf-privacy" name="privacy" class="form-check__input" required aria-required="true" data-error-required="You must agree to our privacy policy." />
+                  <span class="form-check__label">
+                    I agree to the <a href="#">Privacy Policy</a> and consent to being contacted by Wash &amp; Go. <span aria-hidden="true" style="color: var(--color-error);">*</span>
+                  </span>
+                </label>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-lg btn-full" style="margin-top: var(--space-6);">
+                Send Message
+              </button>
+
+              <p class="text-xs text-muted text-center" style="margin-top: var(--space-3);">
+                🔒 Your information is kept confidential and never shared.
+              </p>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Service Area Map Placeholder ──────────────────── -->
+    <section class="section-padding bg-off-white" aria-labelledby="map-heading">
+      <div class="container">
+        <div class="text-center reveal" style="margin-bottom: var(--space-8);">
+          <span class="section-label">Service Area</span>
+          <h2 class="section-title" id="map-heading">We Come to You</h2>
+          <p class="section-subtitle" style="margin-inline: auto;">
+            Serving the Greater Metro Region and surrounding suburbs. Not sure if we cover your area? Give us a call.
+          </p>
+        </div>
+
+        <div class="map-placeholder reveal" role="img" aria-label="Interactive service area map — replace with embedded map">
+          <div class="map-placeholder__text">
+            <div style="font-size: 3rem; margin-bottom: var(--space-3);" aria-hidden="true">🗺️</div>
+            <p>Interactive map coming soon</p>
+            <p style="margin-top: var(--space-2); font-size: var(--font-size-xs);">
+              Replace this with an embedded Google Map
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FAQ ───────────────────────────────────────────── -->
+    <section class="section-padding" aria-labelledby="faq-heading">
+      <div class="container container--md">
+        <div class="text-center reveal">
+          <span class="section-label">FAQs</span>
+          <h2 class="section-title" id="faq-heading">Quick Answers</h2>
+        </div>
+
+        <div class="accordion reveal" style="margin-top: var(--space-10);" role="list">
+
+          <div class="accordion__item" role="listitem" style="border: 1px solid var(--color-light-gray); border-radius: var(--radius-lg); margin-bottom: var(--space-3); overflow: hidden;">
+            <button class="accordion__trigger" style="width: 100%; text-align: left; padding: var(--space-5) var(--space-6); font-size: var(--font-size-md); font-weight: var(--font-weight-semibold); background: var(--color-white); display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+              How quickly can you respond to an enquiry?
+              <span aria-hidden="true">▼</span>
+            </button>
+            <div class="accordion__panel" style="padding: 0 var(--space-6) var(--space-5);">
+              <p style="font-size: var(--font-size-sm); color: var(--color-dark-gray); line-height: var(--line-height-relaxed);">
+                We aim to respond to all email enquiries within 4 business hours. For urgent
+                matters, please call us directly on (555) 123-4567.
+              </p>
+            </div>
+          </div>
+
+          <div class="accordion__item" role="listitem" style="border: 1px solid var(--color-light-gray); border-radius: var(--radius-lg); margin-bottom: var(--space-3); overflow: hidden;">
+            <button class="accordion__trigger" style="width: 100%; text-align: left; padding: var(--space-5) var(--space-6); font-size: var(--font-size-md); font-weight: var(--font-weight-semibold); background: var(--color-white); display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+              Do you offer recurring service plans?
+              <span aria-hidden="true">▼</span>
+            </button>
+            <div class="accordion__panel" style="padding: 0 var(--space-6) var(--space-5);">
+              <p style="font-size: var(--font-size-sm); color: var(--color-dark-gray); line-height: var(--line-height-relaxed);">
+                Yes! We offer weekly, fortnightly and monthly subscription plans at
+                discounted rates. Contact us for a personalised quote.
+              </p>
+            </div>
+          </div>
+
+          <div class="accordion__item" role="listitem" style="border: 1px solid var(--color-light-gray); border-radius: var(--radius-lg); overflow: hidden;">
+            <button class="accordion__trigger" style="width: 100%; text-align: left; padding: var(--space-5) var(--space-6); font-size: var(--font-size-md); font-weight: var(--font-weight-semibold); background: var(--color-white); display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+              How do I get a quote for fleet cleaning?
+              <span aria-hidden="true">▼</span>
+            </button>
+            <div class="accordion__panel" style="padding: 0 var(--space-6) var(--space-5);">
+              <p style="font-size: var(--font-size-sm); color: var(--color-dark-gray); line-height: var(--line-height-relaxed);">
+                Use the contact form above and select "Fleet / Commercial" as your subject.
+                Tell us about your fleet size and cleaning needs and we'll prepare a custom proposal.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA ───────────────────────────────────────────── -->
+    <section class="hero" style="min-height: auto; padding-block: var(--space-16);" aria-labelledby="contact-cta-heading">
+      <div class="hero__bg-pattern" aria-hidden="true"></div>
+      <div class="container text-center reveal">
+        <h2 class="section-title text-white" id="contact-cta-heading">Ready to Book?</h2>
+        <p style="color: rgba(255,255,255,0.75); font-size: var(--font-size-md); margin-bottom: var(--space-6);">
+          Skip the form and go straight to booking your service online.
+        </p>
+        <a href="booking.html" class="btn btn-secondary btn-lg">Book a Service Now</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="site-footer__grid">
+        <div class="site-footer__brand">
+          <a href="index.html" class="site-logo" aria-label="Wash &amp; Go — Home">
+            <span class="site-logo__mark" aria-hidden="true">W</span>
+            <span class="site-logo__text" style="color: var(--color-white);"><span>Wash</span>&amp;Go</span>
+          </a>
+          <p class="site-footer__tagline">Premium mobile car detailing and home cleaning — delivered to your door.</p>
+          <div class="site-footer__socials" aria-label="Social media links">
+            <a href="#" class="site-footer__social" aria-label="Facebook">f</a>
+            <a href="#" class="site-footer__social" aria-label="Instagram">in</a>
+            <a href="#" class="site-footer__social" aria-label="Twitter / X">𝕏</a>
+            <a href="#" class="site-footer__social" aria-label="YouTube">▶</a>
+          </div>
+        </div>
+        <div>
+          <h3 class="site-footer__col-title">Services</h3>
+          <ul class="site-footer__links">
+            <li><a href="services.html" class="site-footer__link">Car Detailing</a></li>
+            <li><a href="services.html" class="site-footer__link">Home Cleaning</a></li>
+            <li><a href="services.html" class="site-footer__link">Combo Packages</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="site-footer__col-title">Company</h3>
+          <ul class="site-footer__links">
+            <li><a href="about.html"   class="site-footer__link">About Us</a></li>
+            <li><a href="about.html"   class="site-footer__link">Our Team</a></li>
+            <li><a href="contact.html" class="site-footer__link">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="site-footer__col-title">Contact</h3>
+          <address style="font-style: normal;">
+            <p class="site-footer__contact-item"><span class="site-footer__contact-icon" aria-hidden="true">📞</span><a href="tel:+15551234567" class="site-footer__link">(555) 123-4567</a></p>
+            <p class="site-footer__contact-item"><span class="site-footer__contact-icon" aria-hidden="true">✉</span><a href="mailto:hello@washandgo.com" class="site-footer__link">hello@washandgo.com</a></p>
+            <p class="site-footer__contact-item"><span class="site-footer__contact-icon" aria-hidden="true">🕐</span><span>Mon–Sat, 7 am – 7 pm</span></p>
+          </address>
+        </div>
+      </div>
+      <div class="site-footer__bottom">
+        <p>&copy; <span id="footer-year">2025</span> Wash &amp; Go. All rights reserved.</p>
+        <nav class="site-footer__bottom-links" aria-label="Legal links">
+          <a href="#" class="site-footer__bottom-link">Privacy Policy</a>
+          <a href="#" class="site-footer__bottom-link">Terms of Service</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/globals.js"></script>
+  <script>
+    const yearEl = document.getElementById('footer-year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
